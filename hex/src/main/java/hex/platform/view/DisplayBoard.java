@@ -1,4 +1,7 @@
 package hex.platform.view;
 
-public class DisplayBoard {
+import javax.swing.*;
+
+public class DisplayBoard extends JFrame {
+
 }

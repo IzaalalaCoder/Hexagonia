@@ -63,9 +63,9 @@ public class HexagonButton extends JButton implements Forms {
     private void manageCoordinate() {
         for(int i=0; i<SHAPE.getNbSides(); i++) {
             double v = i * angle;
-            x[i] = SIZE_DEFAULT_FOR_HEX / 2 + (int) Math.round(((double) SIZE_DEFAULT_FOR_HEX / 2)
+            x[i] = Forms.SIZE_DEFAULT / 2 + (int) Math.round(((double) Forms.SIZE_DEFAULT / 2)
                     * Math.cos(v + Math.PI / 2));
-            y[i] = SIZE_DEFAULT_FOR_HEX / 2 + (int) Math.round(((double) SIZE_DEFAULT_FOR_HEX / 2)
+            y[i] = Forms.SIZE_DEFAULT / 2 + (int) Math.round(((double) Forms.SIZE_DEFAULT / 2)
                     * Math.sin(v + Math.PI / 2));
         }
     }
@@ -110,7 +110,7 @@ public class HexagonButton extends JButton implements Forms {
 
     private void changeSize() {
         Dimension size = getPreferredSize();
-        size.width = size.height = SIZE_DEFAULT_FOR_HEX;
+        size.width = size.height = SIZE_DEFAULT;
         setPreferredSize(size);
     }
 

@@ -90,7 +90,7 @@ public class RoundButton extends JButton implements Forms {
 
     private void changeSize() {
         Dimension size = getPreferredSize();
-        size.width = size.height = SIZE_DEFAULT_FOR_ROUND;
+        size.width = size.height = SIZE_DEFAULT;
         setPreferredSize(size);
     }
 }

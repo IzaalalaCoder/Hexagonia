@@ -53,6 +53,18 @@ public enum Shape {
             }
             return directions;
         }
+    },
+    CIRCLE(0) {
+        @Override
+        public List<Direction> getDirections() {
+            List<Direction> directions = new ArrayList<Direction>();
+            {
+                Shape.getCommonsDirection(directions);
+                directions.add(Direction.TOP);
+                directions.add(Direction.BOTTOM);
+            }
+            return directions;
+        }
     };
 
     // OUTILS
@@ -67,7 +79,6 @@ public enum Shape {
     // Attributs
 
     private final int nbSides;
-    private final List<Direction> directions;
 
     // Requêtes
 
@@ -79,6 +90,6 @@ public enum Shape {
     // Constructeurs
     Shape(int sides) {
         this.nbSides = sides;
-        this.directions = this.getDirections();
+        List<Direction> directions = this.getDirections();
     }
 }
