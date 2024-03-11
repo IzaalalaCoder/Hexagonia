@@ -39,7 +39,12 @@ public enum MenuItem {
             new ImageIcon(MainMenu.PATH + "log.png")),
 
     //
-    SEPARATOR(null, null);
+    SEPARATOR(null, null),
+
+    QUIT(
+        new JMenuItem("QUIT"),
+        new ImageIcon(MainMenu.PATH + "quit.png")
+    );
 
     private final JMenuItem menu;
 

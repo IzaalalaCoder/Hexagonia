@@ -22,7 +22,7 @@ public enum Menu {
 
     private final MenuItem[] items;
 
-    private Menu(MenuItem[] items) {
+    Menu(MenuItem[] items) {
         this.items = items;
     }
 

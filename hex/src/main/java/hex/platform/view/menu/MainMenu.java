@@ -15,17 +15,12 @@ public class MainMenu extends JMenuBar {
         return new ImageIcon(newimg);
     }
 
-    // ATTRIBUTES
-
     // CONSTRUCTOR
 
     public MainMenu() {
         super();
         this.implementMenu();
     }
-
-    // REQUESTS
-
 
     // COMMANDS
 
@@ -43,5 +38,6 @@ public class MainMenu extends JMenuBar {
             }
             this.add(menu);
         }
+        this.add(MenuItem.QUIT.getMenu());
     }
 }

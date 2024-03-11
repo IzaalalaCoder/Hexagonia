@@ -4,14 +4,14 @@ import hex.platform.view.menu.MainMenu;
 
 import javax.swing.*;
 
-public enum ModePlayer {
+public enum TypePlayer {
 
-    COMPUTER(new ImageIcon(MainMenu.PATH + "computer_mode.png")),
+    COMPUTER(new ImageIcon(MainMenu.PATH + "computer_dark.png")),
     PLAYER(new ImageIcon(MainMenu.PATH + "red.png"));
 
     private final ImageIcon img;
 
-    ModePlayer(ImageIcon imageIcon) {
+    TypePlayer(ImageIcon imageIcon) {
         this.img = imageIcon;
     }
 
