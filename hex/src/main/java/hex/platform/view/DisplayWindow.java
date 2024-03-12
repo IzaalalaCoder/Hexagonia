@@ -10,8 +10,8 @@ public class DisplayWindow extends JFrame {
 
     // CONSTANTS
 
-    private final int HEIGHT_WINDOW = 400;
-    private final int WIDTH_WINDOW = 600;
+
+    int WIDTH_WINDOW = 1000;
 
     // ATTRIBUTES
 
@@ -31,6 +31,7 @@ public class DisplayWindow extends JFrame {
     // UTILS
 
     private void updateWindow() {
+        int HEIGHT_WINDOW = 650;
         this.setSize(new Dimension(new Dimension(WIDTH_WINDOW, HEIGHT_WINDOW)));
         this.setResizable(false);
         this.setLayout(new BorderLayout());
@@ -44,10 +45,13 @@ public class DisplayWindow extends JFrame {
     }
 
     private void createInfoBar() {
+        this.add(new DisplayInfo(), BorderLayout.NORTH);
     }
 
     private void createHelpBar() {
-        this.add(new DisplayHelp(), BorderLayout.SOUTH);
+        DisplayHelp help = new DisplayHelp();
+        help.setPreferredSize(new Dimension(WIDTH_WINDOW, 100));
+        this.add(help, BorderLayout.SOUTH);
     }
 
     private void createBoard() {

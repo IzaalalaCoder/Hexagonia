@@ -3,6 +3,7 @@ package hex.util.xml;
 import hex.board.*;
 import hex.game.*;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
 public class ReadingXML implements XMLScheme, XMLParser {
