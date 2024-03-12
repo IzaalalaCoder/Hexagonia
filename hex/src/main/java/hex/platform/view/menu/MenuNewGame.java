@@ -1,8 +1,8 @@
 package hex.platform.view.menu;
 
 import hex.platform.view.menu.game.LevelMode;
-import hex.platform.view.menu.game.ModePlay;
-import hex.platform.view.menu.game.TypePlayer;
+import hex.platform.view.menu.game.PlayMode;
+import hex.platform.view.menu.game.PlayerMode;
 import hex.platform.view.menu.game.SizeGame;
 
 import javax.swing.*;
@@ -16,16 +16,16 @@ public class MenuNewGame extends JMenu {
     }
 
     public void createGameMenu() {
-        for (ModePlay mode : ModePlay.values()) {
+        for (PlayMode mode : PlayMode.values()) {
             JMenu menu = new JMenu(mode.name());
             menu.setIcon(MainMenu.getIcon(mode.getImg()));
             if (mode.getTypePlayers() == null) {
                 this.createSizeMenu(menu);
             } else {
-                for (TypePlayer typePlayer : mode.getTypePlayers()) {
-                    JMenu menuPlayer = new JMenu(typePlayer.name());
-                    menuPlayer.setIcon(MainMenu.getIcon(typePlayer.getImg()));
-                    this.addMenuByTypePlayer(typePlayer, menuPlayer);
+                for (PlayerMode playerMode : mode.getTypePlayers()) {
+                    JMenu menuPlayer = new JMenu(playerMode.name());
+                    menuPlayer.setIcon(MainMenu.getIcon(playerMode.getImg()));
+                    this.addMenuByTypePlayer(playerMode, menuPlayer);
                     menu.add(menuPlayer);
                 }
             }
@@ -33,8 +33,8 @@ public class MenuNewGame extends JMenu {
         }
     }
 
-    private void addMenuByTypePlayer(TypePlayer typePlayer, JMenu menu) {
-        switch (typePlayer) {
+    private void addMenuByTypePlayer(PlayerMode playerMode, JMenu menu) {
+        switch (playerMode) {
             case PLAYER -> {
                 this.createSizeMenu(menu);
             }

@@ -26,6 +26,12 @@ public class Game {
         players = initializePlayers(computerPlay);
     }
 
+    public Game() {
+        board = createBoard(Shape.HEXAGONAL);
+        this.mode = Mode.SAME;
+        players = initializePlayers(false);
+    }
+
     // REQUETES
 
     public Board getBoard() {

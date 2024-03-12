@@ -14,6 +14,12 @@ public class Board {
 
     // Constructeurs
 
+    public Board(int w) {
+        this.size = new Dimension(w, w);
+        this.shape = Shape.HEXAGONAL;
+        this.grid = createGrid();
+    }
+
     public Board(int w, int h, Shape shape) {
         this.size = new Dimension(w, h);
         this.shape = shape;
@@ -30,6 +36,8 @@ public class Board {
     public Cell[][] getGrid() {
         return this.copyGrid(this.grid);
     }
+
+    public Shape getShape() { return this.shape;}
 
     // Commandes
 

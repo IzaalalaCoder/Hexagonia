@@ -22,7 +22,7 @@ public class MainMenu extends JMenuBar {
         this.implementMenu();
     }
 
-    // COMMANDS
+    // UTILS
 
     private void implementMenu() {
         for (Menu m : Menu.values()) {

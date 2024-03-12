@@ -55,7 +55,6 @@ public class Main {
         return p;
     }
 
-    @SuppressWarnings("unused")
     public static JPanel createHexagonBoard(int size) {
         JPanel p = new JPanel(new GridBagLayout());
         p.setPreferredSize(new Dimension(Forms.SIZE_DEFAULT * size * 20,size  * Forms.SIZE_DEFAULT ));
@@ -129,6 +128,7 @@ public class Main {
         return p;
     }
 
+    @SuppressWarnings("unused")
     public static JPanel createTriangleBottomBoard(int size) {
         JPanel p = new JPanel(new GridLayout(size, size));
         for (int i = 0; i < size; i++) {
@@ -140,6 +140,7 @@ public class Main {
         return p;
     }
 
+    @SuppressWarnings("unused")
     public static JPanel createTriangleTopBoard(int size) {
         JPanel p = new JPanel(new GridLayout(size, size, 3, 3));
 
@@ -153,6 +154,7 @@ public class Main {
         return p;
     }
 
+    @SuppressWarnings("unused")
     public static JPanel createTriasssngfffleTopBoard(int size) {
         JPanel p = new JPanel(new GridLayout(size, size, 2, 2));
         //p.setBackground(Color.PINK);
@@ -177,6 +179,7 @@ public class Main {
     }
 
 
+    @SuppressWarnings("unused")
     public static JPanel createDeBoardTriangles(int size) {
         JPanel p = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -223,15 +226,5 @@ public class Main {
         return p;
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setJMenuBar(new MainMenu());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setBackground(Color.CYAN);
-        int size = 11;
-        frame.add(createHexagonBoard(size));
-        frame.getContentPane().setLayout(new FlowLayout());
-        frame.setSize(500, 500);
-        frame.setVisible(true);
-    }
+
 }

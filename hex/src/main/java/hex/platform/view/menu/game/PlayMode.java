@@ -4,11 +4,11 @@ import hex.platform.view.menu.MainMenu;
 
 import javax.swing.*;
 
-public enum ModePlay {
+public enum PlayMode {
 
     OFFLINE(
         new ImageIcon(MainMenu.PATH + "computer_mode.png"),
-        new TypePlayer[] { TypePlayer.COMPUTER, TypePlayer.PLAYER }),
+        new PlayerMode[] { PlayerMode.COMPUTER, PlayerMode.PLAYER }),
 
     ONLINE(
         new ImageIcon(MainMenu.PATH + "reseau.png"),
@@ -16,18 +16,18 @@ public enum ModePlay {
     );
 
     private final ImageIcon img;
-    private final TypePlayer[] typePlayers;
+    private final PlayerMode[] playerModes;
 
-    public TypePlayer[] getTypePlayers() {
-        return typePlayers;
+    public PlayerMode[] getTypePlayers() {
+        return playerModes;
     }
 
     public ImageIcon getImg() {
         return this.img;
     }
 
-    ModePlay(ImageIcon imageIcon, TypePlayer[] typePlayers) {
+    PlayMode(ImageIcon imageIcon, PlayerMode[] playerModes) {
         this.img = imageIcon;
-        this.typePlayers = typePlayers;
+        this.playerModes = playerModes;
     }
 }
