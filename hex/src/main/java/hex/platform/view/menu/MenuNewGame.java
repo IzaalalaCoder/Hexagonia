@@ -1,9 +1,9 @@
 package hex.platform.view.menu;
 
-import hex.platform.view.menu.game.LevelMode;
-import hex.platform.view.menu.game.PlayMode;
-import hex.platform.view.menu.game.PlayerMode;
-import hex.platform.view.menu.game.SizeGame;
+import hex.platform.view.info.LevelMode;
+import hex.platform.view.info.PlayMode;
+import hex.platform.view.info.PlayerMode;
+import hex.platform.view.info.SizeGame;
 
 import javax.swing.*;
 

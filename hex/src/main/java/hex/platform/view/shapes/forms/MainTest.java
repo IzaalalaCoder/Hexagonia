@@ -53,7 +53,7 @@ public class MainTest {
         return p;
     }
 
-    public static JPanel createHexagonBoard(int size) {
+    public static JPanel createHexagonBoardCollapse(int size) {
         JPanel p = new JPanel(new GridBagLayout());
         p.setPreferredSize(new Dimension(Forms.SIZE_DEFAULT * size * 20,size  * Forms.SIZE_DEFAULT ));
         GridBagConstraints gbc = new GridBagConstraints();
@@ -63,19 +63,31 @@ public class MainTest {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size ; j++) {
-                if (i != 0) {
-
-                }
                 HexagonButton button = new HexagonButton();
                 gbc.gridx = i + j * 2 + 1;
                 gbc.gridy = i * 2 + 1;
 
                 gbc.gridwidth =  1;
-            /*gbc.gridwidth =  size - i ;
-            if (i != size - 1) {
-                gbc.gridwidth /= 2;
-            }*/
-                //
+                p.add(button, gbc);
+            }
+        }
+        return p;
+    }
+    public static JPanel createHexagonBoardNotCollapse(int size) {
+        JPanel p = new JPanel(new GridBagLayout());
+        p.setPreferredSize(new Dimension(Forms.SIZE_DEFAULT * size * 20,size  * Forms.SIZE_DEFAULT ));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(-10, -18, 0, 0);
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size ; j++) {
+                HexagonButton button = new HexagonButton();
+                gbc.gridx = i + j * 2 + 1;
+                gbc.gridy = i * 2 + 1;
+
+                gbc.gridwidth =  1;
                 p.add(button, gbc);
             }
         }
@@ -217,8 +229,17 @@ public class MainTest {
 
     public static void main(String[] args) {
         JFrame f = new JFrame();
+        JPanel p = new JPanel();
+        p.add(createHexagonBoardNotCollapse(11));
         //f.setPreferredSize(new Dimension(1000, 700));
-        f.add(createHexagonBoard(15));
+        f.add(p);
         f.setVisible(true);
+
+        JFrame g = new JFrame();
+        JPanel q = new JPanel();
+        q.add(createHexagonBoardCollapse(11));
+        //f.setPreferredSize(new Dimension(1000, 700));
+        g.add(q);
+        g.setVisible(true);
     }
 }

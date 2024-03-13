@@ -1,5 +1,6 @@
 package hex.platform.view;
 
+import hex.board.Board;
 import hex.game.Game;
 import hex.platform.view.shapes.forms.HexagonButton;
 
@@ -10,12 +11,12 @@ public class DisplayBoard extends JPanel {
 
     // ATTRIBUTES
 
-    private Game model;
+    private Board model;
 
     // CONSTRUCTORS
 
-    public DisplayBoard() {
-        this.model = new Game();
+    public DisplayBoard(Board b) {
+        this.model = b;
         this.setLayout(new BorderLayout());
         this.displayBoard();
         this.setBackground(Color.BLACK);
@@ -25,7 +26,7 @@ public class DisplayBoard extends JPanel {
 
     private void displayBoard() {
         JPanel p = new JPanel();
-        switch (this.model.getBoard().getShape()) {
+        switch (this.model.getShape()) {
             case HEXAGONAL -> {
                 this.createHexBoard(p);
             }
@@ -37,13 +38,13 @@ public class DisplayBoard extends JPanel {
     private void createHexBoard(JPanel p) {
         p.setLayout(new GridBagLayout());
         //p.setPreferredSize(new Dimension());
-        final int size = model.getSize();
+        final int size = model.getGrid().length;
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(-13, -28, 0, 0);
 
-        p.setPreferredSize(new Dimension(740, 480 ));
+        //p.setPreferredSize(new Dimension(800, 400 ));
         p.setBackground(Color.blue);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size ; j++) {

@@ -34,7 +34,8 @@ public class Board {
     // Requêtes
 
     public Cell[][] getGrid() {
-        return this.copyGrid(this.grid);
+        //return this.copyGrid(this.grid);
+        return this.grid;
     }
 
     public Shape getShape() { return this.shape;}

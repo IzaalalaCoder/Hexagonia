@@ -1,4 +1,4 @@
-package hex.platform.view.menu.game;
+package hex.platform.view.info;
 
 public enum LevelMode {
 

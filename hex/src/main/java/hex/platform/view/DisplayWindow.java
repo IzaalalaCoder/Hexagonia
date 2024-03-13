@@ -1,6 +1,7 @@
 package hex.platform.view;
 
-import hex.board.Board;
+import hex.game.Game;
+import hex.platform.view.info.SizeGame;
 import hex.platform.view.menu.MainMenu;
 
 import javax.swing.*;
@@ -10,16 +11,21 @@ public class DisplayWindow extends JFrame {
 
     // CONSTANTS
 
-
-    int WIDTH_WINDOW = 800;
-
     // ATTRIBUTES
 
+    private final Game model;
+    private final JPanel help;
+    private final JPanel board;
+    private final JPanel information;
 
     // CONSTRUCTORS
 
     public DisplayWindow() {
         super();
+        this.model = new Game(3);
+        this.board = new DisplayBoard(this.model.getBoard());
+        this.help = new DisplayHelp();
+        this.information = new DisplayInfo();
         this.updateWindow();
         this.placeComponent();
     }
@@ -31,10 +37,18 @@ public class DisplayWindow extends JFrame {
     // UTILS
 
     private void updateWindow() {
-        int HEIGHT_WINDOW = 650;
-        this.setSize(new Dimension(new Dimension(WIDTH_WINDOW, HEIGHT_WINDOW)));
         this.setResizable(false);
+        this.resizeWindow();
+        this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
+    }
+
+    private void resizeWindow() {
+        for (SizeGame size : SizeGame.values()) {
+            if (model.getSize() == size.getSize()) {
+                this.setSize(size.getDimension());
+            }
+        }
     }
 
     private void placeComponent() {
@@ -45,17 +59,16 @@ public class DisplayWindow extends JFrame {
     }
 
     private void createInfoBar() {
-        this.add(new DisplayInfo(), BorderLayout.NORTH);
+        this.add(this.information, BorderLayout.NORTH);
     }
 
     private void createHelpBar() {
-        DisplayHelp help = new DisplayHelp();
-        help.setPreferredSize(new Dimension(WIDTH_WINDOW, 100));
+        //this.help.setPreferredSize(new Dimension(WIDTH_WINDOW, 100));
         this.add(help, BorderLayout.SOUTH);
     }
 
     private void createBoard() {
-        this.add(new DisplayBoard(), BorderLayout.CENTER);
+        this.add(this.board, BorderLayout.CENTER);
     }
 
     private void createMenu() {

@@ -23,16 +23,16 @@ public class Game {
 
     public Game(Mode mode, boolean computerPlay, Shape shape) {
         this.size = 11;
-        board = createBoard(shape);
         this.mode = mode;
+        board = createBoard(shape);
         players = initializePlayers(computerPlay);
     }
 
-    public Game() {
-        board = createBoard(Shape.HEXAGONAL);
+    public Game(int size) {
         this.mode = Mode.SAME;
+        this.size = size;
         players = initializePlayers(false);
-        this.size = 11;
+        board = createBoard(Shape.HEXAGONAL);
     }
 
     // REQUETES
