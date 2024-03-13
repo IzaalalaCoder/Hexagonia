@@ -1,7 +1,5 @@
 package hex.platform.view.menu;
 
-import hex.platform.view.shapes.forms.Main;
-
 import javax.swing.*;
 import java.awt.*;
 

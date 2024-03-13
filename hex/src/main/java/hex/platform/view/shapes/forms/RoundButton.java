@@ -20,7 +20,7 @@ public class RoundButton extends JButton implements Forms {
 
     // ATTRIBUTES
 
-    private MouseAdapter listener = new ControlForms();
+    private MouseAdapter listener;
     private final Map<Direction, Color> borderColor;
 
     // CONSTRUCTOR
@@ -29,6 +29,7 @@ public class RoundButton extends JButton implements Forms {
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
+        this.listener = new ControlForms(this);
         this.addMouseListener(this.listener);
     }
 

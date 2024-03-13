@@ -14,7 +14,7 @@ import java.util.Map;
 public class TriangleBottomButton extends JButton implements Forms {
 
     private final Shape shape = Shape.SQUARE;
-    private MouseAdapter listener = new ControlForms();
+    private MouseAdapter listener;
     private final Map<Direction, Color> borderColor;
 
     private static final int[] X = {Forms.SIZE_DEFAULT /2, 0, Forms.SIZE_DEFAULT};
@@ -24,6 +24,7 @@ public class TriangleBottomButton extends JButton implements Forms {
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
+        this.listener = new ControlForms(this);
         this.addMouseListener(this.listener);
     }
 

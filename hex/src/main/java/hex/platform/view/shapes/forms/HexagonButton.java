@@ -20,7 +20,7 @@ public class HexagonButton extends JButton implements Forms {
 
     // ATTRIBUTES
 
-    private MouseAdapter listener = new ControlForms();
+    private MouseAdapter listener;
     private final Map<Direction, Color> borderColor;
 
     int[] x = new int[SHAPE.getNbSides()];
@@ -38,6 +38,7 @@ public class HexagonButton extends JButton implements Forms {
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
+        this.listener = new ControlForms(this);
         this.addMouseListener(this.listener);
 
     }

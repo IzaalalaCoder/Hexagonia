@@ -15,14 +15,17 @@ import java.util.Map;
 public class SquareButton extends JButton implements Forms  {
 
     private final Shape shape = Shape.SQUARE;
-    private MouseAdapter listener = new ControlForms();
+    private MouseAdapter listener;
     private final Map<Direction, Color> borderColor;
 
     public SquareButton() {
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
+        this.listener = new ControlForms(this);
         this.addMouseListener(this.listener);
+
+        // Le mieux est de ne pas coller les boutons
     }
 
     @Override

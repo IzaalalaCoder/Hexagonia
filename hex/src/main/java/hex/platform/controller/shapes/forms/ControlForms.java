@@ -13,8 +13,11 @@ public class ControlForms extends MouseAdapter {
 
     // CONSTRUCTOR
 
-    public ControlForms() {
+    private JButton btn;
+
+    public ControlForms(JButton btn) {
         super();
+        this.btn = btn;
     }
 
     // COMMANDS
@@ -40,14 +43,20 @@ public class ControlForms extends MouseAdapter {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
         Forms f = (Forms) e.getSource();
-            System.out.println(f.getCoordinate());
+        Point p = e.getPoint();
+        if (f.isContainedInForm(p)) {
+            btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        Forms f = (Forms) e.getSource();
+        Point p = e.getPoint();
+        if (f.isContainedInForm(p)) {
+            btn.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
     }
 
 }

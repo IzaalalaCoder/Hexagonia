@@ -5,9 +5,7 @@ import hex.platform.view.shapes.Forms;
 import javax.swing.*;
 import java.awt.*;
 
-import hex.platform.view.menu.MainMenu;
-
-public class Main {
+public class MainTest {
     @SuppressWarnings("unused")
     public static JPanel createRoundBoard(int size) {
         JPanel p = new JPanel(new GridLayout(size, size));
@@ -61,16 +59,7 @@ public class Main {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(0,-28,14, 0);
-
-        for (int j = 0; j < size; j++) {
-            JPanel q = new JPanel();
-            gbc.gridx = j * 2;
-            gbc.gridy = 0;
-            q.setVisible(true);
-            q.setPreferredSize(new Dimension(Forms.SIZE_DEFAULT -1, Forms.SIZE_DEFAULT- 1));
-            p.add(q, gbc);
-        } gbc.insets = new Insets(-13, -28, 0, 0);
+        gbc.insets = new Insets(-13, -28, 0, 0);
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size ; j++) {
@@ -226,5 +215,10 @@ public class Main {
         return p;
     }
 
-
+    public static void main(String[] args) {
+        JFrame f = new JFrame();
+        //f.setPreferredSize(new Dimension(1000, 700));
+        f.add(createHexagonBoard(15));
+        f.setVisible(true);
+    }
 }

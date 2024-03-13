@@ -11,7 +11,7 @@ public class DisplayWindow extends JFrame {
     // CONSTANTS
 
 
-    int WIDTH_WINDOW = 1000;
+    int WIDTH_WINDOW = 800;
 
     // ATTRIBUTES
 

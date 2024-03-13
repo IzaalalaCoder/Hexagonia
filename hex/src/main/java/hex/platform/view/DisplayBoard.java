@@ -1,7 +1,6 @@
 package hex.platform.view;
 
 import hex.game.Game;
-import hex.platform.view.shapes.Forms;
 import hex.platform.view.shapes.forms.HexagonButton;
 
 import javax.swing.*;
@@ -17,6 +16,7 @@ public class DisplayBoard extends JPanel {
 
     public DisplayBoard() {
         this.model = new Game();
+        this.setLayout(new BorderLayout());
         this.displayBoard();
         this.setBackground(Color.BLACK);
     }
@@ -43,7 +43,7 @@ public class DisplayBoard extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(-13, -28, 0, 0);
 
-        p.setPreferredSize(new Dimension(750, 450 ));
+        p.setPreferredSize(new Dimension(740, 480 ));
         p.setBackground(Color.blue);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size ; j++) {
@@ -54,6 +54,6 @@ public class DisplayBoard extends JPanel {
                 p.add(button, gbc);
             }
         }
-        this.add(p);
+        this.add(p, BorderLayout.CENTER);
     }
 }
