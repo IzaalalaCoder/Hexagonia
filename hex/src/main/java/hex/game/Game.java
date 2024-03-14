@@ -2,11 +2,13 @@ package hex.game;
 
 import hex.board.*;
 import hex.board.cell.*;
+import hex.game.complementary.Help;
 import hex.game.player.Player;
 import hex.game.player.PlayerName;
 import hex.game.player.PlayerType;
+import hex.util.structure.stack.Stack;
 
-public class Game {
+public class Game implements AbstractGame {
 
     // CONSTANCES DE CLASSES
 
@@ -37,20 +39,59 @@ public class Game {
 
     // REQUETES
 
+    @Override
     public int getSize() {
         return size;
     }
 
+    @Override
     public Board getBoard() {
         return board;
     }
 
+    @Override
     public Mode getMode() {
         return mode;
     }
 
+    @Override
     public Player[] getPlayers() {
         return players;
+    }
+
+    @Override
+    public boolean isEndOfGame() {
+        return false;
+    }
+
+    @Override
+    public Player getCurrentPlayer() {
+        return null;
+    }
+
+    @Override
+    public Help getHelp() {
+        return null;
+    }
+
+    @Override
+    public Stack<Action> getHistory() {
+        return null;
+    }
+
+    @Override
+    public void consumeTurn() {
+
+    }
+
+    @Override
+    public void replay() {
+
+    }
+
+    @Override
+    public void reset() {
+
     }
 
     // COMMANDES
@@ -74,5 +115,9 @@ public class Game {
                 new Player(PlayerName.MIN, PlayerType.HUMAN);
         }
         return players;
+    }
+
+    private void managePlayer() {
+
     }
 }

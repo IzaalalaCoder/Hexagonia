@@ -1,7 +1,6 @@
 package hex.platform.view;
 
 import hex.board.Board;
-import hex.game.Game;
 import hex.platform.view.shapes.forms.HexagonButton;
 
 import javax.swing.*;
