@@ -37,7 +37,6 @@ public class Game {
 
     // REQUETES
 
-
     public int getSize() {
         return size;
     }

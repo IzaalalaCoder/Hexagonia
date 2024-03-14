@@ -4,73 +4,59 @@ import java.awt.*;
 
 public enum Direction {
 
-    // VALEURS PREDEFINIES
+    // VALUES
 
-    LEFT("Left") {
+    LEFT() {
         @Override
         public Point getNewCoordinates(int x, int y) {
             return new Point(x, y - 1);
         }
     },
-    RIGHT("Right") {
+    RIGHT() {
         @Override
         public Point getNewCoordinates(int x, int y) {
             return new Point(x, y + 1);
         }
     },
-    TOP("Top") {
+    TOP() {
         @Override
         public Point getNewCoordinates(int x, int y) {
             return new Point(x - 1, y);
         }
     },
-    BOTTOM("Bottom") {
+    BOTTOM() {
         @Override
         public Point getNewCoordinates(int x, int y) {
             return new Point(x + 1, y);
         }
     },
-    TOP_LEFT("Top Left") {
+    TOP_LEFT() {
         @Override
         public Point getNewCoordinates(int x, int y) {
             return new Point(x - 1, y);
         }
     },
-    TOP_RIGHT("Top Right") {
+    TOP_RIGHT() {
         @Override
         public Point getNewCoordinates(int x, int y) {
             return new Point(x - 1, y + 1);
         }
     },
-    BOTTOM_LEFT("Bottom Left") {
+    BOTTOM_LEFT() {
         @Override
         public Point getNewCoordinates(int x, int y) {
             return new Point(x + 1, y - 1);
         }
     },
-    BOTTOM_RIGHT("Bottom Right") {
+    BOTTOM_RIGHT() {
         @Override
         public Point getNewCoordinates(int x, int y) {
             return new Point(x + 1, y);
         }
     };
 
-    // CONSTRUCTEUR
-
-    Direction(String name) {
-        this.name = name;
-    }
-
     // REQUESTS
 
     public abstract Point getNewCoordinates(int x, int y);
 
-    public String getName() {
-        return name;
-    }
-
-
-    // ATTRIBUTS
-
-    private final String name;
 }
