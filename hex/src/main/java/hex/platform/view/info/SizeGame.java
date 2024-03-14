@@ -54,9 +54,9 @@ public enum SizeGame {
         new Dimension(250, 350)
     );
 
-    private int size;
+    private final int size;
 
-    private Dimension dimension;
+    private final Dimension dimension;
 
     SizeGame(int s, Dimension dimension) {
         this.size = s;
