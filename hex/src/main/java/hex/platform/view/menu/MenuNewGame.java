@@ -34,17 +34,14 @@ public class MenuNewGame extends JMenu {
     }
 
     private void addMenuByTypePlayer(PlayerMode playerMode, JMenu menu) {
-        switch (playerMode) {
-            case PLAYER -> {
-                this.createSizeMenu(menu);
-            }
-            case COMPUTER -> {
-                for (LevelMode levelMode : LevelMode.values()) {
-                    JMenu levelMenu = new JMenu(levelMode.name());
-                    this.createSizeMenu(levelMenu);
-                    menu.add(levelMenu);
+        if (playerMode == PlayerMode.PLAYER) {
+            this.createSizeMenu(menu);
+        } else {
+            for (LevelMode levelMode : LevelMode.values()) {
+                JMenu levelMenu = new JMenu(levelMode.name());
+                this.createSizeMenu(levelMenu);
+                menu.add(levelMenu);
 
-                }
             }
         }
     }

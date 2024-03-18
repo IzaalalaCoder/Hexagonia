@@ -40,7 +40,22 @@ public class Board {
 
     public Shape getShape() { return this.shape;}
 
+    public boolean coordinateIsValid(int i, int j) {
+        final int w = this.size.width;
+        final int h = this.size.height;
+        return !(i < 0 || i >= h ||
+                j < 0 || j >= w);
+    }
+
     // Commandes
+
+    public void clearGrid() {
+        for (int i = 0; i < this.size.height; i++) {
+            for (int j = 0; j < this.size.width; j++) {
+                this.grid[i][j].clearCell();
+            }
+        }
+    }
 
     // Outils
 
@@ -62,6 +77,20 @@ public class Board {
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
                 cells[i][j] = new Cell(this.shape);
+            }
+        }
+
+        // Initialization of all direction's cells
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                Cell c = cells[i][j];
+                for (Direction d : Direction.values()) {
+                    Point newCoordinate = d.getNewCoordinates(i, j);
+                    if (this.coordinateIsValid(newCoordinate.x, newCoordinate.y)) {
+                        Cell newCell = cells[newCoordinate.x][newCoordinate.y];
+                        c.setCellOnDirection(d, newCell);
+                    }
+                }
             }
         }
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SizeGame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Hexagonia</a> &gt; <a href="index.source.html" class="el_package">hex.platform.view.info</a> &gt; <span class="el_source">SizeGame.java</span></div><h1>SizeGame.java</h1><pre class="source lang-java linenums">package hex.platform.view.info;
+
+import java.awt.*;
+
+<span class="nc" id="L5">public enum SizeGame {</span>
+
+<span class="nc" id="L7">    TWELVE(</span>
+        12,
+        new Dimension(850, 700)
+    ),
+
+<span class="nc" id="L12">    ELEVEN(</span>
+        11,
+        new Dimension(800, 650)
+    ),
+
+<span class="nc" id="L17">    TEN(</span>
+        10,
+        new Dimension(700, 650)
+    ),
+
+<span class="nc" id="L22">    NINE(</span>
+        9,
+        new Dimension(650, 600)
+    ),
+
+<span class="nc" id="L27">    EIGHT(</span>
+        8,
+        new Dimension(600, 550)
+    ),
+
+<span class="nc" id="L32">    SEVEN(</span>
+        7,
+        new Dimension(530, 500)
+    ),
+
+<span class="nc" id="L37">    SIX(</span>
+        6,
+        new Dimension(450, 500)
+    ),
+
+<span class="nc" id="L42">    FIVE(</span>
+        5,
+        new Dimension(400, 430)
+    ),
+
+<span class="nc" id="L47">    FOUR(</span>
+        4,
+        new Dimension(320, 400)
+    ),
+
+<span class="nc" id="L52">    THREE(</span>
+        3,
+        new Dimension(250, 350)
+    );
+
+    private final int size;
+
+    private final Dimension dimension;
+
+<span class="nc" id="L61">    SizeGame(int s, Dimension dimension) {</span>
+<span class="nc" id="L62">        this.size = s;</span>
+<span class="nc" id="L63">        this.dimension = dimension;</span>
+<span class="nc" id="L64">    }</span>
+
+    public Dimension getDimension() {
+<span class="nc" id="L67">        return dimension;</span>
+    }
+
+    public Integer getSize() {
+<span class="nc" id="L71">        return this.size;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,6 +1,7 @@
 package hex.game;
 
-import hex.game.player.PlayerName;
+import hex.game.player.computer.Computer;
+import hex.platform.view.info.PlayerName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,15 +12,17 @@ class ActionTest {
     void shouldCreateAction() {
         // GIVEN
 
+        Computer compute = new Computer();
         Action a;
 
         // WHEN
 
-        a = new Action(1, 7, PlayerName.MAX);
+        a = new Action(1, 7, compute);
 
         // THEN
 
         assertTrue(a.getAbscissa() == 1
                 && a.getOrdinate() == 7);
+        assertEquals(compute, a.getPlayer());
     }
 }

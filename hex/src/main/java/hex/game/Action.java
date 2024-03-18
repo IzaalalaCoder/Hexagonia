@@ -1,25 +1,25 @@
 package hex.game;
 
-import hex.game.player.PlayerName;
+import hex.game.player.AbstractPlayer;
 
 public class Action {
 
-    // ATTRIBUTS
+    // ATTRIBUTES
 
     private final int abscissa;
     private final int ordinate;
 
-    private final PlayerName player;
+    private final AbstractPlayer player;
 
-    // CONSTRUCTEUR
+    // CONSTRUCTORS
 
-    public Action(int x, int y, PlayerName p) {
+    public Action(int x, int y, AbstractPlayer p) {
         this.abscissa = x;
         this.ordinate = y;
         this.player = p;
     }
 
-    // REQUETES
+    // REQUESTS
 
     public int getAbscissa() {
         return abscissa;
@@ -29,7 +29,7 @@ public class Action {
         return ordinate;
     }
 
-    public PlayerName getPlayer() {
+    public AbstractPlayer getPlayer() {
         return player;
     }
 }

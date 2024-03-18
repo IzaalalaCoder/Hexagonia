@@ -1,23 +1,25 @@
 package hex.platform.controller.shapes.forms;
 
-import hex.game.player.PlayerName;
+import hex.game.Game;
+import hex.platform.view.info.PlayerName;
 import hex.platform.view.shapes.Forms;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class ControlForms extends MouseAdapter {
 
     // CONSTRUCTOR
 
     private JButton btn;
+    private Game model;
 
-    public ControlForms(JButton btn) {
+    public ControlForms(JButton btn, Game model) {
         super();
         this.btn = btn;
+        this.model = model;
     }
 
     // COMMANDS
@@ -31,8 +33,12 @@ public class ControlForms extends MouseAdapter {
         Forms f = (Forms) e.getSource();
         Point p = e.getPoint();
         if (f.isContainedInForm(p)) {
-            f.changeColor(Forms.BORDER_COLOR_DEFAULT);
             f.changeController();
+            if (model != null) {
+                PlayerName playerName = PlayerName.values()[model.getPositionCurrentPlayer()];
+                f.changeColor(playerName.getDefaultColorForPlayer());
+                model.consumeTurn();
+            }
         }
     }
 
@@ -45,18 +51,14 @@ public class ControlForms extends MouseAdapter {
     public void mouseEntered(MouseEvent e) {
         Forms f = (Forms) e.getSource();
         Point p = e.getPoint();
-        if (f.isContainedInForm(p)) {
-            btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        }
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         Forms f = (Forms) e.getSource();
         Point p = e.getPoint();
-        if (f.isContainedInForm(p)) {
-            btn.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        }
+
     }
 
 }

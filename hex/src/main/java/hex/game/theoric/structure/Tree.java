@@ -1,7 +1,6 @@
 package hex.game.theoric.structure;
 
 import hex.board.Board;
-import hex.game.player.PlayerName;
 import hex.game.theoric.structure.node.ManageNode;
 
 public interface Tree {
@@ -21,7 +20,7 @@ public interface Tree {
     /**
      * Read grid and full tree
      */
-    void parseBoard(PlayerName start);
+    void parseBoard();
 
     void calculateGainOnAllLeaf();
 }

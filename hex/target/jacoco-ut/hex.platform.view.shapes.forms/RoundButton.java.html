@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RoundButton.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Hexagonia</a> &gt; <a href="index.source.html" class="el_package">hex.platform.view.shapes.forms</a> &gt; <span class="el_source">RoundButton.java</span></div><h1>RoundButton.java</h1><pre class="source lang-java linenums">package hex.platform.view.shapes.forms;
+
+import hex.board.cell.Direction;
+import hex.board.cell.Shape;
+
+import java.awt.event.MouseAdapter;
+import java.awt.geom.Ellipse2D;
+
+import hex.platform.controller.shapes.forms.ControlForms;
+import hex.platform.view.shapes.Forms;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+
+public class RoundButton extends JButton implements Forms {
+
+<span class="nc" id="L19">    public static final Shape SHAPE = Shape.CIRCLE;</span>
+
+    // ATTRIBUTES
+
+    private MouseAdapter listener;
+    private final Map&lt;Direction, Color&gt; borderColor;
+
+    // CONSTRUCTOR
+
+<span class="nc" id="L28">    public RoundButton() {</span>
+<span class="nc" id="L29">        this.borderColor = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L30">        this.changeSize();</span>
+<span class="nc" id="L31">        this.setContentAreaFilled(false);</span>
+<span class="nc" id="L32">        this.listener = new ControlForms(this);</span>
+<span class="nc" id="L33">        this.addMouseListener(this.listener);</span>
+<span class="nc" id="L34">    }</span>
+
+    // REQUESTS
+
+    @Override
+    public Shape getShapeOfJButton() {
+<span class="nc" id="L40">        return SHAPE;</span>
+    }
+
+    @Override
+    public boolean isContainedInForm(Point p) {
+<span class="nc" id="L45">        java.awt.Shape shape = new Ellipse2D.Float(0, 0, getWidth(), getHeight());</span>
+<span class="nc" id="L46">        return shape.contains(p);</span>
+    }
+
+    @Override
+    public String getCoordinate() {
+<span class="nc" id="L51">        return null;</span>
+    }
+
+    // COMMANDS
+
+    @Override
+    protected void paintComponent(Graphics g) {
+<span class="nc" id="L58">        g.setColor(getBackground());</span>
+<span class="nc" id="L59">        g.fillOval(0,0,getSize().width - 1,getSize().height - 1);</span>
+<span class="nc" id="L60">        super.paintComponent(g);</span>
+<span class="nc" id="L61">    }</span>
+
+    @Override
+    protected void paintBorder(Graphics g) {
+<span class="nc" id="L65">        g.setColor(getForeground());</span>
+<span class="nc" id="L66">        g.drawOval(0, 0, getSize().width-1, getSize().height-1);</span>
+<span class="nc" id="L67">    }</span>
+
+    @Override
+    public void changeColor(Color c) {
+<span class="nc" id="L71">        this.setBackground(c);</span>
+<span class="nc" id="L72">    }</span>
+
+    @Override
+    public void setColorsForBorder(Map&lt;Direction, Color&gt; c) {
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        for (Direction d : this.borderColor.keySet()) {</span>
+<span class="nc" id="L77">            Color color = this.borderColor.get(d);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            if (!color.equals(c.get(d))) {</span>
+<span class="nc" id="L79">                this.borderColor.replace(d, c.get(d));</span>
+            }
+<span class="nc" id="L81">        }</span>
+<span class="nc" id="L82">    }</span>
+
+    @Override
+    public void changeController() {
+<span class="nc" id="L86">        this.removeMouseListener(this.listener);</span>
+<span class="nc" id="L87">        this.listener = null;</span>
+<span class="nc" id="L88">    }</span>
+
+    // UTILS
+
+    private void changeSize() {
+<span class="nc" id="L93">        Dimension size = getPreferredSize();</span>
+<span class="nc" id="L94">        size.width = size.height = SIZE_DEFAULT;</span>
+<span class="nc" id="L95">        setPreferredSize(size);</span>
+<span class="nc" id="L96">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,6 +1,6 @@
 package hex.game.theoric.structure.node;
 
-import hex.game.player.Player;
+import hex.game.player.AbstractPlayer;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface ManageNode<E> {
 
     Boolean getIsFinish();
 
-    Player getLabel();
+    AbstractPlayer getLabel();
 
     E getConfiguration();
 

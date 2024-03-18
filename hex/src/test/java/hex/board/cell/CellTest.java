@@ -1,6 +1,6 @@
 package hex.board.cell;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,6 +35,25 @@ public class CellTest {
                         // WHEN
                         new Cell(null),
                         "Invalid argument"
+        );
+    }
+
+    @Test
+    public void shouldSetCellOnDirWhenDirectionIsNull() {
+
+        // GIVEN
+
+        Cell c = new Cell(Shape.TRIANGLE_B);
+
+        // THEN
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        // WHEN
+
+                        c.setCellOnDirection(null, c),
+                "Invalid argument"
         );
     }
 
@@ -136,6 +155,57 @@ public class CellTest {
                         c.setState(null),
                 "Invalid argument"
         );
+    }
+
+    @Test
+    public void shouldGetCellOnDirWhenIsNull() {
+        // GIVEN
+
+        Cell c = new Cell(Shape.TRIANGLE_B);
+
+        // THEN
+
+        assertThrows(IllegalArgumentException.class,
+                () ->
+                        // WHEN
+                        c.getCellOnDir(null),
+                "Invalid argument"
+
+        );
+    }
+
+    @Test
+    public void shouldGetCellOnDirWhenIsInexistantDirection() {
+        // GIVEN
+
+        Cell c = new Cell(Shape.TRIANGLE_B);
+
+        // THEN
+
+        assertThrows(IllegalArgumentException.class,
+                () ->
+                        // WHEN
+                        c.getCellOnDir(Direction.TOP),
+                "Invalid argument"
+
+        );
+    }
+
+    @Test
+    public void shouldCopyCell() {
+        // GIVEN
+
+        Cell c = new Cell(Shape.TRIANGLE_T);
+
+        // WHEN
+
+        Cell newC = Cell.copyCell(c);
+
+        // THEN
+
+        assertEquals(c.getState(), newC.getState());
+        assertEquals(c.getShape(), newC.getShape());
+        assertEquals(c.getDirections(), newC.getDirections());
     }
 
 }

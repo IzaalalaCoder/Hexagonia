@@ -1,15 +1,19 @@
 package hex.board.cell;
 
+import hex.game.player.AbstractPlayer;
+
 import java.util.EnumMap;
 
 public class Cell {
-    // Attributs
+
+    // ATTRIBUTES
 
     private State state;
     private final Shape shape;
     private final EnumMap<Direction, Cell> directions;
+    private AbstractPlayer player;
 
-    // Constructeurs
+    // CONSTRUCTOR
 
     public Cell(Shape s) {
         if (s == null) {
@@ -18,10 +22,10 @@ public class Cell {
         this.state = State.EMPTY;
         this.shape = s;
         this.directions = new EnumMap<>(Direction.class);
-        this.initializeDirections();
+        this.player = null;
     }
 
-    // Requêtes
+    // REQUESTS
 
     public Shape getShape() {
         return shape;
@@ -52,7 +56,19 @@ public class Cell {
         return this.directions.get(d);
     }
 
-    // Commandes
+    public AbstractPlayer getPlayer() {
+        return player;
+    }
+
+    // COMMANDS
+
+    public void setPlayer(AbstractPlayer p) {
+        if (this.getState() == State.PLAYER) {
+            throw new IllegalArgumentException("Invalid argument");
+        }
+        this.setState(State.PLAYER);
+        this.player = p;
+    }
 
     public void setState(State s) {
         if (s == null) {
@@ -68,16 +84,15 @@ public class Cell {
         if (c.equals(this)) {
             throw new IllegalArgumentException("Don't cell correct");
         }
-        this.directions.replace(d, c);
+        this.directions.put(d, c);
     }
 
-    // Outils
-
-    private void initializeDirections() {
-        for (Direction d : this.shape.getDirections()) {
-            this.directions.put(d, null);
-        }
+    public void clearCell() {
+        this.state = State.EMPTY;
+        this.player = null;
     }
+
+    // UTILS
 
     private static void manageDirections(Cell in, Cell from) {
         for (Direction d : from.getDirections().keySet()) {

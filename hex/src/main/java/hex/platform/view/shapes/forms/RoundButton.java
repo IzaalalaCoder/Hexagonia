@@ -29,7 +29,7 @@ public class RoundButton extends JButton implements Forms {
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
-        this.listener = new ControlForms(this);
+        this.listener = new ControlForms(this, null);
         this.addMouseListener(this.listener);
     }
 

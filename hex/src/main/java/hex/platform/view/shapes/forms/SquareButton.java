@@ -22,7 +22,7 @@ public class SquareButton extends JButton implements Forms  {
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
-        this.listener = new ControlForms(this);
+        this.listener = new ControlForms(this, null);
         this.addMouseListener(this.listener);
 
         // Le mieux est de ne pas coller les boutons

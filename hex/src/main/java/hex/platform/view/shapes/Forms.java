@@ -2,9 +2,7 @@ package hex.platform.view.shapes;
 
 import hex.board.cell.Direction;
 import hex.board.cell.Shape;
-import hex.game.player.PlayerName;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 

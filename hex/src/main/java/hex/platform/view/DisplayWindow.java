@@ -22,10 +22,10 @@ public class DisplayWindow extends JFrame {
 
     public DisplayWindow() {
         super();
-        this.model = new Game(3);
-        this.board = new DisplayBoard(this.model.getBoard());
+        this.model = new Game(11);
+        this.board = new DisplayBoard(this.model);
         this.help = new DisplayHelp();
-        this.information = new DisplayInfo();
+        this.information = new DisplayInfo(this.model);
         this.updateWindow();
         this.placeComponent();
     }

@@ -5,6 +5,7 @@ import hex.board.cell.Shape;
 
 import java.awt.event.MouseAdapter;
 
+import hex.game.Game;
 import hex.platform.controller.shapes.forms.ControlForms;
 import hex.platform.view.shapes.Forms;
 
@@ -26,10 +27,21 @@ public class HexagonButton extends JButton implements Forms {
     int[] x = new int[SHAPE.getNbSides()];
     int[] y = new int[SHAPE.getNbSides()];
     double angle = 2 * Math.PI / SHAPE.getNbSides();
-    private int name;
+    private final int name;
 
 
     // CONSTRUCTOR
+
+    public HexagonButton(Game model) {
+        manageCoordinate();
+        this.name = HexagonButton.id;
+        HexagonButton.id += 1;
+        this.borderColor = new HashMap<>();
+        this.changeSize();
+        this.setContentAreaFilled(false);
+        this.listener = new ControlForms(this, model);
+        this.addMouseListener(this.listener);
+    }
 
     public HexagonButton() {
         manageCoordinate();
@@ -38,7 +50,7 @@ public class HexagonButton extends JButton implements Forms {
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
-        this.listener = new ControlForms(this);
+        this.listener = new ControlForms(this, null);
         this.addMouseListener(this.listener);
 
     }

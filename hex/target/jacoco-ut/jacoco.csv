@@ -1,0 +1,75 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Hexagonia,hex.platform.view,DisplayWindow,117,0,4,0,34,0,11,0,9,0
+Hexagonia,hex.platform.view,DisplayParameter,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.platform.view,DisplayInfo,34,0,0,0,7,0,2,0,2,0
+Hexagonia,hex.platform.view,DisplayRules,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.platform.view,DisplayBoard,108,0,6,0,26,0,6,0,3,0
+Hexagonia,hex.platform.view,DisplayHelp,24,0,0,0,8,0,2,0,2,0
+Hexagonia,hex.game.theoric.structure.node,Node,158,0,22,0,45,0,25,0,14,0
+Hexagonia,hex.game.theoric.structure.node,Status,21,0,0,0,4,0,1,0,1,0
+Hexagonia,hex.platform.view.shapes,Forms,5,0,0,0,2,0,1,0,1,0
+Hexagonia,hex.board.cell,State,0,21,0,0,0,4,0,1,0,1
+Hexagonia,hex.board.cell,Shape,0,61,0,0,0,14,0,4,0,4
+Hexagonia,hex.board.cell,Direction.new Direction() {...},8,6,0,0,1,1,1,1,1,1
+Hexagonia,hex.board.cell,Direction.new Direction() {...},10,6,0,0,1,1,1,1,1,1
+Hexagonia,hex.board.cell,Direction.new Direction() {...},10,6,0,0,1,1,1,1,1,1
+Hexagonia,hex.board.cell,Direction.new Direction() {...},8,6,0,0,1,1,1,1,1,1
+Hexagonia,hex.board.cell,Direction,0,51,0,0,0,9,0,1,0,1
+Hexagonia,hex.board.cell,Direction.new Direction() {...},8,6,0,0,1,1,1,1,1,1
+Hexagonia,hex.board.cell,Direction.new Direction() {...},8,6,0,0,1,1,1,1,1,1
+Hexagonia,hex.board.cell,Direction.new Direction() {...},8,6,0,0,1,1,1,1,1,1
+Hexagonia,hex.board.cell,Shape.new Shape() {...},0,23,0,0,0,6,0,2,0,2
+Hexagonia,hex.board.cell,Direction.new Direction() {...},8,6,0,0,1,1,1,1,1,1
+Hexagonia,hex.board.cell,Shape.new Shape() {...},0,31,0,0,0,8,0,2,0,2
+Hexagonia,hex.board.cell,Shape.new Shape() {...},0,19,0,0,0,5,0,2,0,2
+Hexagonia,hex.board.cell,Shape.new Shape() {...},0,19,0,0,0,5,0,2,0,2
+Hexagonia,hex.board.cell,Shape.new Shape() {...},0,23,0,0,0,6,0,2,0,2
+Hexagonia,hex.board.cell,Cell,0,153,0,18,0,39,0,19,0,10
+Hexagonia,hex.platform.view.info,PlayMode,51,0,0,0,9,0,4,0,4,0
+Hexagonia,hex.platform.view.info,PlayerMode,34,0,0,0,7,0,3,0,3,0
+Hexagonia,hex.platform.view.info,LevelMode,27,0,0,0,5,0,1,0,1,0
+Hexagonia,hex.platform.view.info,SizeGame,141,0,0,0,17,0,4,0,4,0
+Hexagonia,hex.game.player.real,PlayDistancial,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.game.complementary,Log,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.game.complementary,Help,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.util.structure.stack,Stack,32,0,4,0,9,0,7,0,5,0
+Hexagonia,hex.game.theoric.algo.beta,NegaBeta,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.game.theoric.algo.beta,AlphaBeta,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.util.time,Chronometer,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.platform.controller.shapes.forms,ControlForms,63,0,6,0,21,0,9,0,6,0
+Hexagonia,hex.platform.view.menu,MenuItem,153,0,0,0,17,0,4,0,4,0
+Hexagonia,hex.platform.view.menu,Menu,82,0,0,0,8,0,3,0,3,0
+Hexagonia,hex.platform.view.menu,MainMenu,85,0,6,0,16,0,6,0,3,0
+Hexagonia,hex.platform.view.menu,MenuNewGame,148,0,12,0,27,0,10,0,4,0
+Hexagonia,hex.game.player.computer,Play,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.game.player.computer,Analyze,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.game.player.computer,Level,27,0,0,0,2,0,1,0,1,0
+Hexagonia,hex.game.theoric.algo.sss,ThreeSStar,29,0,0,0,12,0,8,0,8,0
+Hexagonia,hex.game.theoric.algo.sss,Element,56,0,4,0,19,0,10,0,8,0
+Hexagonia,hex.game.theoric.algo.sss,Eval,38,0,0,0,9,0,4,0,4,0
+Hexagonia,hex.platform.controller.menu,ControlMainMenu,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.platform.controller,ControlBoard,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.platform.controller,ControlParameter,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.platform.controller,ControlWindow,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.platform.controller,ControlRules,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.game.theoric.algo.strat,LostStrategy,13,0,0,0,8,0,7,0,7,0
+Hexagonia,hex.game.theoric.algo.strat,WinStrategy,13,0,0,0,8,0,7,0,7,0
+Hexagonia,hex.game.player,PlayerName,3,25,0,0,1,5,1,2,1,2
+Hexagonia,hex.game.player,Player,15,0,0,0,6,0,3,0,3,0
+Hexagonia,hex.game.player,PlayerType,15,0,0,0,2,0,1,0,1,0
+Hexagonia,hex.util.xml,ReadingXML,11,0,0,0,6,0,4,0,4,0
+Hexagonia,hex.util.xml,WritingXML,7,0,0,0,5,0,4,0,4,0
+Hexagonia,hex.game.theoric.algo,Minimax,22,0,0,0,13,0,13,0,13,0
+Hexagonia,hex.game.theoric.algo,Negamax,3,0,0,0,1,0,1,0,1,0
+Hexagonia,hex.board,Board,125,0,8,0,28,0,11,0,7,0
+Hexagonia,hex.util.structure.file,PriorityFile,91,0,12,0,20,0,13,0,7,0
+Hexagonia,hex.game.theoric.structure,Arborescence,15,9,1,1,7,3,5,1,4,1
+Hexagonia,hex.game,Mode,15,0,0,0,2,0,1,0,1,0
+Hexagonia,hex.game,Action,0,21,0,0,0,8,0,4,0,4
+Hexagonia,hex.game,Game,107,0,4,0,32,0,18,0,16,0
+Hexagonia,hex.platform.view.shapes.forms,RoundButton,147,0,4,0,34,0,13,0,11,0
+Hexagonia,hex.platform.view.shapes.forms,SquareButton,157,0,4,0,34,0,12,0,10,0
+Hexagonia,hex.platform.view.shapes.forms,TriangleBottomButton,159,0,4,0,36,0,13,0,11,0
+Hexagonia,hex.platform.view.shapes.forms,HexagonButton,206,0,6,0,48,0,15,0,12,0
+Hexagonia,hex.platform.view.shapes.forms,TriangleTopButton,159,0,4,0,36,0,13,0,11,0
+Hexagonia,hex.platform.view.shapes.forms,MainTest,704,0,54,0,136,0,38,0,11,0

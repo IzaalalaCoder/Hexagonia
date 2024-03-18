@@ -1,10 +1,7 @@
 package hex.game.theoric.structure;
 
 import hex.board.Board;
-import hex.board.cell.Cell;
-import hex.game.player.PlayerName;
 import hex.game.theoric.structure.node.ManageNode;
-import hex.game.theoric.structure.node.Node;
 
 public class Arborescence implements Tree {
 
@@ -35,18 +32,12 @@ public class Arborescence implements Tree {
         return board;
     }
 
-    // COMMANDS
-
     @Override
-    public void parseBoard(PlayerName start) {
-        /*Cell[][] grids = this.board.getGrid();
-        for (Cell[] cells : grids) {
-             for (Cell c : cells) {
-                 Board b = this.
+    public void parseBoard() {
 
-             }
-        }*/
     }
+
+    // COMMANDS
 
     public void calculateGainOnAllLeaf() {
 

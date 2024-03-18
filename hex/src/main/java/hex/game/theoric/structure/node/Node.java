@@ -1,7 +1,6 @@
 package hex.game.theoric.structure.node;
 
-import hex.board.Board;
-import hex.game.player.Player;
+import hex.game.player.AbstractPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ public class Node<E> implements ManageNode<E> {
 
     // ATTRIBUTES
 
-    private final Player label;
+    private final AbstractPlayer label;
     private final E config;
     private Status status;
     private final ManageNode<E> parent;
@@ -18,7 +17,7 @@ public class Node<E> implements ManageNode<E> {
 
     // CONSTRUCTORS
 
-    public Node(Node<E> parent, Player label, E configuration) {
+    public Node(Node<E> parent, AbstractPlayer label, E configuration) {
         this.label = label;
         this.config = configuration;
         this.parent = parent;
@@ -34,7 +33,7 @@ public class Node<E> implements ManageNode<E> {
     }
 
     @Override
-    public Player getLabel() {
+    public AbstractPlayer getLabel() {
         return this.label;
     }
 

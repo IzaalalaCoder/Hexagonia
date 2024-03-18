@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Hexagonia</a> &gt; <a href="index.source.html" class="el_package">hex.game</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">package hex.game;
+
+import hex.board.*;
+import hex.board.cell.*;
+import hex.game.complementary.Help;
+import hex.game.player.Player;
+import hex.game.player.PlayerName;
+import hex.game.player.PlayerType;
+import hex.util.structure.stack.Stack;
+
+public class Game implements AbstractGame {
+
+    // CONSTANCES DE CLASSES
+
+    public static final int MAX_NUMBER_OF_PLAYER = 2;
+
+    // ATTRIBUTS
+
+    private final Mode mode;
+    private final Board board;
+    private final Player[] players;
+    private final int size;
+
+    // CONSTRUCTEURS
+
+<span class="nc" id="L26">    public Game(Mode mode, boolean computerPlay, Shape shape) {</span>
+<span class="nc" id="L27">        this.size = 11;</span>
+<span class="nc" id="L28">        this.mode = mode;</span>
+<span class="nc" id="L29">        board = createBoard(shape);</span>
+<span class="nc" id="L30">        players = initializePlayers(computerPlay);</span>
+<span class="nc" id="L31">    }</span>
+
+<span class="nc" id="L33">    public Game(int size) {</span>
+<span class="nc" id="L34">        this.mode = Mode.SAME;</span>
+<span class="nc" id="L35">        this.size = size;</span>
+<span class="nc" id="L36">        players = initializePlayers(false);</span>
+<span class="nc" id="L37">        board = createBoard(Shape.HEXAGONAL);</span>
+<span class="nc" id="L38">    }</span>
+
+    // REQUETES
+
+    @Override
+    public int getSize() {
+<span class="nc" id="L44">        return size;</span>
+    }
+
+    @Override
+    public Board getBoard() {
+<span class="nc" id="L49">        return board;</span>
+    }
+
+    @Override
+    public Mode getMode() {
+<span class="nc" id="L54">        return mode;</span>
+    }
+
+    @Override
+    public Player[] getPlayers() {
+<span class="nc" id="L59">        return players;</span>
+    }
+
+    @Override
+    public boolean isEndOfGame() {
+<span class="nc" id="L64">        return false;</span>
+    }
+
+    @Override
+    public Player getCurrentPlayer() {
+<span class="nc" id="L69">        return null;</span>
+    }
+
+    @Override
+    public Help getHelp() {
+<span class="nc" id="L74">        return null;</span>
+    }
+
+    @Override
+    public Stack&lt;Action&gt; getHistory() {
+<span class="nc" id="L79">        return null;</span>
+    }
+
+    @Override
+    public void consumeTurn() {
+
+<span class="nc" id="L85">    }</span>
+
+    @Override
+    public void replay() {
+
+<span class="nc" id="L90">    }</span>
+
+    @Override
+    public void reset() {
+
+<span class="nc" id="L95">    }</span>
+
+    // COMMANDES
+
+
+
+    // OUTILS
+
+    private Board createBoard(Shape shape) {
+<span class="nc" id="L104">        return new Board(this.size,this.size, shape);</span>
+    }
+
+    private Player[] initializePlayers(boolean computerPlay) {
+<span class="nc" id="L108">        Player[] players = new Player[Game.MAX_NUMBER_OF_PLAYER];</span>
+<span class="nc" id="L109">        players[0] = new Player(PlayerName.MAX, PlayerType.HUMAN);</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (this.mode == Mode.SAME) {</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">            players[1] = new Player(PlayerName.MIN, computerPlay</span>
+<span class="nc" id="L112">                    ? PlayerType.COMPUTER : PlayerType.HUMAN);</span>
+        } else {
+<span class="nc" id="L114">                new Player(PlayerName.MIN, PlayerType.HUMAN);</span>
+        }
+<span class="nc" id="L116">        return players;</span>
+    }
+
+    private void managePlayer() {
+
+<span class="nc" id="L121">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
