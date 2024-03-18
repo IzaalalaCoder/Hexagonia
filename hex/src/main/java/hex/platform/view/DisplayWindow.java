@@ -29,9 +29,9 @@ public class DisplayWindow extends JFrame {
         this.createContents();
         this.createMenu();
         this.help = new DisplayHelp();
+        this.setSize(this.dim);
         this.updateWindow();
         this.createController();
-        this.setSize(this.dim);
     }
 
     // REQUESTS
