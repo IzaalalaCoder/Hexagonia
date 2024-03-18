@@ -6,6 +6,7 @@ import hex.board.cell.Shape;
 import hex.game.complementary.Help;
 import hex.game.player.AbstractPlayer;
 import hex.game.player.computer.Computer;
+import hex.game.player.computer.Level;
 import hex.game.player.human.Player;
 import hex.game.player.PlayerType;
 import hex.util.structure.stack.ManageStack;
@@ -23,16 +24,14 @@ public class Game implements AbstractGame {
     private final int size;
     private int currentPlayer;
     private ManageStack<Action> history;
-
     private final PropertyChangeSupport pcs;
-    // private final VetoableChangeSupport vcs;
 
     // CONSTRUCTORS
 
-    public Game(int size) {
-        this.mode = Mode.SAME;
+    public Game(boolean offline, boolean computer, int level, int size) {
+        this.mode = offline ? Mode.SAME : Mode.DISTANCE;
         this.size = size;
-        players = initializePlayers(false);
+        players = initializePlayers(computer);
         this.currentPlayer = 0;
         this.pcs = new PropertyChangeSupport(this);
         board = createBoard(Shape.HEXAGONAL);

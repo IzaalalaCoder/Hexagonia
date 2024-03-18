@@ -1,7 +1,11 @@
 package hex.platform.view.menu;
 
+import hex.platform.view.DisplayWindow;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainMenu extends JMenuBar {
 
@@ -13,11 +17,15 @@ public class MainMenu extends JMenuBar {
         return new ImageIcon(newimg);
     }
 
+    private Map<MenuItem, JMenuItem> subMenus;
+
     // CONSTRUCTOR
 
-    public MainMenu() {
+    public MainMenu(DisplayWindow parent) {
         super();
+        this.subMenus = new HashMap<>();
         this.implementMenu();
+        this.createController(parent);
     }
 
     // UTILS
@@ -29,7 +37,7 @@ public class MainMenu extends JMenuBar {
                 if (it.getMenu() != null) {
                     it.getMenu().setIcon(MainMenu.getIcon(it.getIcon()));
                     menu.add(it.getMenu());
-
+                    this.subMenus.put(it, it.getMenu());
                 } else {
                     menu.addSeparator();
                 }
@@ -37,5 +45,13 @@ public class MainMenu extends JMenuBar {
             this.add(menu);
         }
         this.add(MenuItem.QUIT.getMenu());
+    }
+
+    private void createController(DisplayWindow parent) {
+        // Add controller on new game menu
+
+        MenuNewGame newGameMenu = (MenuNewGame) this.subMenus.get(MenuItem.NEW_GAME);
+        newGameMenu.createController(parent);
+
     }
 }

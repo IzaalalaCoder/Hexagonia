@@ -11,23 +11,27 @@ public class DisplayWindow extends JFrame {
 
     // CONSTANTS
 
+    private Dimension dim = new Dimension(600, 600);
+
     // ATTRIBUTES
 
-    private final Game model;
-    private final JPanel help;
-    private final JPanel board;
-    private final JPanel information;
+    private Game model;
+    private JPanel help;
+    private JPanel board;
+    private JPanel information;
+
+    private MainMenu mainMenu;
 
     // CONSTRUCTORS
 
     public DisplayWindow() {
         super();
-        this.model = new Game(11);
-        this.board = new DisplayBoard(this.model);
+        this.createContents();
+        this.createMenu();
         this.help = new DisplayHelp();
-        this.information = new DisplayInfo(this.model);
         this.updateWindow();
-        this.placeComponent();
+        this.createController();
+        this.setSize(this.dim);
     }
 
     // REQUESTS
@@ -36,9 +40,12 @@ public class DisplayWindow extends JFrame {
 
     // UTILS
 
+    private void createContents() {
+        this.mainMenu = new MainMenu(this);
+    }
+
     private void updateWindow() {
         this.setResizable(false);
-        this.resizeWindow();
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
     }
@@ -51,9 +58,28 @@ public class DisplayWindow extends JFrame {
         }
     }
 
+    private void createController() {
+
+    }
+
+    public void setModel(Game game) {
+        this.removeAllController();
+        this.model = game;
+        this.resizeWindow();
+        this.board = new DisplayBoard(this.model);
+        this.information = new DisplayInfo(this.model);
+
+        this.placeComponent();
+    }
+
+    private void removeAllController() {
+
+    }
+
     private void placeComponent() {
-        this.createMenu();
-        this.createBoard();
+        if (this.board != null) {
+            this.createBoard();
+        }
         this.createHelpBar();
         this.createInfoBar();
     }
@@ -72,7 +98,7 @@ public class DisplayWindow extends JFrame {
     }
 
     private void createMenu() {
-        this.setJMenuBar(new MainMenu());
+        this.setJMenuBar(this.mainMenu);
     }
 
     // POINT ENTERED

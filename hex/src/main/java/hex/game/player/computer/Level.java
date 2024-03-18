@@ -1,5 +1,10 @@
 package hex.game.player.computer;
 
 public enum Level {
-    EASY, MEDIUM, HARD, EXTREME;
+    EASY,
+    MEDIUM,
+    HARD,
+    EXTREME;
+
+
 }
