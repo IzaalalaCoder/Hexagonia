@@ -67,7 +67,7 @@ public enum SizeGame {
         return dimension;
     }
 
-    public Integer getSize() {
+    public int getSize() {
         return this.size;
     }
 }

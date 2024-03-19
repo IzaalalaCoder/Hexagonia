@@ -11,7 +11,7 @@ public class DisplayWindow extends JFrame {
 
     // CONSTANTS
 
-    private Dimension dim = new Dimension(600, 600);
+    private final Dimension DIMENSION = new Dimension(600, 600);
 
     // ATTRIBUTES
 
@@ -19,17 +19,13 @@ public class DisplayWindow extends JFrame {
     private JPanel help;
     private JPanel board;
     private JPanel information;
-
     private MainMenu mainMenu;
 
     // CONSTRUCTORS
 
     public DisplayWindow() {
         super();
-        this.createContents();
         this.createMenu();
-        this.help = new DisplayHelp();
-        this.setSize(this.dim);
         this.updateWindow();
         this.createController();
     }
@@ -45,6 +41,7 @@ public class DisplayWindow extends JFrame {
     }
 
     private void updateWindow() {
+        this.setSize(this.DIMENSION);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
@@ -68,7 +65,7 @@ public class DisplayWindow extends JFrame {
         this.resizeWindow();
         this.board = new DisplayBoard(this.model);
         this.information = new DisplayInfo(this.model);
-
+        this.help = new DisplayHelp();
         this.placeComponent();
     }
 
@@ -77,9 +74,7 @@ public class DisplayWindow extends JFrame {
     }
 
     private void placeComponent() {
-        if (this.board != null) {
-            this.createBoard();
-        }
+        this.createBoard();
         this.createHelpBar();
         this.createInfoBar();
     }
@@ -89,7 +84,6 @@ public class DisplayWindow extends JFrame {
     }
 
     private void createHelpBar() {
-        //this.help.setPreferredSize(new Dimension(WIDTH_WINDOW, 100));
         this.add(help, BorderLayout.SOUTH);
     }
 
@@ -98,6 +92,7 @@ public class DisplayWindow extends JFrame {
     }
 
     private void createMenu() {
+        this.createContents();
         this.setJMenuBar(this.mainMenu);
     }
 
