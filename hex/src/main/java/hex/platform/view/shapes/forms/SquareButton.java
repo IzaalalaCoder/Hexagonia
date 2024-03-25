@@ -29,6 +29,10 @@ public class SquareButton extends JButton implements Forms  {
     }
 
     @Override
+    public Map<Direction, Color> getColorsForBorder() {
+        return this.borderColor;
+    }
+    @Override
     public Shape getShapeOfJButton() {
         return shape;
     }
@@ -37,11 +41,6 @@ public class SquareButton extends JButton implements Forms  {
     public boolean isContainedInForm(Point p) {
         java.awt.Shape shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, 15, 15);
         return shape.contains(p.getX(), p.getY());
-    }
-
-    @Override
-    public String getCoordinate() {
-        return null;
     }
 
     @Override

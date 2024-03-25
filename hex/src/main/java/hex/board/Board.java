@@ -2,36 +2,33 @@ package hex.board;
 
 import hex.board.cell.*;
 import hex.board.cell.Shape;
+import hex.game.player.AbstractPlayer;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Board {
-    // Attributs
 
-    private Dimension size;
+    // ATTRIBUTES
+
+    private final int size;
     private final Cell[][] grid;
     private final Shape shape;
+    private final List<AbstractPlayer> players;
 
-    // Constructeurs
+    // CONSTRUCTORS
 
-    public Board(int w) {
-        this.size = new Dimension(w, w);
-        this.shape = Shape.HEXAGONAL;
+    public Board(int size, Shape shape, AbstractPlayer[] players) {
+
+        this.size = size;
+        this.shape = shape;
+        this.players = Arrays.asList(players);
         this.grid = createGrid();
     }
 
-    public Board(int w, int h, Shape shape) {
-        this.size = new Dimension(w, h);
-        this.shape = shape;
-        this.grid = createGrid();
-    }
-
-    public Board(Cell[][] g, Shape shape) {
-        this.grid = copyGrid(g);
-        this.shape = shape;
-    }
-
-    // Requêtes
+    // REQUESTS
 
     public Cell[][] getGrid() {
         //return this.copyGrid(this.grid);
@@ -41,23 +38,21 @@ public class Board {
     public Shape getShape() { return this.shape;}
 
     public boolean coordinateIsValid(int i, int j) {
-        final int w = this.size.width;
-        final int h = this.size.height;
-        return !(i < 0 || i >= h ||
-                j < 0 || j >= w);
+        return !(i < 0 || i >= size||
+                j < 0 || j >= size);
     }
 
-    // Commandes
+    // COMMANDS
 
     public void clearGrid() {
-        for (int i = 0; i < this.size.height; i++) {
-            for (int j = 0; j < this.size.width; j++) {
+        for (int i = 0; i < this.size; i++) {
+            for (int j = 0; j < this.size; j++) {
                 this.grid[i][j].clearCell();
             }
         }
     }
 
-    // Outils
+    // UTILS
 
     private Cell[][] copyGrid(Cell[][] grid) {
         Cell[][] cells = new Cell[this.grid.length][];
@@ -70,19 +65,27 @@ public class Board {
     }
 
     private Cell[][] createGrid() {
-        final int w = this.size.width;
-        final int h = this.size.height;
-        Cell[][] cells = new Cell[h][w];
+        Cell[][] cells = new Cell[size][size];
 
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
-                cells[i][j] = new Cell(this.shape);
+        List<AbstractPlayer> playersCell = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (j == 0 || j == size - 1) {
+                    playersCell.add(this.players.get(0));
+                }
+
+                if (i == 0 || i == size - 1) {
+                    playersCell.add(this.players.get(1));
+                }
+                cells[i][j] = new Cell(this.shape, playersCell.size());
+                playersCell.clear();
             }
+
         }
 
         // Initialization of all direction's cells
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 Cell c = cells[i][j];
                 for (Direction d : Direction.values()) {
                     Point newCoordinate = d.getNewCoordinates(i, j);

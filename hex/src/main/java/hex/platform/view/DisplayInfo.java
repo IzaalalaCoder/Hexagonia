@@ -26,7 +26,7 @@ public class DisplayInfo extends JPanel {
     }
 
     private void placeComponents() {
-        this.add(new JButton("Montre"));
+        this.add(new JLabel("Horaire"));
         this.add(this.playerInformation);
     }
 

@@ -6,8 +6,7 @@ import hex.board.cell.Shape;
 import hex.game.complementary.Help;
 import hex.game.player.AbstractPlayer;
 import hex.game.player.computer.Computer;
-import hex.game.player.computer.Level;
-import hex.game.player.human.Player;
+import hex.game.player.Player;
 import hex.game.player.PlayerType;
 import hex.util.structure.stack.ManageStack;
 
@@ -31,10 +30,10 @@ public class Game implements AbstractGame {
     public Game(boolean offline, boolean computer, int level, int size) {
         this.mode = offline ? Mode.SAME : Mode.DISTANCE;
         this.size = size;
-        players = initializePlayers(computer);
+        this.players = initializePlayers(computer);
         this.currentPlayer = 0;
+        this.board = createBoard(Shape.HEXAGONAL);
         this.pcs = new PropertyChangeSupport(this);
-        board = createBoard(Shape.HEXAGONAL);
     }
 
     // REQUESTS
@@ -116,16 +115,16 @@ public class Game implements AbstractGame {
     // UTILS
 
     private Board createBoard(Shape shape) {
-        return new Board(this.size,this.size, shape);
+        return new Board(this.size, shape, this.players);
     }
 
     private AbstractPlayer[] initializePlayers(boolean computerPlay) {
         AbstractPlayer[] players = new AbstractPlayer[Game.MAX_NUMBER_OF_PLAYER];
-        players[0] = new Player(PlayerType.HUMAN);
+        players[0] = new Player(PlayerType.HUMAN, FIRST_PLAYER);
         if (computerPlay) {
-            players[1] = new Computer();
+            players[1] = new Computer(SECOND_PLAYER);
         } else {
-            players[1] = new Player(PlayerType.HUMAN);
+            players[1] = new Player(PlayerType.HUMAN, SECOND_PLAYER);
         }
         return players;
     }

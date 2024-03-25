@@ -40,11 +40,6 @@ public class TriangleBottomButton extends JButton implements Forms {
     }
 
     @Override
-    public String getCoordinate() {
-        return null;
-    }
-
-    @Override
     public void changeColor(Color c) {
         this.setBackground(c);
     }
@@ -70,6 +65,11 @@ public class TriangleBottomButton extends JButton implements Forms {
                 this.borderColor.replace(d, c.get(d));
             }
         }
+    }
+
+    @Override
+    public Map<Direction, Color> getColorsForBorder() {
+        return this.borderColor;
     }
 
     @Override

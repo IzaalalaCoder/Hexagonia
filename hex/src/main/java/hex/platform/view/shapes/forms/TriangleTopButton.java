@@ -40,11 +40,6 @@ public class TriangleTopButton extends JButton implements Forms {
     }
 
     @Override
-    public String getCoordinate() {
-        return null;
-    }
-
-    @Override
     public void changeColor(Color c) {
         this.setBackground(c);
     }
@@ -72,6 +67,10 @@ public class TriangleTopButton extends JButton implements Forms {
         }
     }
 
+    @Override
+    public Map<Direction, Color> getColorsForBorder() {
+        return this.borderColor;
+    }
     @Override
     public void removeController() {
         this.removeMouseListener(this.listener);

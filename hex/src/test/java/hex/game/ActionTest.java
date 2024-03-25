@@ -1,6 +1,7 @@
 package hex.game;
 
 import hex.game.player.computer.Computer;
+import hex.game.player.computer.Level;
 import hex.platform.view.info.PlayerName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ class ActionTest {
     void shouldCreateAction() {
         // GIVEN
 
-        Computer compute = new Computer();
+        Computer compute = new Computer(1);
         Action a;
 
         // WHEN

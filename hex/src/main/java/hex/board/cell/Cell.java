@@ -3,6 +3,7 @@ package hex.board.cell;
 import hex.game.player.AbstractPlayer;
 
 import java.util.EnumMap;
+import java.util.List;
 
 public class Cell {
 
@@ -12,10 +13,11 @@ public class Cell {
     private final Shape shape;
     private final EnumMap<Direction, Cell> directions;
     private AbstractPlayer player;
+    private final int numberOfMemberships;
 
     // CONSTRUCTOR
 
-    public Cell(Shape s) {
+    public Cell(Shape s, int players) {
         if (s == null) {
             throw new IllegalArgumentException("Invalid argument");
         }
@@ -23,6 +25,7 @@ public class Cell {
         this.shape = s;
         this.directions = new EnumMap<>(Direction.class);
         this.player = null;
+        this.numberOfMemberships = players;
     }
 
     // REQUESTS
@@ -40,7 +43,7 @@ public class Cell {
     }
 
     public static Cell copyCell(Cell c) {
-        Cell cell = new Cell(c.getShape());
+        Cell cell = new Cell(c.getShape(), c.numberOfMemberships);
         cell.setState(c.getState());
         manageDirections(cell, c);
         return cell;
@@ -58,6 +61,10 @@ public class Cell {
 
     public AbstractPlayer getPlayer() {
         return player;
+    }
+
+    public int getNumberOfMemberships() {
+        return numberOfMemberships;
     }
 
     // COMMANDS

@@ -8,9 +8,8 @@ import hex.platform.view.info.PlayerMode;
 import hex.platform.view.info.SizeGame;
 import hex.platform.view.menu.util.InformationOnNewGame;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,19 +33,13 @@ public class MenuNewGame extends JMenu {
             boolean isOffline = information.isOffline();
             int level = information.getLevel();
             int size = Integer.parseInt(it.getText());
-            Game model = new Game(
+
+            it.addActionListener(e -> parent.setModel(new Game(
                     isOffline,
                     isComputer,
                     level,
                     size
-            );
-
-            it.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    parent.setModel(model);
-                }
-            });
+            )));
         }
     }
 

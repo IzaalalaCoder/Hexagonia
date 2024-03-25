@@ -13,6 +13,9 @@ public interface AbstractGame {
 
     public final String PROP_CURR_PLAYER = "currentPlayer";
 
+    public final int FIRST_PLAYER = 0;
+    public final int SECOND_PLAYER = 1;
+
     public final int MAX_NUMBER_OF_PLAYER = 2;
 
     /**

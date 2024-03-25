@@ -16,27 +16,22 @@ import java.util.Map;
 
 public class HexagonButton extends JButton implements Forms {
 
-    public static int id = 0;
     public static final Shape SHAPE = Shape.HEXAGONAL;
 
     // ATTRIBUTES
 
     private MouseAdapter listener;
     private final Map<Direction, Color> borderColor;
-
     int[] x = new int[SHAPE.getNbSides()];
     int[] y = new int[SHAPE.getNbSides()];
     double angle = 2 * Math.PI / SHAPE.getNbSides();
-    private final int name;
 
 
     // CONSTRUCTOR
 
-    public HexagonButton(Game model) {
+    public HexagonButton(Game model, Map<Direction, Color> border) {
         manageCoordinate();
-        this.name = HexagonButton.id;
-        HexagonButton.id += 1;
-        this.borderColor = new HashMap<>();
+        this.borderColor = border;
         this.changeSize();
         this.setContentAreaFilled(false);
         this.listener = new ControlForms(this, model);
@@ -45,14 +40,17 @@ public class HexagonButton extends JButton implements Forms {
 
     public HexagonButton() {
         manageCoordinate();
-        this.name = HexagonButton.id;
-        HexagonButton.id += 1;
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
         this.listener = new ControlForms(this, null);
         this.addMouseListener(this.listener);
 
+    }
+
+    @Override
+    public Map<Direction, Color> getColorsForBorder() {
+        return this.borderColor;
     }
 
     // REQUESTS
@@ -66,11 +64,6 @@ public class HexagonButton extends JButton implements Forms {
     public boolean isContainedInForm(Point p) {
         Polygon polygon = new Polygon(x, y, SHAPE.getNbSides());
         return polygon.contains(p);
-    }
-
-    @Override
-    public String getCoordinate() {
-        return Integer.toString(name);
     }
 
     private void manageCoordinate() {
@@ -110,6 +103,7 @@ public class HexagonButton extends JButton implements Forms {
             if (!color.equals(c.get(d))) {
                 this.borderColor.replace(d, c.get(d));
             }
+
         }
     }
 

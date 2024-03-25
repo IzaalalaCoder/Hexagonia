@@ -32,6 +32,10 @@ public class RoundButton extends JButton implements Forms {
         this.listener = new ControlForms(this, null);
         this.addMouseListener(this.listener);
     }
+    @Override
+    public Map<Direction, Color> getColorsForBorder() {
+        return this.borderColor;
+    }
 
     // REQUESTS
 
@@ -44,11 +48,6 @@ public class RoundButton extends JButton implements Forms {
     public boolean isContainedInForm(Point p) {
         java.awt.Shape shape = new Ellipse2D.Float(0, 0, getWidth(), getHeight());
         return shape.contains(p);
-    }
-
-    @Override
-    public String getCoordinate() {
-        return null;
     }
 
     // COMMANDS

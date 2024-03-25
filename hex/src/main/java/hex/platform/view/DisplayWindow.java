@@ -26,8 +26,10 @@ public class DisplayWindow extends JFrame {
     public DisplayWindow() {
         super();
         this.createMenu();
-        this.updateWindow();
         this.createController();
+        this.setSize(this.DIMENSION);
+        this.setLayout(new BorderLayout());
+        this.updateWindow();
     }
 
     // REQUESTS
@@ -41,10 +43,8 @@ public class DisplayWindow extends JFrame {
     }
 
     private void updateWindow() {
-        this.setSize(this.DIMENSION);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setLayout(new BorderLayout());
     }
 
     private void resizeWindow() {
@@ -67,6 +67,7 @@ public class DisplayWindow extends JFrame {
         this.information = new DisplayInfo(this.model);
         this.help = new DisplayHelp();
         this.placeComponent();
+        this.updateWindow();
     }
 
     private void removeAllController() {
