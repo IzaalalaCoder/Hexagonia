@@ -50,15 +50,13 @@ public class ControlForms extends MouseAdapter {
     @Override
     public void mouseEntered(MouseEvent e) {
         Forms f = (Forms) e.getSource();
-        Point p = e.getPoint();
-
+        f.changeColor(Color.BLACK);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         Forms f = (Forms) e.getSource();
-        Point p = e.getPoint();
-
+        f.changeColor(Color.WHITE);
     }
 
 }

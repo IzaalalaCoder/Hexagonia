@@ -58,17 +58,20 @@ public class DisplayBoard extends JPanel {
                 gbc.gridy = i * 2 + 1;
                 gbc.gridwidth =  1;
 
-
-
                 Map<Direction, Color> colorsForBorder = this.generateBorderColor(c, i, j, cells.length - 1);
+                HexagonButton button = new HexagonButton(model, colorsForBorder);
+
+                this.buttons[i][j] = button;
 
                 if (c.getState() != State.EMPTY) {
                     this.buttons[i][j].changeColor(
                             PlayerName.values()[c.getPlayer().getPosition()].getDefaultColorForPlayer());
+                } else {
+                    this.buttons[i][j].changeColor(Color.WHITE);
                 }
 
-                HexagonButton button = new HexagonButton(model, colorsForBorder);
-                this.buttons[i][j] = button;
+
+
 
                 p.add(button, gbc);
             }
