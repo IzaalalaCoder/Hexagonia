@@ -72,6 +72,9 @@ public class DisplayWindow extends JFrame {
     private void removeAllController() {
         if (this.board != null) {
             this.board.removeAllController();
+            this.remove(this.board);
+            this.remove(this.help);
+            this.remove(this.information);
         }
     }
 
