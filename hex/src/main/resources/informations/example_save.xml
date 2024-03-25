@@ -1,0 +1,38 @@
+<save mode="">
+    <players>
+        <player mode="computer" />
+        <player mode="human" />
+    </players>
+
+    <current>
+        <player_current>RED</player_current>
+        <chronometer>3.2</chronometer>
+    </current>
+
+    <board shape="HEXAGONAL" size="3">
+        <row>
+            <empty/>
+            <cell>BLUE</cell>
+            <cell>RED</cell>
+            <empty/>
+        </row>
+        <row>
+            <cell>BLUE</cell>
+            <empty/>
+            <empty/>
+            <cell>RED</cell>
+        </row>
+        <row>
+            <cell>BLUE</cell>
+            <empty/>
+            <cell>RED</cell>
+            <cell>RED</cell>
+        </row>
+        <row>
+            <cell>BLUE</cell>
+            <empty/>
+            <empty/>
+            <cell>BLUE</cell>
+        </row>
+    </board>
+</save>
