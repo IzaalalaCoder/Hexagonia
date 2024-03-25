@@ -1,7 +1,6 @@
 package hex.platform.view.menu;
 
 import hex.game.Game;
-import hex.game.player.computer.Level;
 import hex.platform.view.DisplayWindow;
 import hex.platform.view.info.LevelMode;
 import hex.platform.view.info.PlayMode;

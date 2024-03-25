@@ -4,6 +4,7 @@ import hex.board.Board;
 
 import hex.board.cell.Shape;
 import hex.game.Game;
+import hex.platform.view.shapes.Forms;
 import hex.platform.view.shapes.forms.HexagonButton;
 
 import javax.swing.*;
@@ -15,11 +16,13 @@ public class DisplayBoard extends JPanel {
     // ATTRIBUTES
 
     private final Game model;
+    private final Forms[][] buttons;
 
     // CONSTRUCTORS
 
     public DisplayBoard(Game game) {
         this.model = game;
+        this.buttons = new Forms[game.getSize()][game.getSize()];
         this.setLayout(new BorderLayout());
         this.displayBoard();
     }
@@ -36,7 +39,7 @@ public class DisplayBoard extends JPanel {
     private void createHexBoard(JPanel p) {
         p.setLayout(new GridBagLayout());
         //p.setPreferredSize(new Dimension());
-        final int size = model.getBoard().getGrid().length;
+        final int size = model.getSize();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
@@ -48,9 +51,20 @@ public class DisplayBoard extends JPanel {
                 gbc.gridx = i + j * 2 + 1;
                 gbc.gridy = i * 2 + 1;
                 gbc.gridwidth =  1;
+                this.buttons[i][j] = button;
                 p.add(button, gbc);
             }
         }
         this.add(p, BorderLayout.CENTER);
     }
+
+    public void removeAllController() {
+        final int size = this.buttons.length;
+        for (Forms[] button : this.buttons) {
+            for (int j = 0; j < size; j++) {
+                button[j].removeController();
+            }
+        }
+    }
+
 }

@@ -82,7 +82,7 @@ public class RoundButton extends JButton implements Forms {
     }
 
     @Override
-    public void changeController() {
+    public void removeController() {
         this.removeMouseListener(this.listener);
         this.listener = null;
     }

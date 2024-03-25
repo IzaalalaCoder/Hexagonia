@@ -17,7 +17,7 @@ public class DisplayWindow extends JFrame {
 
     private Game model;
     private JPanel help;
-    private JPanel board;
+    private DisplayBoard board;
     private JPanel information;
     private MainMenu mainMenu;
 
@@ -70,7 +70,9 @@ public class DisplayWindow extends JFrame {
     }
 
     private void removeAllController() {
-
+        if (this.board != null) {
+            this.board.removeAllController();
+        }
     }
 
     private void placeComponent() {
