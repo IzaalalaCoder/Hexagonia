@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: hex.board.cell.CellTest
--------------------------------------------------------------------------------
-Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.126 s - in hex.board.cell.CellTest
