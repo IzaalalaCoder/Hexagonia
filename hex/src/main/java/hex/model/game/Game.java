@@ -1,14 +1,13 @@
-package hex.game;
+package hex.model.game;
 
-import hex.board.*;
-import hex.board.cell.*;
-import hex.board.cell.Shape;
-import hex.game.complementary.Help;
-import hex.game.player.AbstractPlayer;
-import hex.game.player.computer.Computer;
-import hex.game.player.Player;
-import hex.game.player.PlayerType;
-import hex.util.structure.stack.ManageStack;
+import hex.model.board.Board;
+import hex.model.board.cell.Cell;
+import hex.model.board.cell.Shape;
+import hex.model.game.complementary.Help;
+import hex.model.game.player.AbstractPlayer;
+import hex.model.game.player.computer.Computer;
+import hex.model.game.player.Player;
+import hex.model.game.player.PlayerType;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -22,7 +21,6 @@ public class Game implements AbstractGame {
     private final AbstractPlayer[] players;
     private final int size;
     private int currentPlayer;
-    private ManageStack<Action> history;
     private final PropertyChangeSupport pcs;
 
     // CONSTRUCTORS
@@ -78,11 +76,6 @@ public class Game implements AbstractGame {
         return null;
     }
 
-    @Override
-    public ManageStack<Action> getHistory() {
-        return this.history;
-    }
-
     // COMMANDS
 
     @Override
@@ -119,7 +112,7 @@ public class Game implements AbstractGame {
     }
 
     private AbstractPlayer[] initializePlayers(boolean computerPlay) {
-        AbstractPlayer[] players = new AbstractPlayer[Game.MAX_NUMBER_OF_PLAYER];
+        AbstractPlayer[] players = new AbstractPlayer[MAX_NUMBER_OF_PLAYER];
         players[0] = new Player(PlayerType.HUMAN, FIRST_PLAYER);
         if (computerPlay) {
             players[1] = new Computer(SECOND_PLAYER);

@@ -1,11 +1,9 @@
-package hex.game;
+package hex.model.game;
 
-import hex.board.Board;
-import hex.board.cell.Cell;
-import hex.game.complementary.Help;
-import hex.game.player.AbstractPlayer;
-import hex.util.structure.stack.ManageStack;
-import hex.util.structure.stack.Stack;
+import hex.model.board.Board;
+import hex.model.board.cell.Cell;
+import hex.model.game.complementary.Help;
+import hex.model.game.player.AbstractPlayer;
 
 import java.beans.PropertyChangeListener;
 
@@ -61,12 +59,6 @@ public interface AbstractGame {
      * @return Help
      */
     Help getHelp();
-
-    /**
-     * Return action's player history
-     * @return Stack<Action>
-     */
-    ManageStack<Action> getHistory();
 
     /**
      * Current player act so consume his turn
