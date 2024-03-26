@@ -1,6 +1,6 @@
 package hex.game.theoric.structure;
 
-import hex.board.cell.Cell;
+import hex.model.game.theoric.structure.Arborescence;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

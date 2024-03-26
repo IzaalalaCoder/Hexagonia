@@ -1,7 +1,7 @@
 package hex.platform.view.shapes;
 
-import hex.board.cell.Direction;
-import hex.board.cell.Shape;
+import hex.model.board.cell.Direction;
+import hex.model.board.cell.Shape;
 
 import java.awt.*;
 import java.util.Map;

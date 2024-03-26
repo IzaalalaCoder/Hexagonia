@@ -1,5 +1,9 @@
 package hex.board.cell;
 
+import hex.model.board.cell.Cell;
+import hex.model.board.cell.Direction;
+import hex.model.board.cell.Shape;
+import hex.model.board.cell.State;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

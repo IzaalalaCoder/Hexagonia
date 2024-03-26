@@ -1,7 +1,7 @@
 package hex.platform.view;
 
-import hex.game.AbstractGame;
-import hex.game.Game;
+import hex.model.game.AbstractGame;
+import hex.model.game.Game;
 import hex.platform.view.info.PlayerName;
 
 import javax.swing.*;

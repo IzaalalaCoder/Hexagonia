@@ -1,7 +1,7 @@
 package hex.platform.view.shapes.forms;
 
-import hex.board.cell.Direction;
-import hex.board.cell.Shape;
+import hex.model.board.cell.Direction;
+import hex.model.board.cell.Shape;
 
 import java.awt.event.MouseAdapter;
 import java.awt.geom.Ellipse2D;
@@ -29,7 +29,7 @@ public class RoundButton extends JButton implements Forms {
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
-        this.listener = new ControlForms(this, null);
+        this.listener = new ControlForms(null);
         this.addMouseListener(this.listener);
     }
     @Override

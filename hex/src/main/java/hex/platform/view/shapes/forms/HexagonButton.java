@@ -1,11 +1,11 @@
 package hex.platform.view.shapes.forms;
 
-import hex.board.cell.Direction;
-import hex.board.cell.Shape;
+import hex.model.board.cell.Direction;
+import hex.model.board.cell.Shape;
 
 import java.awt.event.MouseAdapter;
 
-import hex.game.Game;
+import hex.model.game.Game;
 import hex.platform.controller.shapes.forms.ControlForms;
 import hex.platform.view.shapes.Forms;
 
@@ -34,7 +34,7 @@ public class HexagonButton extends JButton implements Forms {
         this.borderColor = border;
         this.changeSize();
         this.setContentAreaFilled(false);
-        this.listener = new ControlForms(this, model);
+        this.listener = new ControlForms(model);
         this.addMouseListener(this.listener);
     }
 
@@ -43,7 +43,7 @@ public class HexagonButton extends JButton implements Forms {
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
-        this.listener = new ControlForms(this, null);
+        this.listener = new ControlForms(null);
         this.addMouseListener(this.listener);
 
     }

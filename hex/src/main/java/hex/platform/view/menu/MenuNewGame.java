@@ -1,6 +1,6 @@
 package hex.platform.view.menu;
 
-import hex.game.Game;
+import hex.platform.controller.menu.ControlMenuNewGame;
 import hex.platform.view.DisplayWindow;
 import hex.platform.view.info.LevelMode;
 import hex.platform.view.info.PlayMode;
@@ -34,12 +34,8 @@ public class MenuNewGame extends JMenu {
             int level = information.getLevel();
             int size = Integer.parseInt(it.getText());
 
-            it.addActionListener(e -> parent.setModel(new Game(
-                    isOffline,
-                    isComputer,
-                    level,
-                    size
-            )));
+            it.addActionListener(new ControlMenuNewGame(parent, isComputer,
+                isOffline, level, size));
         }
     }
 

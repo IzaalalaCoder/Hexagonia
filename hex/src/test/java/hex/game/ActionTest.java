@@ -1,8 +1,7 @@
 package hex.game;
 
-import hex.game.player.computer.Computer;
-import hex.game.player.computer.Level;
-import hex.platform.view.info.PlayerName;
+import hex.model.game.Action;
+import hex.model.game.player.computer.Computer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

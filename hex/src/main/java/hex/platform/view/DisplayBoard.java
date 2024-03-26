@@ -1,10 +1,10 @@
 package hex.platform.view;
 
-import hex.board.cell.Cell;
-import hex.board.cell.Direction;
-import hex.board.cell.Shape;
-import hex.board.cell.State;
-import hex.game.Game;
+import hex.model.board.cell.Cell;
+import hex.model.board.cell.Direction;
+import hex.model.board.cell.Shape;
+import hex.model.board.cell.State;
+import hex.model.game.Game;
 import hex.platform.view.info.PlayerName;
 import hex.platform.view.shapes.Forms;
 import hex.platform.view.shapes.forms.HexagonButton;

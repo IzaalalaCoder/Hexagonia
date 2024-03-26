@@ -1,7 +1,7 @@
 package hex.platform.view.shapes.forms;
 
-import hex.board.cell.Direction;
-import hex.board.cell.Shape;
+import hex.model.board.cell.Direction;
+import hex.model.board.cell.Shape;
 import hex.platform.controller.shapes.forms.ControlForms;
 import hex.platform.view.shapes.Forms;
 
@@ -24,7 +24,7 @@ public class TriangleTopButton extends JButton implements Forms {
         this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
-        this.listener = new ControlForms(this, null);
+        this.listener = new ControlForms(null);
         this.addMouseListener(this.listener);
     }
 

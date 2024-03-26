@@ -4,15 +4,12 @@ public enum Menu {
 
     GAME(new MenuItem[] {
             MenuItem.NEW_GAME,
+            MenuItem.JOIN_GAME,
             MenuItem.SEPARATOR,
             MenuItem.RULE_GAME,
             MenuItem.SEPARATOR,
             MenuItem.SAVE_GAME,
             MenuItem.LOAD_GAME
-    }),
-    HISTORIC(new MenuItem[] {
-            MenuItem.REDO_HIST,
-            MenuItem.UNDO_HIST
     }),
     OTHER(new MenuItem[] {
             MenuItem.ABOUT_OTH,

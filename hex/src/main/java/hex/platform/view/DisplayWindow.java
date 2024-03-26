@@ -1,6 +1,6 @@
 package hex.platform.view;
 
-import hex.game.Game;
+import hex.model.game.Game;
 import hex.platform.view.info.SizeGame;
 import hex.platform.view.menu.MainMenu;
 

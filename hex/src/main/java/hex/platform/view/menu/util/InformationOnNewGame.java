@@ -1,6 +1,6 @@
 package hex.platform.view.menu.util;
 
-import hex.game.player.computer.Level;
+import hex.model.game.player.computer.Level;
 
 public class InformationOnNewGame {
     private Boolean isComputer;
