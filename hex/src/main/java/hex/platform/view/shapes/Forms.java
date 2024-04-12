@@ -20,6 +20,10 @@ public interface Forms {
 
     boolean isContainedInForm(Point p);
 
+    int getOrdinate();
+
+    int getAbscissa();
+
     // COMMANDS
 
     void changeColor(Color c);

@@ -4,6 +4,7 @@ import hex.model.board.cell.Cell;
 import hex.model.board.cell.Direction;
 import hex.model.board.cell.Shape;
 import hex.model.board.cell.State;
+import hex.model.game.AbstractGame;
 import hex.model.game.Game;
 import hex.platform.view.info.PlayerName;
 import hex.platform.view.shapes.Forms;
@@ -11,6 +12,8 @@ import hex.platform.view.shapes.forms.HexagonButton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,9 +31,20 @@ public class DisplayBoard extends JPanel {
         this.buttons = new Forms[game.getSize()][game.getSize()];
         this.setLayout(new BorderLayout());
         this.displayBoard();
+        this.createController();
     }
 
     // UTILS
+
+    private void createController() {
+        this.model.addPropertyChangeListener(AbstractGame.PROP_END_GAME, new PropertyChangeListener() {
+
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                removeAllController();
+            }
+        });
+    }
 
     private void displayBoard() {
         JPanel p = new JPanel();
@@ -59,7 +73,7 @@ public class DisplayBoard extends JPanel {
                 gbc.gridwidth =  1;
 
                 Map<Direction, Color> colorsForBorder = this.generateBorderColor(c, i, j, cells.length - 1);
-                HexagonButton button = new HexagonButton(model, colorsForBorder);
+                HexagonButton button = new HexagonButton(model, colorsForBorder, i, j);
 
                 this.buttons[i][j] = button;
 
@@ -69,9 +83,6 @@ public class DisplayBoard extends JPanel {
                 } else {
                     this.buttons[i][j].changeColor(Color.WHITE);
                 }
-
-
-
 
                 p.add(button, gbc);
             }

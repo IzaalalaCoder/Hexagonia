@@ -2,7 +2,9 @@ package hex.model.game;
 
 import hex.model.board.Board;
 import hex.model.board.cell.Cell;
+import hex.model.board.cell.Direction;
 import hex.model.board.cell.Shape;
+import hex.model.board.cell.State;
 import hex.model.game.complementary.Help;
 import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.computer.Computer;
@@ -57,8 +59,10 @@ public class Game implements AbstractGame {
     }
 
     @Override
-    public boolean isEndOfGame(Cell c) {
-        return false;
+    public boolean isEndOfGame() {
+        boolean endOfGame = this.existLine();
+        this.pcs.firePropertyChange(PROP_END_GAME, false, endOfGame);
+        return endOfGame;
     }
 
     @Override
@@ -79,9 +83,17 @@ public class Game implements AbstractGame {
     // COMMANDS
 
     @Override
+    public void takeCell(int i, int j) {
+        Cell c = this.board.getGrid()[i][j];
+        c.setPlayer(this.getCurrentPlayer());
+        c.setState(State.PLAYER);
+        this.isEndOfGame();
+    }
+
+    @Override
     public void consumeTurn() {
         this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
-        this.pcs.firePropertyChange(PROP_CURR_PLAYER, false, this.currentPlayer);
+        this.pcs.firePropertyChange(PROP_CURR_PLAYER, null, this.currentPlayer);
     }
 
     @Override
@@ -120,5 +132,65 @@ public class Game implements AbstractGame {
             players[1] = new Player(PlayerType.HUMAN, SECOND_PLAYER);
         }
         return players;
+    }
+
+    private boolean existLine() {
+        boolean readOnOrdinate = this.currentPlayer == 0;
+        Cell[][] grid = this.board.getGrid();
+        if (readOnOrdinate) {
+            for (int line = 0; line < grid.length; line++) {
+                Cell c = grid[line][0];
+                c.setVisit(true);
+                if (c.getState() != State.EMPTY
+                    && c.getPlayer() == this.getCurrentPlayer()) {
+                    if (this.canPathFromCell(c)) {
+                        return true;
+                    } else {
+                        this.board.refreshVisit();
+                    }
+                }
+            }
+        } else {
+            Cell[] line = grid[0];
+            for (Cell c : line) {
+                if (c.getState() != State.EMPTY
+                    && c.getPlayer() == this.getCurrentPlayer()) {
+                    c.setVisit(true);
+                    if (this.canPathFromCell(c)) {
+                        return true;
+                    } else {
+                        this.board.refreshVisit();
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean canPathFromCell(Cell c) {
+        boolean readOnOrdinate = this.currentPlayer == 0;
+
+        if (readOnOrdinate) {
+            if (c.getOrdinate() == this.board.getGrid().length - 1) {
+                return true;
+            }
+        } else {
+            if (c.getAbscissa() == this.board.getGrid().length - 1) {
+                return true;
+            }
+        }
+
+        for (Direction d : c.getDirections().keySet()) {
+            Cell newCell = c.getCellOnDir(d);
+            if (newCell.getState() == State.PLAYER
+                && newCell.getPlayer() == this.getCurrentPlayer()
+                && !newCell.getVisited())
+            {
+                newCell.setVisit(true);
+                return this.canPathFromCell(newCell);
+            }
+        }
+        return false;
     }
 }

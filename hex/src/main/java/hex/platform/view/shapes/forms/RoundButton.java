@@ -50,6 +50,16 @@ public class RoundButton extends JButton implements Forms {
         return shape.contains(p);
     }
 
+    @Override
+    public int getOrdinate() {
+        return 0;
+    }
+
+    @Override
+    public int getAbscissa() {
+        return 0;
+    }
+
     // COMMANDS
 
     @Override

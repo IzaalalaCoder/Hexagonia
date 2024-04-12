@@ -12,15 +12,21 @@ public class Cell {
     private final Shape shape;
     private final EnumMap<Direction, Cell> directions;
     private AbstractPlayer player;
+    private boolean visit;
+    private final int abscissa;
+    private final int ordinate;
     private final int numberOfMemberships;
 
     // CONSTRUCTOR
 
-    public Cell(Shape s, int players) {
+    public Cell(Shape s, int players, int i, int j) {
         if (s == null) {
             throw new IllegalArgumentException("Invalid argument");
         }
         this.state = State.EMPTY;
+        this.abscissa = i;
+        this.ordinate = j;
+        this.visit = false;
         this.shape = s;
         this.directions = new EnumMap<>(Direction.class);
         this.player = null;
@@ -28,6 +34,19 @@ public class Cell {
     }
 
     // REQUESTS
+
+
+    public int getAbscissa() {
+        return abscissa;
+    }
+
+    public int getOrdinate() {
+        return ordinate;
+    }
+
+    public boolean getVisited() {
+        return visit;
+    }
 
     public Shape getShape() {
         return shape;
@@ -42,7 +61,8 @@ public class Cell {
     }
 
     public static Cell copyCell(Cell c) {
-        Cell cell = new Cell(c.getShape(), c.numberOfMemberships);
+        Cell cell = new Cell(c.getShape(), c.numberOfMemberships,
+            c.abscissa, c.ordinate);
         cell.setState(c.getState());
         manageDirections(cell, c);
         return cell;
@@ -67,6 +87,10 @@ public class Cell {
     }
 
     // COMMANDS
+
+    public void setVisit(boolean visit) {
+        this.visit = visit;
+    }
 
     public void setPlayer(AbstractPlayer p) {
         if (this.getState() == State.PLAYER) {

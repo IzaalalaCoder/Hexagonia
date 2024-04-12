@@ -33,6 +33,7 @@ public class ControlForms extends MouseAdapter {
             if (model != null) {
                 PlayerName playerName = PlayerName.values()[model.getPositionCurrentPlayer()];
                 f.changeColor(playerName.getDefaultColorForPlayer());
+                model.takeCell(f.getAbscissa(), f.getOrdinate());
                 model.consumeTurn();
             }
             f.removeController();

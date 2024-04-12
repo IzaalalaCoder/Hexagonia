@@ -53,6 +53,14 @@ public class Board {
         }
     }
 
+    public void refreshVisit() {
+        for (Cell[] cells : this.grid) {
+            for (Cell c : cells) {
+                c.setVisit(false);
+            }
+        }
+    }
+
     // UTILS
 
     private Cell[][] copyGrid(Cell[][] grid) {
@@ -78,7 +86,7 @@ public class Board {
                 if (i == 0 || i == size - 1) {
                     playersCell.add(this.players.get(1));
                 }
-                cells[i][j] = new Cell(this.shape, playersCell.size());
+                cells[i][j] = new Cell(this.shape, playersCell.size(), i, j);
                 playersCell.clear();
             }
 

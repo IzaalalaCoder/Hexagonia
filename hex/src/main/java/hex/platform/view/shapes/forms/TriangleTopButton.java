@@ -40,6 +40,16 @@ public class TriangleTopButton extends JButton implements Forms {
     }
 
     @Override
+    public int getOrdinate() {
+        return 0;
+    }
+
+    @Override
+    public int getAbscissa() {
+        return 0;
+    }
+
+    @Override
     public void changeColor(Color c) {
         this.setBackground(c);
     }

@@ -25,12 +25,16 @@ public class HexagonButton extends JButton implements Forms {
     int[] x = new int[SHAPE.getNbSides()];
     int[] y = new int[SHAPE.getNbSides()];
     double angle = 2 * Math.PI / SHAPE.getNbSides();
+    private int ordinate;
+    private int abscissa;
 
 
     // CONSTRUCTOR
 
-    public HexagonButton(Game model, Map<Direction, Color> border) {
+    public HexagonButton(Game model, Map<Direction, Color> border, int i, int j) {
         manageCoordinate();
+        this.abscissa = i;
+        this.ordinate = j;
         this.borderColor = border;
         this.changeSize();
         this.setContentAreaFilled(false);
@@ -56,6 +60,16 @@ public class HexagonButton extends JButton implements Forms {
     // REQUESTS
 
     @Override
+    public int getOrdinate() {
+        return this.ordinate;
+    }
+
+    @Override
+    public int getAbscissa() {
+        return this.abscissa;
+    }
+
+    @Override
     public Shape getShapeOfJButton() {
         return SHAPE;
     }
@@ -67,7 +81,7 @@ public class HexagonButton extends JButton implements Forms {
     }
 
     private void manageCoordinate() {
-        for(int i=0; i<SHAPE.getNbSides(); i++) {
+        for(int i = 0; i < SHAPE.getNbSides(); i++) {
             double v = i * angle;
             x[i] = Forms.SIZE_DEFAULT / 2 + (int) Math.round(((double) Forms.SIZE_DEFAULT / 2)
                     * Math.cos(v + Math.PI / 2));

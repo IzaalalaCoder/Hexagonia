@@ -11,8 +11,8 @@ import java.beans.PropertyChangeListener;
 
 public class DisplayInfo extends JPanel {
 
-    private Game model;
-    private JLabel playerInformation;
+    private final Game model;
+    private final JLabel playerInformation;
 
     public DisplayInfo(Game model) {
         super();

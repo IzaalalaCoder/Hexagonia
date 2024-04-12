@@ -19,7 +19,7 @@ public class CellTest {
 
         // WHEN
 
-        c = new Cell(s, 0);
+        c = new Cell(s, 0, 0, 0);
 
         // THEN
 
@@ -37,7 +37,7 @@ public class CellTest {
                 IllegalArgumentException.class,
                 () ->
                         // WHEN
-                        new Cell(null, 0),
+                        new Cell(null, 0, 0, 0),
                         "Invalid argument"
         );
     }
@@ -47,7 +47,7 @@ public class CellTest {
 
         // GIVEN
 
-        Cell c = new Cell(Shape.TRIANGLE_B, 0);
+        Cell c = new Cell(Shape.TRIANGLE_B, 0, 0, 0);
 
         // THEN
 
@@ -65,8 +65,8 @@ public class CellTest {
     public void shouldSetCellOnDirWithCorrect() {
         // GIVEN
         Shape s = Shape.SQUARE;
-        Cell c = new Cell(s, 0);
-        Cell c1 = new Cell(s, 0);
+        Cell c = new Cell(s, 0, 0, 0);
+        Cell c1 = new Cell(s, 0, 0, 0);
 
         // WHEN
 
@@ -81,7 +81,7 @@ public class CellTest {
     public void shouldSetCellOnDirWithNotCorrectCell() {
         // GIVEN
 
-        Cell c = new Cell(Shape.SQUARE, 0);
+        Cell c = new Cell(Shape.SQUARE, 0, 0, 0);
 
         // THEN
 
@@ -98,7 +98,7 @@ public class CellTest {
     public void shouldSetCellOnDirWithNotCorrectDir() {
         // GIVEN
 
-        Cell c = new Cell(Shape.SQUARE, 0);
+        Cell c = new Cell(Shape.SQUARE, 0, 0, 0);
 
         // THEN
 
@@ -115,7 +115,7 @@ public class CellTest {
     public void shouldSetCellOnDirWithSameCell() {
         // GIVEN
 
-        Cell c = new Cell(Shape.SQUARE, 0);
+        Cell c = new Cell(Shape.SQUARE, 0, 0, 0);
 
         // THEN
 
@@ -132,7 +132,7 @@ public class CellTest {
     public void shouldSetValidState() {
         // GIVEN
 
-        Cell c = new Cell(Shape.SQUARE, 0);
+        Cell c = new Cell(Shape.SQUARE, 0, 0, 0);
 
         // WHEN
 
@@ -147,7 +147,7 @@ public class CellTest {
     public void shouldSetInvalidState() {
         // GIVEN
 
-        Cell c = new Cell(Shape.SQUARE, 0);
+        Cell c = new Cell(Shape.SQUARE, 0, 0, 0);
 
         // THEN
 
@@ -165,7 +165,7 @@ public class CellTest {
     public void shouldGetCellOnDirWhenIsNull() {
         // GIVEN
 
-        Cell c = new Cell(Shape.TRIANGLE_B, 0);
+        Cell c = new Cell(Shape.TRIANGLE_B, 0, 0, 0);
 
         // THEN
 
@@ -182,7 +182,7 @@ public class CellTest {
     public void shouldGetCellOnDirWhenIsInexistantDirection() {
         // GIVEN
 
-        Cell c = new Cell(Shape.TRIANGLE_B, 0);
+        Cell c = new Cell(Shape.TRIANGLE_B, 0, 0, 0);
 
         // THEN
 
@@ -199,7 +199,7 @@ public class CellTest {
     public void shouldCopyCell() {
         // GIVEN
 
-        Cell c = new Cell(Shape.TRIANGLE_T, 0);
+        Cell c = new Cell(Shape.TRIANGLE_T, 0, 0, 0);
 
         // WHEN
 

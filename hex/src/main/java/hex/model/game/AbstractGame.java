@@ -10,6 +10,7 @@ import java.beans.PropertyChangeListener;
 public interface AbstractGame {
 
     public final String PROP_CURR_PLAYER = "currentPlayer";
+    public final String PROP_END_GAME = "EndOfGame";
 
     public final int FIRST_PLAYER = 0;
     public final int SECOND_PLAYER = 1;
@@ -46,7 +47,9 @@ public interface AbstractGame {
      * Check if ended game
      * @return boolean
      */
-    boolean isEndOfGame(Cell c);
+    boolean isEndOfGame();
+
+    void takeCell(int i, int j);
 
     /**
      * Return current player
