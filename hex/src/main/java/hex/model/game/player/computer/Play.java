@@ -34,6 +34,7 @@ public class Play {
             this.randomize.chooseCell(this.board);
             this.action = this.randomize.getChooseCell();
         }
+
     }
 
     // UTILS

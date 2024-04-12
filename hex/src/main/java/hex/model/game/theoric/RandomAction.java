@@ -56,6 +56,8 @@ public class RandomAction {
         Random r = new Random();
 
         int index = r.nextInt(this.emptyCells.size());
-        return this.emptyCells.get(index);
+        Cell action = this.emptyCells.get(index);
+        this.emptyCells.clear();
+        return action;
     }
 }

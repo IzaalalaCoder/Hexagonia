@@ -25,6 +25,7 @@ public class Game implements AbstractGame {
     private final int size;
     private int currentPlayer;
     private final PropertyChangeSupport pcs;
+    private boolean endOfGame;
 
     // CONSTRUCTORS
 
@@ -64,7 +65,11 @@ public class Game implements AbstractGame {
 
     @Override
     public boolean isEndOfGame() {
-        boolean endOfGame = this.existLine();
+        return endOfGame;
+    }
+
+    private boolean isEndOfGameAboutCurrentPlayer() {
+        this.endOfGame = this.existLine();
         this.pcs.firePropertyChange(PROP_END_GAME, false, endOfGame);
         return endOfGame;
     }
@@ -91,11 +96,14 @@ public class Game implements AbstractGame {
         Cell c = this.board.getGrid()[i][j];
         c.setPlayer(this.getCurrentPlayer());
         c.setState(State.PLAYER);
-        this.isEndOfGame();
+        if (c.getPlayer().getType() == PlayerType.COMPUTER) {
+            this.pcs.firePropertyChange(PROP_TAKE_CELL_BY_COMPUTER, null, c);
+        }
     }
 
     @Override
     public void consumeTurn() {
+        this.isEndOfGameAboutCurrentPlayer();
         this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
         this.pcs.firePropertyChange(PROP_CURR_PLAYER_ID, null, this.currentPlayer);
     }

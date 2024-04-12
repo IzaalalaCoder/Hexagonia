@@ -24,6 +24,9 @@ public class Computer extends AbstractPlayer {
         this.game = null;
     }
 
+    public void consume() {
+        this.game.consumeTurn();
+    }
     public void setGame(Game game) {
         this.game = game;
         this.play = new Play(level, game.getBoard(), this);
@@ -31,7 +34,9 @@ public class Computer extends AbstractPlayer {
 
     public void play() {
         this.play.play();
+
         Action act = this.play.getAction();
+        System.out.println("JAI CHOISI x " + act.getCell().getAbscissa() + "y " + act.getCell().getOrdinate());
         Cell c = act.getCell();
 
         this.game.takeCell(c.getAbscissa(), c.getOrdinate());

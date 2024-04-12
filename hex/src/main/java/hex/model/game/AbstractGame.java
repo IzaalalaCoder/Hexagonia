@@ -10,6 +10,7 @@ import java.beans.PropertyChangeListener;
 public interface AbstractGame {
 
     public final String PROP_CURR_PLAYER_ID = "currentPlayer";
+    public final String PROP_TAKE_CELL_BY_COMPUTER = "takeCell";
     public final String PROP_END_GAME = "EndOfGame";
 
     public final int FIRST_PLAYER = 0;
