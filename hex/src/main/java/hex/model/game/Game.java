@@ -68,10 +68,9 @@ public class Game implements AbstractGame {
         return endOfGame;
     }
 
-    private boolean isEndOfGameAboutCurrentPlayer() {
+    private void isEndOfGameAboutCurrentPlayer() {
         this.endOfGame = this.existLine();
         this.pcs.firePropertyChange(PROP_END_GAME, false, endOfGame);
-        return endOfGame;
     }
 
     @Override
@@ -150,11 +149,11 @@ public class Game implements AbstractGame {
         boolean readOnOrdinate = this.currentPlayer == 0;
         Cell[][] grid = this.board.getGrid();
         if (readOnOrdinate) {
-            for (int line = 0; line < grid.length; line++) {
-                Cell c = grid[line][0];
+            for (Cell[] cells : grid) {
+                Cell c = cells[0];
                 c.setVisit(true);
                 if (c.getState() != State.EMPTY
-                    && c.getPlayer() == this.getCurrentPlayer()) {
+                        && c.getPlayer() == this.getCurrentPlayer()) {
                     if (this.canPathFromCell(c)) {
                         return true;
                     } else {
