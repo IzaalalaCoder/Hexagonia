@@ -41,41 +41,29 @@ public class DisplayBoard extends JPanel {
 
     private void createController() {
 
-        this.model.addPropertyChangeListener(AbstractGame.PROP_TAKE_CELL_BY_COMPUTER, new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                Cell c = (Cell) evt.getNewValue();
+        this.model.addPropertyChangeListener(AbstractGame.PROP_TAKE_CELL_BY_COMPUTER, evt -> {
+            Cell c = (Cell) evt.getNewValue();
 
 
-                PlayerName playerName = PlayerName.values()[model.getPositionCurrentPlayer()];
-                buttons[c.getAbscissa()][c.getOrdinate()].changeColor(playerName.getDefaultColorForPlayer());
-                buttons[c.getAbscissa()][c.getOrdinate()].removeController();
-                model.consumeTurn();
-            }
+            PlayerName playerName = PlayerName.values()[model.getPositionCurrentPlayer()];
+            buttons[c.getAbscissa()][c.getOrdinate()].changeColor(playerName.getDefaultColorForPlayer());
+            buttons[c.getAbscissa()][c.getOrdinate()].removeController();
+            model.consumeTurn();
         });
 
-        this.model.addPropertyChangeListener(AbstractGame.PROP_END_GAME, new PropertyChangeListener() {
+        this.model.addPropertyChangeListener(AbstractGame.PROP_END_GAME, evt -> removeAllController());
 
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                removeAllController();
+        this.model.addPropertyChangeListener(AbstractGame.PROP_CURR_PLAYER_ID, evt -> {
+            if (model.isEndOfGame()) {
+                return;
             }
-        });
-
-        this.model.addPropertyChangeListener(AbstractGame.PROP_CURR_PLAYER_ID, new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (model.isEndOfGame()) {
-                    return;
-                }
-                AbstractPlayer player = model.getCurrentPlayer();
-                if (player.getType() == PlayerType.COMPUTER) {
-                    Computer computer = (Computer) model.getCurrentPlayer();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (Exception e) { }
-                    computer.play();
-                }
+            AbstractPlayer player = model.getCurrentPlayer();
+            if (player.getType() == PlayerType.COMPUTER) {
+                Computer computer = (Computer) model.getCurrentPlayer();
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ignored) { }
+                computer.play();
             }
         });
     }

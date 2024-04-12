@@ -31,14 +31,10 @@ public class DisplayInfo extends JPanel {
     }
 
     private void createController() {
-        this.model.addPropertyChangeListener(AbstractGame.PROP_CURR_PLAYER_ID, new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                int value = (int) evt.getNewValue();
-                PlayerName playerName = PlayerName.values()[value];
-                playerInformation.setText("Player " + playerName.name());
-            }
+        this.model.addPropertyChangeListener(AbstractGame.PROP_CURR_PLAYER_ID, evt -> {
+            int value = (int) evt.getNewValue();
+            PlayerName playerName = PlayerName.values()[value];
+            playerInformation.setText("Player " + playerName.name());
         });
     }
 }
