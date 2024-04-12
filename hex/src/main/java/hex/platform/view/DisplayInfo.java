@@ -34,7 +34,6 @@ public class DisplayInfo extends JPanel {
             int value = (int) evt.getNewValue();
             PlayerName playerName = PlayerName.values()[value];
             playerInformation.setText("Player " + playerName.name());
-
         });
     }
 }

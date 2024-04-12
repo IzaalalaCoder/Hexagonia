@@ -8,6 +8,8 @@ import hex.model.game.theoric.RandomAction;
 
 public class Play {
 
+    // ATTRIBUTES
+
     Level level;
     RandomAction randomize;
     Board board;
@@ -16,7 +18,6 @@ public class Play {
     // CONSTRUCTOR
 
     public Play(Level level, Board b, Computer computer) {
-        if (b == null) System.out.println("jidsdf");
         this.board = b;
         this.level = level;
         this.action = null;

@@ -13,6 +13,7 @@ public interface AbstractGame {
     public final String PROP_TAKE_CELL_BY_COMPUTER = "takeCell";
     public final String PROP_END_GAME = "EndOfGame";
 
+    boolean getIsGameWithComputer();
     public final int FIRST_PLAYER = 0;
     public final int SECOND_PLAYER = 1;
 

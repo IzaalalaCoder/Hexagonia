@@ -26,10 +26,10 @@ public class ControlBoard {
     private void createController() {
         this.model.addPropertyChangeListener(AbstractGame.PROP_TAKE_CELL_BY_COMPUTER, evt -> {
             Cell c = (Cell) evt.getNewValue();
-
             PlayerName playerName = PlayerName.values()[model.getPositionCurrentPlayer()];
             buttons[c.getAbscissa()][c.getOrdinate()].changeColor(playerName.getDefaultColorForPlayer());
             buttons[c.getAbscissa()][c.getOrdinate()].removeController();
+
             model.consumeTurn();
         });
 

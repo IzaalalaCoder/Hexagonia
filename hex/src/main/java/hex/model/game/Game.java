@@ -27,10 +27,13 @@ public class Game implements AbstractGame {
     private final PropertyChangeSupport pcs;
     private boolean endOfGame;
 
+    private boolean gameWithComputer;
+
     // CONSTRUCTORS
 
     public Game(boolean offline, boolean computer, int level, int size) {
         this.mode = offline ? Mode.SAME : Mode.DISTANCE;
+        this.gameWithComputer = computer;
         this.size = size;
         this.currentPlayer = 0;
         this.players = initializePlayers(computer, level);
@@ -42,6 +45,11 @@ public class Game implements AbstractGame {
     }
 
     // REQUESTS
+
+    @Override
+    public boolean getIsGameWithComputer() {
+        return this.gameWithComputer;
+    }
 
     @Override
     public int getSize() {
@@ -101,7 +109,7 @@ public class Game implements AbstractGame {
     }
 
     @Override
-    synchronized public void consumeTurn() {
+    public void consumeTurn() {
         this.isEndOfGameAboutCurrentPlayer();
         this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
         this.pcs.firePropertyChange(PROP_CURR_PLAYER_ID, null, this.currentPlayer);
