@@ -53,7 +53,11 @@ public class ControlForms extends MouseAdapter {
     @Override
     public void mouseEntered(MouseEvent e) {
         Forms f = (Forms) e.getSource();
-        f.changeColor(Color.BLACK);
+        PlayerName playerName = PlayerName.values()[model.getPositionCurrentPlayer()];
+        int r = playerName.getDefaultColorForPlayer().getRed();
+        int g = playerName.getDefaultColorForPlayer().getGreen();
+        int b = playerName.getDefaultColorForPlayer().getBlue();
+        f.changeColor(new Color(r, g, b, 50));
     }
 
     @Override

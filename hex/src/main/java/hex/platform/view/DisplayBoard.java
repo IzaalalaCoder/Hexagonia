@@ -4,19 +4,14 @@ import hex.model.board.cell.Cell;
 import hex.model.board.cell.Direction;
 import hex.model.board.cell.Shape;
 import hex.model.board.cell.State;
-import hex.model.game.AbstractGame;
 import hex.model.game.Game;
-import hex.model.game.player.AbstractPlayer;
-import hex.model.game.player.PlayerType;
-import hex.model.game.player.computer.Computer;
+import hex.platform.controller.ControlBoard;
 import hex.platform.view.info.PlayerName;
 import hex.platform.view.shapes.Forms;
 import hex.platform.view.shapes.forms.HexagonButton;
 
 import javax.swing.*;
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,32 +35,7 @@ public class DisplayBoard extends JPanel {
     // UTILS
 
     private void createController() {
-
-        this.model.addPropertyChangeListener(AbstractGame.PROP_TAKE_CELL_BY_COMPUTER, evt -> {
-            Cell c = (Cell) evt.getNewValue();
-
-
-            PlayerName playerName = PlayerName.values()[model.getPositionCurrentPlayer()];
-            buttons[c.getAbscissa()][c.getOrdinate()].changeColor(playerName.getDefaultColorForPlayer());
-            buttons[c.getAbscissa()][c.getOrdinate()].removeController();
-            model.consumeTurn();
-        });
-
-        this.model.addPropertyChangeListener(AbstractGame.PROP_END_GAME, evt -> removeAllController());
-
-        this.model.addPropertyChangeListener(AbstractGame.PROP_CURR_PLAYER_ID, evt -> {
-            if (model.isEndOfGame()) {
-                return;
-            }
-            AbstractPlayer player = model.getCurrentPlayer();
-            if (player.getType() == PlayerType.COMPUTER) {
-                Computer computer = (Computer) model.getCurrentPlayer();
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception ignored) { }
-                computer.play();
-            }
-        });
+        new ControlBoard(this.buttons, model, this);
     }
 
     private void displayBoard() {

@@ -24,15 +24,17 @@ public class DisplayInfo extends JPanel {
     }
 
     private void placeComponents() {
-        this.add(new JLabel("Horaire"));
+        this.add(new JLabel("Hora ire"));
         this.add(this.playerInformation);
     }
 
     private void createController() {
+
         this.model.addPropertyChangeListener(AbstractGame.PROP_CURR_PLAYER_ID, evt -> {
             int value = (int) evt.getNewValue();
             PlayerName playerName = PlayerName.values()[value];
             playerInformation.setText("Player " + playerName.name());
+
         });
     }
 }
