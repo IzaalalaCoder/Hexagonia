@@ -6,13 +6,11 @@ import hex.model.game.Game;
 import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.PlayerType;
 
-import java.util.List;
-
 public class Computer extends AbstractPlayer {
 
     private Play play;
 
-    private Level level;
+    private final Level level;
 
     private Game game;
 
