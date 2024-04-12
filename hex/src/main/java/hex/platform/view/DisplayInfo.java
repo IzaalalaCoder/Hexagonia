@@ -6,8 +6,6 @@ import hex.platform.view.info.PlayerName;
 
 import javax.swing.*;
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 public class DisplayInfo extends JPanel {
 
