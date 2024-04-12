@@ -46,8 +46,11 @@ public class DisplayBoard extends JPanel {
             public void propertyChange(PropertyChangeEvent evt) {
                 Cell c = (Cell) evt.getNewValue();
 
+
                 PlayerName playerName = PlayerName.values()[model.getPositionCurrentPlayer()];
                 buttons[c.getAbscissa()][c.getOrdinate()].changeColor(playerName.getDefaultColorForPlayer());
+                buttons[c.getAbscissa()][c.getOrdinate()].removeController();
+                model.consumeTurn();
             }
         });
 
@@ -72,8 +75,6 @@ public class DisplayBoard extends JPanel {
                         Thread.sleep(1000);
                     } catch (Exception e) { }
                     computer.play();
-
-                    computer.consume();
                 }
             }
         });

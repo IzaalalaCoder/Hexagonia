@@ -102,7 +102,7 @@ public class Game implements AbstractGame {
     }
 
     @Override
-    public void consumeTurn() {
+    synchronized public void consumeTurn() {
         this.isEndOfGameAboutCurrentPlayer();
         this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
         this.pcs.firePropertyChange(PROP_CURR_PLAYER_ID, null, this.currentPlayer);
