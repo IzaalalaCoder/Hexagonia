@@ -1,4 +1,4 @@
-package hex.model.game.theoric.algo.beta;
+package hex.model.game.theoric.algo.max;
 
 import hex.model.game.Action;
 import hex.model.game.player.computer.Level;
@@ -8,7 +8,7 @@ import hex.model.game.theoric.structure.Tree;
 import java.io.File;
 import java.util.List;
 
-public class AlphaBeta extends AbstractTheory {
+public class Negamax extends AbstractTheory {
     @Override
     public Tree getTree() {
         return null;

@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class DisplayHelp extends JPanel {
 
-    private JTextArea area = new JTextArea();
+    private final JTextArea area = new JTextArea();
 
     public DisplayHelp() {
         super();

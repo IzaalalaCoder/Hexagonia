@@ -1,7 +1,8 @@
-package hex.model.game.theoric.algo;
+package hex.model.game.theoric.algo.max;
 
 import hex.model.game.Action;
 import hex.model.game.player.computer.Level;
+import hex.model.game.theoric.AbstractTheory;
 import hex.model.game.theoric.Theory;
 import hex.model.game.theoric.structure.node.ManageNode;
 import hex.model.game.theoric.structure.Tree;
@@ -18,7 +19,7 @@ import java.util.List;
  *     > 0 : Max a gagné et Min a perdu
  *     = 0 : Max et Min ont gagné
  */
-public class Minimax implements Theory {
+public class Minimax extends AbstractTheory {
 
     // ATTRIBUTES
 

@@ -6,6 +6,9 @@ import hex.model.board.cell.Shape;
 import hex.model.board.cell.State;
 import hex.model.game.AbstractGame;
 import hex.model.game.Game;
+import hex.model.game.player.AbstractPlayer;
+import hex.model.game.player.PlayerType;
+import hex.model.game.player.computer.Computer;
 import hex.platform.view.info.PlayerName;
 import hex.platform.view.shapes.Forms;
 import hex.platform.view.shapes.forms.HexagonButton;
@@ -42,6 +45,20 @@ public class DisplayBoard extends JPanel {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 removeAllController();
+            }
+        });
+
+        this.model.addPropertyChangeListener(AbstractGame.PROP_CURR_PLAYER_ID, new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                AbstractPlayer player = model.getCurrentPlayer();
+                if (player.getType() == PlayerType.COMPUTER) {
+                    Computer computer = (Computer) model.getCurrentPlayer();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) { }
+                    computer.play();
+                }
             }
         });
     }

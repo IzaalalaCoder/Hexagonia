@@ -31,7 +31,7 @@ public class DisplayInfo extends JPanel {
     }
 
     private void createController() {
-        this.model.addPropertyChangeListener(AbstractGame.PROP_CURR_PLAYER, new PropertyChangeListener() {
+        this.model.addPropertyChangeListener(AbstractGame.PROP_CURR_PLAYER_ID, new PropertyChangeListener() {
 
             @Override
             public void propertyChange(PropertyChangeEvent evt) {

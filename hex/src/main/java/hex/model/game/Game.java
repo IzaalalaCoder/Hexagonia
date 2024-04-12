@@ -10,6 +10,7 @@ import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.computer.Computer;
 import hex.model.game.player.Player;
 import hex.model.game.player.PlayerType;
+import hex.model.game.player.computer.Level;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -30,9 +31,12 @@ public class Game implements AbstractGame {
     public Game(boolean offline, boolean computer, int level, int size) {
         this.mode = offline ? Mode.SAME : Mode.DISTANCE;
         this.size = size;
-        this.players = initializePlayers(computer);
         this.currentPlayer = 0;
+        this.players = initializePlayers(computer, level);
         this.board = createBoard(Shape.HEXAGONAL);
+        if (computer) {
+            ((Computer) this.players[1]).setGame(this);
+        }
         this.pcs = new PropertyChangeSupport(this);
     }
 
@@ -93,7 +97,7 @@ public class Game implements AbstractGame {
     @Override
     public void consumeTurn() {
         this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
-        this.pcs.firePropertyChange(PROP_CURR_PLAYER, null, this.currentPlayer);
+        this.pcs.firePropertyChange(PROP_CURR_PLAYER_ID, null, this.currentPlayer);
     }
 
     @Override
@@ -123,11 +127,11 @@ public class Game implements AbstractGame {
         return new Board(this.size, shape, this.players);
     }
 
-    private AbstractPlayer[] initializePlayers(boolean computerPlay) {
+    private AbstractPlayer[] initializePlayers(boolean computerPlay, int level) {
         AbstractPlayer[] players = new AbstractPlayer[MAX_NUMBER_OF_PLAYER];
         players[0] = new Player(PlayerType.HUMAN, FIRST_PLAYER);
         if (computerPlay) {
-            players[1] = new Computer(SECOND_PLAYER);
+            players[1] = new Computer(SECOND_PLAYER, Level.values()[level]);
         } else {
             players[1] = new Player(PlayerType.HUMAN, SECOND_PLAYER);
         }

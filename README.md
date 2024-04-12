@@ -66,3 +66,5 @@ dans le projet (finis ou pas). Ca permet de voir ou on en est.
     - Refactoring des paquetages : model et platform afin de mieux séparer les éléments le 26/03/2024
     - Ajout de la réactivité au niveau de la souris sur le plateau le 26/03/2024
     - Ajout d'un nouveau fichier dédié à la création de partie le 26/03/2024
+    - Ajout du chronomètre mais partiel le 27/03/2024
+    - Ajout de la fin de partie le 12/04/2024

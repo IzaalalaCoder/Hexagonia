@@ -2,6 +2,7 @@ package hex.model.game.theoric.algo.sss;
 
 import hex.model.game.Action;
 import hex.model.game.player.computer.Level;
+import hex.model.game.theoric.AbstractTheory;
 import hex.model.game.theoric.Theory;
 import hex.model.game.theoric.structure.Tree;
 import hex.model.util.structure.file.ManageFile;
@@ -11,7 +12,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThreeSStar implements Theory {
+public class ThreeSStar extends AbstractTheory {
 
     // ATTRIBUTES
 

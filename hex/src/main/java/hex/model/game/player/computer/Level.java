@@ -1,10 +1,18 @@
 package hex.model.game.player.computer;
 
 public enum Level {
-    EASY,
-    MEDIUM,
-    HARD,
-    EXTREME;
+    EASY(100),
+    MEDIUM(50),
+    HARD(30),
+    EXTREME(20);
 
+    private Level(int percent) {
+        this.percent = percent;
+    }
 
+    private int percent;
+
+    public int getPercent() {
+        return percent;
+    }
 }

@@ -2,13 +2,14 @@ package hex.model.game.theoric.algo.strat;
 
 import hex.model.game.Action;
 import hex.model.game.player.computer.Level;
+import hex.model.game.theoric.AbstractTheory;
 import hex.model.game.theoric.Theory;
 import hex.model.game.theoric.structure.Tree;
 
 import java.io.File;
 import java.util.List;
 
-public class WinStrategy implements Theory {
+public class WinStrategy extends AbstractTheory {
 
     // ATTRIBUTES
 
