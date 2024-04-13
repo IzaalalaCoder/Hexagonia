@@ -30,20 +30,8 @@ __Le code__
   
 J'ai fait quatre blocs un pour chaque intervenant, pour nous permettre de dire ce que nous avons ajouter 
 dans le projet (finis ou pas). Ca permet de voir ou on en est.
-
-### Yohann
-
--
-
-### Hortense
-
--
-
-### Yacine
-
--
  
-### Izana
+### Moi
     - Création de tous les paquetages du diagramme
     - J'ai du renommé la classe Case en Cell car cela plantait la reconnaissance du paquetage
     - Finis la première tâche, Mise en place du projet, le 11/02/2024
