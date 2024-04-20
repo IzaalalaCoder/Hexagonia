@@ -3,7 +3,6 @@ package hex.platform.view.menu;
 import hex.platform.controller.menu.ControlMenuNewGame;
 import hex.platform.view.DisplayWindow;
 import hex.platform.view.info.LevelMode;
-import hex.platform.view.info.PlayMode;
 import hex.platform.view.info.PlayerMode;
 import hex.platform.view.info.SizeGame;
 import hex.platform.view.menu.util.InformationOnNewGame;
@@ -30,32 +29,19 @@ public class MenuNewGame extends JMenu {
             JMenuItem it = pair.getSecond();
 
             boolean isComputer = information.isComputer();
-            boolean isOffline = information.isOffline();
             int level = information.getLevel();
             int size = Integer.parseInt(it.getText());
 
-            it.addActionListener(new ControlMenuNewGame(parent, isComputer,
-                isOffline, level, size));
+            it.addActionListener(new ControlMenuNewGame(parent, isComputer, level, size));
         }
     }
 
     public void createGameMenu() {
-        for (PlayMode mode : PlayMode.values()) {
-            JMenu menu = new JMenu(mode.name());
-            menu.setIcon(MainMenu.getIcon(mode.getImg()));
-            if (mode.getTypePlayers() == null) {
-                InformationOnNewGame info = new InformationOnNewGame(false);
-                info.setComputer(false);
-                this.createSizeMenu(info, menu);
-            } else {
-                for (PlayerMode playerMode : mode.getTypePlayers()) {
-                    JMenu menuPlayer = new JMenu(playerMode.name());
-                    menuPlayer.setIcon(MainMenu.getIcon(playerMode.getImg()));
-                    this.addMenuByTypePlayer(playerMode, menuPlayer);
-                    menu.add(menuPlayer);
-                }
-            }
-            this.add(menu);
+        for (PlayerMode playerMode : PlayerMode.values()) {
+            JMenu menuPlayer = new JMenu(playerMode.name());
+            menuPlayer.setIcon(MainMenu.getIcon(playerMode.getImg()));
+            this.addMenuByTypePlayer(playerMode, menuPlayer);
+            this.add(menuPlayer);
         }
     }
 

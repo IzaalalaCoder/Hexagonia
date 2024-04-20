@@ -31,12 +31,6 @@ public interface AbstractGame {
     Board getBoard();
 
     /**
-     * Return mode's play game
-     * @return Mode
-     */
-    Mode getMode();
-
-    /**
      * Returns all players
      * @return Player[]
      */

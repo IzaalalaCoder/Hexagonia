@@ -19,7 +19,6 @@ public class Game implements AbstractGame {
 
     // ATTRIBUTES
 
-    private final Mode mode;
     private final Board board;
     private final AbstractPlayer[] players;
     private final int size;
@@ -31,8 +30,7 @@ public class Game implements AbstractGame {
 
     // CONSTRUCTORS
 
-    public Game(boolean offline, boolean computer, int level, int size) {
-        this.mode = offline ? Mode.SAME : Mode.DISTANCE;
+    public Game(boolean computer, int level, int size) {
         this.gameWithComputer = computer;
         this.size = size;
         this.currentPlayer = 0;
@@ -59,11 +57,6 @@ public class Game implements AbstractGame {
     @Override
     public Board getBoard() {
         return board;
-    }
-
-    @Override
-    public Mode getMode() {
-        return mode;
     }
 
     @Override
