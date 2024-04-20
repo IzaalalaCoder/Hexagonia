@@ -22,7 +22,7 @@ public class Computer extends AbstractPlayer {
         this.game = null;
     }
 
-    public void setGame(Game game) {
+    public void startPlay(Game game) {
         this.game = game;
         this.play = new Play(level, game.getBoard(), this);
     }
@@ -30,9 +30,12 @@ public class Computer extends AbstractPlayer {
     public void play() {
         this.play.play();
 
-        Action act = this.play.getAction();
-        Cell c = act.getCell();
+       Action act = this.play.getAction();
 
-        this.game.takeCell(c.getAbscissa(), c.getOrdinate());
+        if (act != null) { 
+            Cell c = act.getCell();
+            this.game.takeCell(c.getAbscissa(), c.getOrdinate());
+        } 
+        
     }
 }

@@ -37,7 +37,7 @@ public class Game implements AbstractGame {
         this.players = initializePlayers(computer, level);
         this.board = createBoard(Shape.HEXAGONAL);
         if (computer) {
-            ((Computer) this.players[1]).setGame(this);
+            ((Computer) this.players[1]).startPlay(this);
         }
         this.pcs = new PropertyChangeSupport(this);
     }

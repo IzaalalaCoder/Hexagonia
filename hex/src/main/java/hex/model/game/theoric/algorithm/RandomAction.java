@@ -1,4 +1,4 @@
-package hex.model.game.theoric;
+package hex.model.game.theoric.algorithm;
 
 import hex.model.board.Board;
 import hex.model.board.cell.Cell;

@@ -4,7 +4,7 @@ import hex.model.board.Board;
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.State;
 import hex.model.game.Action;
-import hex.model.game.theoric.RandomAction;
+import hex.model.game.theoric.algorithm.RandomAction;
 
 public class Play {
 
@@ -27,13 +27,23 @@ public class Play {
     // COMMANDS
 
     public Action getAction() {
-        return this.action;
+        Action chooseAction;
+        if (this.action != null) {
+            chooseAction = this.action;
+        } else {
+            return null;
+        }
+        this.action = null;
+        return chooseAction;
     }
 
     public void play() {
-        if (this.getPercentFullCase() < this.level.getPercent()) {
+        int percent = this.getPercentFullCase();
+        if (percent < this.level.getPercent()) {
             this.randomize.chooseCell(this.board);
             this.action = this.randomize.getChooseCell();
+        } else {
+            System.out.println("attack");
         }
 
     }
@@ -51,9 +61,9 @@ public class Play {
             }
         }
 
+
         int size = this.board.getGrid().length
             * this.board.getGrid().length;
-
-        return (count / size) * 100;
+        return ((count * 100) / size);
     }
 }
