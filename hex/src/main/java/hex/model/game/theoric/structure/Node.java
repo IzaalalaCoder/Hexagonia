@@ -13,7 +13,7 @@ public interface Node {
     
     public Status geStatus();
     
-    public List<Tree> getSuccessor();
+    public List<Node> getSuccessor();
     
     public Node getPredecessor();
 
@@ -23,11 +23,11 @@ public interface Node {
     
     public void seStatus(Status status);
     
-    public void addSuccessor(Tree subTree);
+    public void addSuccessor(Node successor);
     
-    public void removeSuccessor(Tree subTree);
+    public void removeSuccessor(Node successor);
 
-    public void setPredecessor(Node parent);
+    public void setPredecessor(Node predecessor);
 
     public void setHeuristicValue(int heuristicValue);
 
