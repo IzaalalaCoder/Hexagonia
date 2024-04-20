@@ -1,7 +1,7 @@
 package hex.platform.view.menu;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
 
 public enum MenuItem {
 

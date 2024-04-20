@@ -15,6 +15,7 @@ public class ThreeSStar extends AbstractTheory {
 
     // ATTRIBUTES
 
+    @SuppressWarnings("unused")
     private final ManageFile<Element> priorityFile;
     private final Tree tree;
     private final List<Action> possibleActions;
@@ -63,6 +64,7 @@ public class ThreeSStar extends AbstractTheory {
 
     // UTILS
 
+    @SuppressWarnings("unused")
     private void initializePriorityFile() {
     }
 

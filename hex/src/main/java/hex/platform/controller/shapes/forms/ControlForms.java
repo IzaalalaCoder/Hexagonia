@@ -1,6 +1,5 @@
 package hex.platform.controller.shapes.forms;
 
-import hex.model.game.AbstractGame;
 import hex.model.game.Game;
 import hex.platform.view.info.PlayerName;
 import hex.platform.view.shapes.Forms;
@@ -8,8 +7,6 @@ import hex.platform.view.shapes.Forms;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 public class ControlForms extends MouseAdapter {
 

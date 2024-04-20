@@ -8,6 +8,7 @@ public class ReadingXML implements XMLScheme, XMLParser {
 
     // ATTRIBUTS
 
+    @SuppressWarnings("unused")
     private File f;
 
     // CONSTRUCTEUR

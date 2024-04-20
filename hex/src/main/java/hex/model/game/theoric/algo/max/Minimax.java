@@ -17,7 +17,8 @@ import java.util.List;
  *     < 0 : Max a perdu et Min a gagné
  *     > 0 : Max a gagné et Min a perdu
  *     = 0 : Max et Min ont gagné
- */
+ */   
+@SuppressWarnings("rawtypes")
 public class Minimax extends AbstractTheory {
 
     // ATTRIBUTES
@@ -33,6 +34,7 @@ public class Minimax extends AbstractTheory {
     public List<ManageNode> getAllTerminalNode() {
         return null;
     }
+
 
     public List<ManageNode> getAllNodePreviousTerminalNodes() {
         return null;
