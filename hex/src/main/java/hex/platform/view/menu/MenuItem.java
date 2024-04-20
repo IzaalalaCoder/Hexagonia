@@ -10,14 +10,12 @@ public enum MenuItem {
     NEW_GAME(
             new MenuNewGame(),
             new ImageIcon(MainMenu.PATH + "new.png")),
-
-    JOIN_GAME (
-            new JMenuItem("Joindre une partie"),
-            new ImageIcon(MainMenu.PATH + "new.png")
-    ),
     RULE_GAME(
             new JMenuItem("Règle du jeu"),
             new ImageIcon(MainMenu.PATH + "rule.png")),
+    HISTORY_GAME(
+        new JMenuItem("Histoire du jeu"), null),
+        //new ImageIcon(MainMenu.PATH + "history.png")),
     SAVE_GAME(
             new JMenuItem("Sauvegarder la partie"),
             new ImageIcon(MainMenu.PATH + "save.png")),

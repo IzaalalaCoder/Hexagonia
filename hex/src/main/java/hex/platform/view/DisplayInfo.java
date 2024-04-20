@@ -17,14 +17,13 @@ public class DisplayInfo extends JPanel {
         this.playerInformation = new JLabel();
         playerInformation.setText("Player " + PlayerName.FIRST.name());
         this.model = model;
-        this.setLayout(new GridLayout(0, 3));
+        this.setLayout(new FlowLayout());
         this.setPreferredSize(new Dimension(1000, 30));
         this.placeComponents();
         this.createController();
     }
 
     private void placeComponents() {
-        this.add(new JLabel("Hora ire"));
         this.add(this.playerInformation);
     }
 

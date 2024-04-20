@@ -4,9 +4,9 @@ public enum Menu {
 
     GAME(new MenuItem[] {
             MenuItem.NEW_GAME,
-            MenuItem.JOIN_GAME,
             MenuItem.SEPARATOR,
             MenuItem.RULE_GAME,
+            MenuItem.HISTORY_GAME,
             MenuItem.SEPARATOR,
             MenuItem.SAVE_GAME,
             MenuItem.LOAD_GAME

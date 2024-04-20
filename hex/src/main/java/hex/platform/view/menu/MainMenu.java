@@ -12,6 +12,9 @@ public class MainMenu extends JMenuBar {
     public static final String PATH = "hex/src/main/resources/assets/";
 
     public static ImageIcon getIcon(ImageIcon imageIcon) {
+        if (imageIcon == null) {
+            return null;
+        }
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(32, 32,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newimg);
