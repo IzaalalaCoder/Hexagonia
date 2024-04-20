@@ -1,6 +1,6 @@
 package hex.model.game.player.computer;
 
-import hex.model.game.theoric.Theory;
+import hex.model.game.theoric.algorithm.Theory;
 
 public enum Analyze {
     MINIMAX(null),
