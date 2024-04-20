@@ -23,24 +23,6 @@ public enum MenuItem {
             new JMenuItem("Charger une partie"),
             new ImageIcon(MainMenu.PATH + "load.png")),
 
-    // Historic
-
-    REDO_HIST(
-            new JMenuItem("Annuler"),
-            new ImageIcon(MainMenu.PATH + "redo.png")),
-    UNDO_HIST(
-            new JMenuItem("Refaire"),
-            new ImageIcon(MainMenu.PATH + "undo.png")),
-
-    // Other
-
-    ABOUT_OTH(
-            new JMenuItem("A propos"),
-            new ImageIcon(MainMenu.PATH + "about.png")),
-    LOG_OTH(
-            new JMenuItem("Afficher les logs"),
-            new ImageIcon(MainMenu.PATH + "log.png")),
-
     //
     SEPARATOR(null, null),
 

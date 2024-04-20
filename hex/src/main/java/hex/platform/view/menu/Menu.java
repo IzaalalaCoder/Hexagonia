@@ -10,11 +10,6 @@ public enum Menu {
             MenuItem.SEPARATOR,
             MenuItem.SAVE_GAME,
             MenuItem.LOAD_GAME
-    }),
-    OTHER(new MenuItem[] {
-            MenuItem.ABOUT_OTH,
-            MenuItem.SEPARATOR,
-            MenuItem.LOG_OTH
     });
 
     private final MenuItem[] items;
