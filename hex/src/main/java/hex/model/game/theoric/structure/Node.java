@@ -3,6 +3,7 @@ package hex.model.game.theoric.structure;
 import java.util.ArrayList;
 import java.util.List;
 
+import hex.model.board.Board;
 import hex.model.game.theoric.structure.util.LabelPlayer;
 import hex.model.game.theoric.structure.util.Status;
 
@@ -11,6 +12,7 @@ public class Node {
     // ATTRIBUTES
 
     private final LabelPlayer labelPlayer;
+    private final Board board;
     private Status status;
     private List<Node> successors;
     private Node predecessor;
@@ -18,15 +20,20 @@ public class Node {
 
     // CONSTRUCTORS
 
-    public Node(LabelPlayer labelPlayer) {
+    public Node(LabelPlayer labelPlayer, Board board) {
         this.labelPlayer = labelPlayer;
         this.status = Status.LEAF;
         this.successors = new ArrayList<Node>();
         this.predecessor = null;
         this.heuristicValue = 0.0;
+        this.board = board;
     } 
 
     // REQUESTS
+
+    public Board getActualBoard() {
+        return this.board;
+    }
 
     public LabelPlayer getLabelPlayer() {
         return this.labelPlayer;

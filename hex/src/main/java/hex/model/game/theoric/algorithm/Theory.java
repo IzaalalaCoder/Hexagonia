@@ -6,7 +6,5 @@ public interface Theory {
 
     public Cell getChooseCell();
 
-    public void readBoardGame();
-
     public void analyze();
 }

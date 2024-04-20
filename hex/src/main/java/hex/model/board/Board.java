@@ -18,13 +18,14 @@ public class Board {
     private final Cell[][] grid;
     private final Shape shape;
     private final List<AbstractPlayer> players;
+    private final AbstractPlayer[] abstractPlayer;
 
     // CONSTRUCTORS
 
     public Board(int size, Shape shape, AbstractPlayer[] players) {
-
         this.size = size;
         this.shape = shape;
+        this.abstractPlayer = players;
         this.players = Arrays.asList(players);
         this.grid = createGrid();
     }
@@ -41,6 +42,10 @@ public class Board {
     public boolean coordinateIsValid(int i, int j) {
         return !(i < 0 || i >= size||
                 j < 0 || j >= size);
+    }
+
+    public AbstractPlayer[] getAbstractPlayers() {
+        return this.abstractPlayer;
     }
 
     // COMMANDS

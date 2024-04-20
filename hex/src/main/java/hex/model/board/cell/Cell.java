@@ -9,10 +9,12 @@ public class Cell {
     // ATTRIBUTES
 
     private State state;
-    private final Shape shape;
     private EnumMap<Direction, Cell> directions;
     private AbstractPlayer player;
     private boolean visit;
+
+    
+    private final Shape shape;
     private final int abscissa;
     private final int ordinate;
     private final int numberOfMemberships;

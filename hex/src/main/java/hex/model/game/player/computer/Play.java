@@ -5,6 +5,8 @@ import hex.model.board.cell.Cell;
 import hex.model.board.cell.State;
 import hex.model.game.Action;
 import hex.model.game.theoric.algorithm.RandomAction;
+import hex.model.game.theoric.algorithm.tree.Arborescence;
+import hex.model.game.theoric.structure.Node;
 
 public class Play {
 
@@ -43,7 +45,9 @@ public class Play {
             this.randomize.chooseCell(this.board);
             this.action = this.randomize.getChooseCell();
         } else {
-            System.out.println("attack");
+            Arborescence a = new Arborescence(board);
+            Node n = a.createArborescence(level);
+            System.out.println(n.getSuccessor().size());
         }
 
     }
