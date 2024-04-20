@@ -1,6 +1,5 @@
 package hex.game;
 
-import hex.model.board.Board;
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.Shape;
 import hex.model.game.Action;
