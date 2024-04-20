@@ -10,7 +10,7 @@ public class Cell {
 
     private State state;
     private final Shape shape;
-    private final EnumMap<Direction, Cell> directions;
+    private EnumMap<Direction, Cell> directions;
     private AbstractPlayer player;
     private boolean visit;
     private final int abscissa;
@@ -28,7 +28,7 @@ public class Cell {
         this.ordinate = j;
         this.visit = false;
         this.shape = s;
-        this.directions = new EnumMap<>(Direction.class);
+        this.initializeDirection();
         this.player = null;
         this.numberOfMemberships = players;
     }
@@ -111,10 +111,13 @@ public class Cell {
         if (d == null || c == null) {
             throw new IllegalArgumentException("Invalid argument");
         }
+        if (!this.directions.containsKey(d)) {
+            throw new IllegalArgumentException("Invalid argument");
+        }
         if (c.equals(this)) {
             throw new IllegalArgumentException("Don't cell correct");
         }
-        this.directions.put(d, c);
+        this.directions.replace(d, c);
     }
 
     public void clearCell() {
@@ -128,6 +131,14 @@ public class Cell {
         for (Direction d : from.getDirections().keySet()) {
             Cell cellOnDirection = from.getDirections().get(d);
             in.getDirections().replace(d, cellOnDirection);
+        }
+    }
+
+    private void initializeDirection() {
+        this.directions = new EnumMap<>(Direction.class);
+
+        for (Direction d : this.shape.getDirections()) {
+            this.directions.put(d, null);
         }
     }
 }

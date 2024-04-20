@@ -23,10 +23,9 @@ public class CellTest {
 
         // THEN
 
-        assertTrue(c.getShape() == s
-                && c.getState() == State.EMPTY
-                && c.getDirections().size() == s.getNbSides()
-        );
+        assertSame(s, c.getShape());
+        assertTrue(c.getState() == State.EMPTY);
+        assertSame(s.getNbSides(), c.getDirections().size());
     }
 
     @Test
