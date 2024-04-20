@@ -5,12 +5,10 @@ import hex.model.board.cell.Cell;
 import hex.model.board.cell.State;
 import hex.model.game.Action;
 import hex.model.game.player.computer.Computer;
-import hex.model.game.player.computer.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@SuppressWarnings("unused")
 public class RandomAction {
 
     // ATTRIBUTES
