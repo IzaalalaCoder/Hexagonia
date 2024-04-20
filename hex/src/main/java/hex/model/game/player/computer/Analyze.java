@@ -7,8 +7,7 @@ public enum Analyze {
     NEGAMAX(null),
     ALPHA_BETA(null),
     NEG_ALPHA_BETA(null),
-    SSS_STAR(null),
-    A_STAR(null)
+    SSS_STAR(null)
     ;
 
     private Theory theory;
