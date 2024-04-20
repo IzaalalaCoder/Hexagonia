@@ -18,18 +18,6 @@ public enum Direction {
             return new Point(x, y + 1);
         }
     },
-    TOP() {
-        @Override
-        public Point getNewCoordinates(int x, int y) {
-            return new Point(x - 1, y);
-        }
-    },
-    BOTTOM() {
-        @Override
-        public Point getNewCoordinates(int x, int y) {
-            return new Point(x + 1, y);
-        }
-    },
     TOP_LEFT() {
         @Override
         public Point getNewCoordinates(int x, int y) {

@@ -2,7 +2,6 @@ package hex.board.cell;
 
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.Direction;
-import hex.model.board.cell.Shape;
 import hex.model.board.cell.State;
 import org.junit.jupiter.api.Test;
 
@@ -15,30 +14,15 @@ public class CellTest {
         // GIVEN
 
         Cell c;
-        Shape s = Shape.SQUARE;
 
         // WHEN
 
-        c = new Cell(s, 0, 0, 0);
+        c = new Cell(0, 0, 0);
 
         // THEN
 
-        assertSame(s, c.getShape());
         assertTrue(c.getState() == State.EMPTY);
-        assertSame(s.getNbSides(), c.getDirections().size());
-    }
-
-    @Test
-    public void shouldCreateInvalidCell() {
-        // THEN
-
-        assertThrows(
-                IllegalArgumentException.class,
-                () ->
-                        // WHEN
-                        new Cell(null, 0, 0, 0),
-                        "Invalid argument"
-        );
+        assertSame(6, c.getDirections().size());
     }
 
     @Test
@@ -46,7 +30,7 @@ public class CellTest {
 
         // GIVEN
 
-        Cell c = new Cell(Shape.TRIANGLE_B, 0, 0, 0);
+        Cell c = new Cell(0, 0, 0);
 
         // THEN
 
@@ -63,31 +47,30 @@ public class CellTest {
     @Test
     public void shouldSetCellOnDirWithCorrect() {
         // GIVEN
-        Shape s = Shape.SQUARE;
-        Cell c = new Cell(s, 0, 0, 0);
-        Cell c1 = new Cell(s, 0, 0, 0);
+        Cell c = new Cell(0, 0, 0);
+        Cell c1 = new Cell(0, 0, 0);
 
         // WHEN
 
-        c.setCellOnDirection(Direction.BOTTOM, c1);
+        c.setCellOnDirection(Direction.LEFT, c1);
 
         // THEN
 
-        assertSame(c.getCellOnDir(Direction.BOTTOM), c1);
+        assertSame(c.getCellOnDir(Direction.LEFT), c1);
     }
 
     @Test
     public void shouldSetCellOnDirWithNotCorrectCell() {
         // GIVEN
 
-        Cell c = new Cell(Shape.SQUARE, 0, 0, 0);
+        Cell c = new Cell(0, 0, 0);
 
         // THEN
 
         assertThrows(IllegalArgumentException.class,
                 () ->
                         // WHEN
-                        c.setCellOnDirection(Direction.BOTTOM, null),
+                        c.setCellOnDirection(Direction.TOP_LEFT, null),
                 "Invalid argument"
 
         );
@@ -97,7 +80,7 @@ public class CellTest {
     public void shouldSetCellOnDirWithNotCorrectDir() {
         // GIVEN
 
-        Cell c = new Cell(Shape.SQUARE, 0, 0, 0);
+        Cell c = new Cell(0, 0, 0);
 
         // THEN
 
@@ -114,14 +97,14 @@ public class CellTest {
     public void shouldSetCellOnDirWithSameCell() {
         // GIVEN
 
-        Cell c = new Cell(Shape.SQUARE, 0, 0, 0);
+        Cell c = new Cell(0, 0, 0);
 
         // THEN
 
         assertThrows(IllegalArgumentException.class,
                 () ->
                         // WHEN
-                        c.setCellOnDirection(Direction.BOTTOM, c),
+                        c.setCellOnDirection(Direction.TOP_LEFT, c),
                 "Don't cell correct"
 
         );
@@ -131,7 +114,7 @@ public class CellTest {
     public void shouldSetValidState() {
         // GIVEN
 
-        Cell c = new Cell(Shape.SQUARE, 0, 0, 0);
+        Cell c = new Cell(0, 0, 0);
 
         // WHEN
 
@@ -146,7 +129,7 @@ public class CellTest {
     public void shouldSetInvalidState() {
         // GIVEN
 
-        Cell c = new Cell(Shape.SQUARE, 0, 0, 0);
+        Cell c = new Cell(0, 0, 0);
 
         // THEN
 
@@ -164,7 +147,7 @@ public class CellTest {
     public void shouldGetCellOnDirWhenIsNull() {
         // GIVEN
 
-        Cell c = new Cell(Shape.TRIANGLE_B, 0, 0, 0);
+        Cell c = new Cell(0, 0, 0);
 
         // THEN
 
@@ -178,27 +161,10 @@ public class CellTest {
     }
 
     @Test
-    public void shouldGetCellOnDirWhenIsInexistantDirection() {
-        // GIVEN
-
-        Cell c = new Cell(Shape.TRIANGLE_B, 0, 0, 0);
-
-        // THEN
-
-        assertThrows(IllegalArgumentException.class,
-                () ->
-                        // WHEN
-                        c.getCellOnDir(Direction.TOP),
-                "Invalid argument"
-
-        );
-    }
-
-    @Test
     public void shouldCopyCell() {
         // GIVEN
 
-        Cell c = new Cell(Shape.TRIANGLE_T, 0, 0, 0);
+        Cell c = new Cell( 0, 0, 0);
 
         // WHEN
 
@@ -207,7 +173,6 @@ public class CellTest {
         // THEN
 
         assertEquals(c.getState(), newC.getState());
-        assertEquals(c.getShape(), newC.getShape());
         assertEquals(c.getDirections(), newC.getDirections());
     }
 

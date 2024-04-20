@@ -1,7 +1,6 @@
 package hex.platform.view.shapes.forms;
 
 import hex.model.board.cell.Direction;
-import hex.model.board.cell.Shape;
 
 import java.awt.event.MouseAdapter;
 
@@ -16,15 +15,13 @@ import java.util.Map;
 
 public class HexagonButton extends JButton implements Forms {
 
-    public static final Shape SHAPE = Shape.HEXAGONAL;
-
     // ATTRIBUTES
 
     private MouseAdapter listener;
     private final Map<Direction, Color> borderColor;
-    int[] x = new int[SHAPE.getNbSides()];
-    int[] y = new int[SHAPE.getNbSides()];
-    double angle = 2 * Math.PI / SHAPE.getNbSides();
+    int[] x = new int[6];
+    int[] y = new int[6];
+    double angle = 2 * Math.PI / 6;
     private int ordinate;
     private int abscissa;
 
@@ -70,18 +67,13 @@ public class HexagonButton extends JButton implements Forms {
     }
 
     @Override
-    public Shape getShapeOfJButton() {
-        return SHAPE;
-    }
-
-    @Override
     public boolean isContainedInForm(Point p) {
-        Polygon polygon = new Polygon(x, y, SHAPE.getNbSides());
+        Polygon polygon = new Polygon(x, y, 6);
         return polygon.contains(p);
     }
 
     private void manageCoordinate() {
-        for(int i = 0; i < SHAPE.getNbSides(); i++) {
+        for(int i = 0; i < 6; i++) {
             double v = i * angle;
             x[i] = Forms.SIZE_DEFAULT / 2 + (int) Math.round(((double) Forms.SIZE_DEFAULT / 2)
                     * Math.cos(v + Math.PI / 2));
@@ -95,14 +87,14 @@ public class HexagonButton extends JButton implements Forms {
     @Override
     protected void paintComponent(Graphics g) {
         g.setColor(getBackground());
-        g.fillPolygon(x, y, SHAPE.getNbSides());
+        g.fillPolygon(x, y, 6);
         super.paintComponent(g);
     }
 
     @Override
     protected void paintBorder(Graphics g) {
         g.setColor(getForeground());
-        g.drawPolygon(x, y, SHAPE.getNbSides());
+        g.drawPolygon(x, y, 6);
     }
 
     @Override

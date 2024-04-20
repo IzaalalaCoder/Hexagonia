@@ -2,7 +2,6 @@ package hex.model.board;
 
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.Direction;
-import hex.model.board.cell.Shape;
 import hex.model.game.player.AbstractPlayer;
 
 import java.awt.*;
@@ -16,15 +15,13 @@ public class Board {
 
     private final int size;
     private final Cell[][] grid;
-    private final Shape shape;
     private final List<AbstractPlayer> players;
     private final AbstractPlayer[] abstractPlayer;
 
     // CONSTRUCTORS
 
-    public Board(int size, Shape shape, AbstractPlayer[] players) {
+    public Board(int size, AbstractPlayer[] players) {
         this.size = size;
-        this.shape = shape;
         this.abstractPlayer = players;
         this.players = Arrays.asList(players);
         this.grid = createGrid();
@@ -36,8 +33,6 @@ public class Board {
         //return this.copyGrid(this.grid);
         return this.grid;
     }
-
-    public Shape getShape() { return this.shape;}
 
     public boolean coordinateIsValid(int i, int j) {
         return !(i < 0 || i >= size||
@@ -91,7 +86,7 @@ public class Board {
                 if (i == 0 || i == size - 1) {
                     playersCell.add(this.players.get(1));
                 }
-                cells[i][j] = new Cell(this.shape, playersCell.size(), i, j);
+                cells[i][j] = new Cell(playersCell.size(), i, j);
                 playersCell.clear();
             }
 
@@ -101,7 +96,7 @@ public class Board {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 Cell c = cells[i][j];
-                for (Direction d : this.shape.getDirections()) {
+                for (Direction d : Direction.values()) {
                     Point newCoordinate = d.getNewCoordinates(i, j);
                     if (this.coordinateIsValid(newCoordinate.x, newCoordinate.y)) {
                         Cell newCell = cells[newCoordinate.x][newCoordinate.y];

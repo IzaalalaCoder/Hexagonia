@@ -3,7 +3,6 @@ package hex.model.game;
 import hex.model.board.Board;
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.Direction;
-import hex.model.board.cell.Shape;
 import hex.model.board.cell.State;
 import hex.model.game.complementary.Help;
 import hex.model.game.player.AbstractPlayer;
@@ -25,7 +24,6 @@ public class Game implements AbstractGame {
     private int currentPlayer;
     private final PropertyChangeSupport pcs;
     private boolean endOfGame;
-
     private boolean gameWithComputer;
 
     // CONSTRUCTORS
@@ -35,7 +33,7 @@ public class Game implements AbstractGame {
         this.size = size;
         this.currentPlayer = 0;
         this.players = initializePlayers(computer, level);
-        this.board = createBoard(Shape.HEXAGONAL);
+        this.board = createBoard();
         if (computer) {
             ((Computer) this.players[1]).startPlay(this);
         }
@@ -131,8 +129,8 @@ public class Game implements AbstractGame {
 
     // UTILS
 
-    private Board createBoard(Shape shape) {
-        return new Board(this.size, shape, this.players);
+    private Board createBoard() {
+        return new Board(this.size, this.players);
     }
 
     private AbstractPlayer[] initializePlayers(boolean computerPlay, int level) {

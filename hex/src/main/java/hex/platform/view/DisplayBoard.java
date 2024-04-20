@@ -2,7 +2,6 @@ package hex.platform.view;
 
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.Direction;
-import hex.model.board.cell.Shape;
 import hex.model.board.cell.State;
 import hex.model.game.Game;
 import hex.platform.controller.ControlBoard;
@@ -40,9 +39,7 @@ public class DisplayBoard extends JPanel {
 
     private void displayBoard() {
         JPanel p = new JPanel();
-        if (this.model.getBoard().getShape() == Shape.HEXAGONAL) {
-            this.createHexBoard(p);
-        }
+        this.createHexBoard(p);
     }
 
     private void createHexBoard(JPanel p) {

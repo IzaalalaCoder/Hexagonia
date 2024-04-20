@@ -1,7 +1,6 @@
 package hex.game;
 
 import hex.model.board.cell.Cell;
-import hex.model.board.cell.Shape;
 import hex.model.game.Action;
 import hex.model.game.player.computer.Computer;
 import hex.model.game.player.computer.Level;
@@ -17,7 +16,7 @@ class ActionTest {
 
         Computer compute = new Computer(1, Level.EASY);
         Action a;
-        Cell c = new Cell(Shape.HEXAGONAL, 1, 1, 7);
+        Cell c = new Cell(1, 1, 7);
 
         // WHEN
 
