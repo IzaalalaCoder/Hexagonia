@@ -90,6 +90,5 @@ public enum Shape {
     // Constructeurs
     Shape(int sides) {
         this.nbSides = sides;
-        List<Direction> directions = this.getDirections();
     }
 }

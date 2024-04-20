@@ -3,7 +3,6 @@ package hex.model.game.theoric.algo.max;
 import hex.model.game.Action;
 import hex.model.game.player.computer.Level;
 import hex.model.game.theoric.AbstractTheory;
-import hex.model.game.theoric.Theory;
 import hex.model.game.theoric.structure.node.ManageNode;
 import hex.model.game.theoric.structure.Tree;
 

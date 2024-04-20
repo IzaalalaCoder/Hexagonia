@@ -112,6 +112,9 @@ public class Cell {
             throw new IllegalArgumentException("Invalid argument");
         }
         if (!this.directions.containsKey(d)) {
+            System.out.println(d.name());
+            System.out.println(this.directions.size());
+            System.out.println(this.directions.toString());
             throw new IllegalArgumentException("Invalid argument");
         }
         if (c.equals(this)) {

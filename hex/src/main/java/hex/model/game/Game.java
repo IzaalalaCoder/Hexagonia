@@ -201,13 +201,19 @@ public class Game implements AbstractGame {
         }
 
         for (Direction d : c.getDirections().keySet()) {
+
             Cell newCell = c.getCellOnDir(d);
-            if (newCell.getState() == State.PLAYER
-                && newCell.getPlayer() == this.getCurrentPlayer()
-                && !newCell.getVisited())
-            {
-                newCell.setVisit(true);
-                return this.canPathFromCell(newCell);
+
+            if (newCell != null) {
+                if (newCell.getState() == State.PLAYER
+                    && newCell.getPlayer() == this.getCurrentPlayer()
+                    && !newCell.getVisited())
+                {
+                    newCell.setVisit(true);
+                    if (this.canPathFromCell(newCell)) {
+                        return true;
+                    }
+                }
             }
         }
         return false;

@@ -63,7 +63,7 @@ public class Board {
 
     // UTILS
 
-    private Cell[][] copyGrid(Cell[][] grid) {
+    /*private Cell[][] copyGrid(Cell[][] grid) {
         Cell[][] cells = new Cell[this.grid.length][];
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
@@ -71,7 +71,7 @@ public class Board {
             }
         }
         return cells;
-    }
+    }*/
 
     private Cell[][] createGrid() {
         Cell[][] cells = new Cell[size][size];
@@ -96,7 +96,7 @@ public class Board {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 Cell c = cells[i][j];
-                for (Direction d : Direction.values()) {
+                for (Direction d : this.shape.getDirections()) {
                     Point newCoordinate = d.getNewCoordinates(i, j);
                     if (this.coordinateIsValid(newCoordinate.x, newCoordinate.y)) {
                         Cell newCell = cells[newCoordinate.x][newCoordinate.y];

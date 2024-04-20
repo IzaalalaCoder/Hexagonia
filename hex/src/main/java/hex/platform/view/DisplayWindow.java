@@ -16,7 +16,6 @@ public class DisplayWindow extends JFrame {
     // ATTRIBUTES
 
     private Game model;
-    private JPanel help;
     private DisplayBoard board;
     private JPanel information;
     private MainMenu mainMenu;
@@ -99,10 +98,6 @@ public class DisplayWindow extends JFrame {
 
     private void createInfoBar() {
         this.add(this.information, BorderLayout.NORTH);
-    }
-
-    private void createHelpBar() {
-        this.add(help, BorderLayout.SOUTH);
     }
 
     private void createBoard() {
