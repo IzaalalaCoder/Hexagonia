@@ -1,5 +1,6 @@
 package hex.platform.view.menu;
 
+import hex.platform.controller.ControlRules;
 import hex.platform.view.DisplayWindow;
 
 import javax.swing.*;
@@ -55,6 +56,10 @@ public class MainMenu extends JMenuBar {
 
         MenuNewGame newGameMenu = (MenuNewGame) this.subMenus.get(MenuItem.NEW_GAME);
         newGameMenu.createController(parent);
+
+
+        JMenuItem itemRule = this.subMenus.get(MenuItem.RULE_GAME);
+        itemRule.addActionListener(new ControlRules());
 
     }
 }
