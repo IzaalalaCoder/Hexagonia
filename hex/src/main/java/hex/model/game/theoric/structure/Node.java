@@ -43,7 +43,8 @@ public class Node {
                 if (c.getState() == State.EMPTY) {
                     result += " _ ";
                 } else {
-                    result += c.getPlayer().getType() == PlayerType.COMPUTER ? " X " : " O ";
+                    result += c.getPlayer().getType() 
+                        == PlayerType.COMPUTER ? " X " : " O ";
                 }
             }
             result += "\n";
@@ -78,16 +79,20 @@ public class Node {
 
     // COMMANDS
     
-    public void seStatus(Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
     
     public void addSuccessor(Node successor) {
         this.successors.add(successor);
+        this.status = Status.NODE;
     }
     
     public void removeSuccessor(Node successor) {
         this.successors.remove(successor);
+        if (this.successors.size() == 0) {
+            this.status = Status.LEAF;
+        }
     }
 
     public void setPredecessor(Node predecessor) {
@@ -96,6 +101,7 @@ public class Node {
 
     public void setHeuristicValue(Double heuristicValue) {
         this.heuristicValue = heuristicValue;
+        this.status = Status.TERMINAL;
     }
 
 }
