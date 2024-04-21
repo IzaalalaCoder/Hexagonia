@@ -43,7 +43,8 @@ public class Minimax implements Theory {
 
     private Double minimax(Node root) {
         Double val;
-        if (root.geStatus() == Status.LEAF) {
+        if (root.getStatus() == Status.LEAF) {
+            // calculate heuristic value
             val = root.getHeuristicValue();
         } else {
             if (root.getLabelPlayer() == LabelPlayer.MAX) {
