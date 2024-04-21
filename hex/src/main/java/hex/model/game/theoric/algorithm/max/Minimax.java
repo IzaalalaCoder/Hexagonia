@@ -6,33 +6,59 @@ import hex.model.game.player.computer.Level;
 import hex.model.game.theoric.algorithm.Theory;
 import hex.model.game.theoric.algorithm.tree.Arborescence;
 import hex.model.game.theoric.structure.Node;
+import hex.model.game.theoric.structure.util.LabelPlayer;
+import hex.model.game.theoric.structure.util.Status;
 
 
 public class Minimax implements Theory {
 
     // ATTRIBUTES
 
-    private final Node root; 
+    private Cell chooseCell;
 
     // CONSTRUCTOR
 
     public Minimax(Board board, Level level) {
         Arborescence a = new Arborescence(board);
-        root = a.createArborescence(level);
-    }
+        this.analyze(a.createArborescence(level));
+        chooseCell = null;
+    }   
 
     // REQUESTS
 
     @Override
     public Cell getChooseCell() {
-        return null;
+        return chooseCell;
         
     }
 
     // COMMANDS
 
     @Override
-    public void analyze() {
+    public void analyze(Node root) {
+        this.minimax(root);
+    }
+
+    // UTILS
+
+    private Double minimax(Node root) {
+        Double val;
+        if (root.geStatus() == Status.LEAF) {
+            val = root.getHeuristicValue();
+        } else {
+            if (root.getLabelPlayer() == LabelPlayer.MAX) {
+                val = Double.MIN_VALUE;
+                for (Node n : root.getSuccessor()) {
+                    val = Math.max(val, this.minimax(n));
+                }
+            } else {
+                val = Double.MAX_VALUE;
+                for (Node n : root.getSuccessor()) {
+                    val = Math.min(val, this.minimax(n));
+                }
+            }
+        }
+        return val;
     }
     
 }
