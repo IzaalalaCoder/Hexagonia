@@ -44,10 +44,11 @@ public class Arborescence {
                 if (c.getState() == State.EMPTY) {
                     c.setPlayer(p);
                     Node newNode = new Node(this.currentPlayer == 1 ? LabelPlayer.MIN : LabelPlayer.MAX, board.getCopy());
+                    this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
                     this.buildTree(newNode, tail - 1);
+                    this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
                     newNode.setPredecessor(node);
                     node.addSuccessor(newNode);
-                    //this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
                     c.unsetPlayer();
                 }
             }
