@@ -47,6 +47,11 @@ public enum SizeGame {
     FOUR(
         4,
         new Dimension(320, 400)
+    ),
+
+    THREE(
+        3,
+        new Dimension(250, 350)
     );
 
     private final int size;
