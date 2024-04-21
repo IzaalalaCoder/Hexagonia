@@ -43,6 +43,19 @@ public class Board {
         return this.abstractPlayer;
     }
 
+    public Board getCopy() {
+        Board newBoard = new Board(this.getGrid().length, this.getAbstractPlayers());
+        for (Cell[] cells : this.getGrid()) {
+            for (Cell c : cells) {
+                int i = c.getAbscissa();
+                int j = c.getOrdinate();
+                newBoard.getGrid()[i][j] = c.copyCell();
+            }
+        }
+
+        return newBoard;
+    }
+
     // COMMANDS
 
     public void clearGrid() {

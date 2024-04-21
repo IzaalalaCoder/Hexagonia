@@ -4,7 +4,7 @@ public enum LevelMode {
 
     EASY,
     MEDIUM,
-    HARD,
-    EXTREME;
+    HARD;
+    //EXTREME;
 
 }

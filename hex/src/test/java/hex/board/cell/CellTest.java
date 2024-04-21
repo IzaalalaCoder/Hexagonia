@@ -111,39 +111,6 @@ public class CellTest {
     }
 
     @Test
-    public void shouldSetValidState() {
-        // GIVEN
-
-        Cell c = new Cell(0, 0, 0);
-
-        // WHEN
-
-        c.setState(State.PLAYER);
-
-        // THEN
-
-        assertSame(c.getState(), State.PLAYER);
-    }
-
-    @Test
-    public void shouldSetInvalidState() {
-        // GIVEN
-
-        Cell c = new Cell(0, 0, 0);
-
-        // THEN
-
-        assertThrows(
-                IllegalArgumentException.class,
-                () ->
-                        // WHEN
-
-                        c.setState(null),
-                "Invalid argument"
-        );
-    }
-
-    @Test
     public void shouldGetCellOnDirWhenIsNull() {
         // GIVEN
 
@@ -168,7 +135,7 @@ public class CellTest {
 
         // WHEN
 
-        Cell newC = Cell.copyCell(c);
+        Cell newC = c.copyCell();
 
         // THEN
 

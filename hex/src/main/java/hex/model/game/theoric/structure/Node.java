@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hex.model.board.Board;
+import hex.model.board.cell.Cell;
+import hex.model.board.cell.State;
+import hex.model.game.player.PlayerType;
 import hex.model.game.theoric.structure.util.LabelPlayer;
 import hex.model.game.theoric.structure.util.Status;
 
@@ -30,6 +33,24 @@ public class Node {
     } 
 
     // REQUESTS
+
+    @Override
+    public String toString() {
+        String result = "";
+
+        for (Cell[] cells : this.board.getGrid()) {
+            for (Cell c : cells) {
+                if (c.getState() == State.EMPTY) {
+                    result += " _ ";
+                } else {
+                    result += c.getPlayer().getType() == PlayerType.COMPUTER ? " X " : " O ";
+                }
+            }
+            result += "\n";
+        }
+
+        return result;
+    }
 
     public Board getActualBoard() {
         return this.board;

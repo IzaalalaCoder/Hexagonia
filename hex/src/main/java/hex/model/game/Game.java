@@ -93,7 +93,6 @@ public class Game implements AbstractGame {
     public void takeCell(int i, int j) {
         Cell c = this.board.getGrid()[i][j];
         c.setPlayer(this.getCurrentPlayer());
-        c.setState(State.PLAYER);
         if (c.getPlayer().getType() == PlayerType.COMPUTER) {
             this.pcs.firePropertyChange(PROP_TAKE_CELL_BY_COMPUTER, null, c);
         }

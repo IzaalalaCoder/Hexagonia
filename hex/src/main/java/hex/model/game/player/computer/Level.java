@@ -1,10 +1,10 @@
 package hex.model.game.player.computer;
 
 public enum Level {
-    EASY(10, 2),
-    MEDIUM(7, 3),
-    HARD(6, 4), 
-    EXTREME(5, 5);
+    EASY(80, 1),
+    MEDIUM(85, 2),
+    HARD(90, 3); // 12 a 9 thread ?
+    //EXTREME(10, 4);
 
     private Level(int percent, int sizeTail) {
         this.percent = percent;

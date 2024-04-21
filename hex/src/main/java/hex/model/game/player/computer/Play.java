@@ -40,26 +40,25 @@ public class Play {
     }
 
     public void play() {
-        int percent = this.getPercentFullCase();
-        if (percent < this.level.getPercent()) {
+        int percent = this.getPercentEmptyCase();
+        if (percent > this.level.getPercent()) {
             this.randomize.chooseCell(this.board);
             this.action = this.randomize.getChooseCell();
         } else {
             Arborescence a = new Arborescence(board);
             Node n = a.createArborescence(level);
-            System.out.println(n.getSuccessor().size());
         }
 
     }
 
     // UTILS
 
-    private int getPercentFullCase() {
+    private int getPercentEmptyCase() {
         int count = 0;
 
         for (Cell[] cells : this.board.getGrid()) {
             for (Cell c : cells) {
-                if (c.getState() == State.PLAYER) {
+                if (c.getState() == State.EMPTY) {
                     count++;
                 }
             }
@@ -68,6 +67,7 @@ public class Play {
 
         int size = this.board.getGrid().length
             * this.board.getGrid().length;
+
         return ((count * 100) / size);
     }
 }

@@ -12,6 +12,7 @@ public class Cell {
     private EnumMap<Direction, Cell> directions;
     private AbstractPlayer player;
     private boolean visit;
+
     private final int abscissa;
     private final int ordinate;
     private final int numberOfMemberships;
@@ -51,12 +52,13 @@ public class Cell {
         return this.directions;
     }
 
-    public static Cell copyCell(Cell c) {
-        Cell cell = new Cell(c.numberOfMemberships,
-            c.abscissa, c.ordinate);
-        cell.setState(c.getState());
-        manageDirections(cell, c);
-        return cell;
+    public Cell copyCell() {
+        Cell newCell = new Cell(this.numberOfMemberships, this.abscissa, this.ordinate);
+        newCell.state = state;
+        newCell.player = player;
+        newCell.setVisit(this.getVisited());
+        manageDirections(newCell, this);
+        return newCell;
     }
 
     public Cell getCellOnDir(Direction d) {
@@ -87,15 +89,16 @@ public class Cell {
         if (this.getState() == State.PLAYER) {
             throw new IllegalArgumentException("Invalid argument");
         }
-        this.setState(State.PLAYER);
+        state = State.PLAYER;
         this.player = p;
     }
 
-    public void setState(State s) {
-        if (s == null) {
+    public void unsetPlayer() {
+        if (this.getState() == State.EMPTY) {
             throw new IllegalArgumentException("Invalid argument");
         }
-        state = s;
+        state = State.EMPTY;
+        this.player = null;
     }
 
     public void setCellOnDirection(Direction d, Cell c) {
@@ -103,9 +106,6 @@ public class Cell {
             throw new IllegalArgumentException("Invalid argument");
         }
         if (!this.directions.containsKey(d)) {
-            System.out.println(d.name());
-            System.out.println(this.directions.size());
-            System.out.println(this.directions.toString());
             throw new IllegalArgumentException("Invalid argument");
         }
         if (c.equals(this)) {

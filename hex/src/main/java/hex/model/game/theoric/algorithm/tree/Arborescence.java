@@ -13,7 +13,6 @@ public class Arborescence {
     // ATTRIBUTES
 
     private Node root;
-    private Board board;
     private int currentPlayer;
 
 
@@ -21,7 +20,6 @@ public class Arborescence {
     
     public Arborescence(Board board) {
         this.root = new Node(LabelPlayer.MAX, board);
-        this.board = board;
         this.currentPlayer = 1;
     }
 
@@ -39,26 +37,19 @@ public class Arborescence {
         if (tail == 0) {
             return;
         }
-        for (Cell[] cells : node.getActualBoard().getGrid()) {
+        Board board = node.getActualBoard().getCopy();
+        AbstractPlayer p = board.getAbstractPlayers()[currentPlayer];
+        for (Cell[] cells : board.getGrid()) {
             for (Cell c : cells) {
                 if (c.getState() == State.EMPTY) {
-                    this.placeFakePlayer(c, board.getAbstractPlayers()[currentPlayer]);
-                    Node newNode = new Node(this.currentPlayer == 1 ? LabelPlayer.MIN : LabelPlayer.MAX, node.getActualBoard());
+                    c.setPlayer(p);
+                    Node newNode = new Node(this.currentPlayer == 1 ? LabelPlayer.MIN : LabelPlayer.MAX, board.getCopy());
+                    this.buildTree(newNode, tail - 1);
                     node.addSuccessor(newNode);
-                    this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
-                    this.resetCell(c);
+                    //this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
+                    c.unsetPlayer();
                 }
             }
         }
-    }
-
-    private void placeFakePlayer(Cell c, AbstractPlayer player) {
-        c.setPlayer(player);
-        c.setState(State.PLAYER);
-    }
-
-    private void resetCell(Cell c) {
-        c.setState(State.EMPTY);
-        c.setPlayer(null);
     }
 }
