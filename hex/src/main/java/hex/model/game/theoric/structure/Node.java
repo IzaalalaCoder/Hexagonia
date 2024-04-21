@@ -61,14 +61,15 @@ public class Node {
         return this.labelPlayer;
     }
     
-    public Status geStatus() {
+    public Status getStatus() {
+        this.calculateHeuristicValue();
         return this.status;
     }
     
     public List<Node> getSuccessor() {
         return this.successors;
     }
-    
+      
     public Node getPredecessor() {
         return this.predecessor;
     }
@@ -99,8 +100,8 @@ public class Node {
         this.predecessor = predecessor;
     }
 
-    public void setHeuristicValue(Double heuristicValue) {
-        this.heuristicValue = heuristicValue;
+    private void calculateHeuristicValue() {
+        // TODO calculate
         this.status = Status.TERMINAL;
     }
 
