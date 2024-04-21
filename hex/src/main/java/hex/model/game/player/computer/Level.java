@@ -1,8 +1,8 @@
 package hex.model.game.player.computer;
 
 public enum Level {
-    EASY(80, 1),
-    MEDIUM(85, 2),
+    EASY(90, 1),
+    MEDIUM(90, 2),
     HARD(90, 3); // 12 a 9 thread ?
     //EXTREME(10, 4);
 
