@@ -1,6 +1,8 @@
 package hex.platform.view.menu;
 
+import hex.platform.controller.ControlHistory;
 import hex.platform.controller.ControlRules;
+import hex.platform.controller.ControlWindow;
 import hex.platform.view.DisplayWindow;
 
 import javax.swing.*;
@@ -48,7 +50,6 @@ public class MainMenu extends JMenuBar {
             }
             this.add(menu);
         }
-        this.add(MenuItem.QUIT.getMenu());
     }
 
     private void createController(DisplayWindow parent) {
@@ -60,6 +61,12 @@ public class MainMenu extends JMenuBar {
 
         JMenuItem itemRule = this.subMenus.get(MenuItem.RULE_GAME);
         itemRule.addActionListener(new ControlRules());
+
+        JMenuItem itemHistory = this.subMenus.get(MenuItem.HISTORY_GAME);
+        itemHistory.addActionListener(new ControlHistory());
+
+        JMenuItem itemQuit = this.subMenus.get(MenuItem.QUIT);
+        itemQuit.addActionListener(new ControlWindow(parent));
 
     }
 }

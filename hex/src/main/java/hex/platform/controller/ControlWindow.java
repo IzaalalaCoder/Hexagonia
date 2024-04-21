@@ -1,4 +1,24 @@
 package hex.platform.controller;
 
-public class ControlWindow {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import hex.platform.view.DisplayWindow;
+
+public class ControlWindow implements ActionListener {
+
+    // ATTRIBUTES
+
+    private DisplayWindow parent;
+
+    // CONSTRUCTOR 
+
+    public ControlWindow(DisplayWindow parent) {
+        this.parent = parent;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        parent.dispose();
+    }
 }

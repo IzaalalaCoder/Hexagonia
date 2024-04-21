@@ -9,7 +9,9 @@ public enum Menu {
             MenuItem.HISTORY_GAME,
             MenuItem.SEPARATOR,
             MenuItem.SAVE_GAME,
-            MenuItem.LOAD_GAME
+            MenuItem.LOAD_GAME,
+            MenuItem.SEPARATOR,
+            MenuItem.QUIT
     });
 
     private final MenuItem[] items;
