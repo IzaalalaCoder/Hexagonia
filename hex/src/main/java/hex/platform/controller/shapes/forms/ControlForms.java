@@ -10,16 +10,16 @@ import java.awt.event.MouseEvent;
 
 public class ControlForms extends MouseAdapter {
 
-    // CONSTRUCTOR
+    // ATTRIBUTES
 
     private final Game model;
+
+    // CONSTRUCTOR
 
     public ControlForms(Game model) {
         super();
         this.model = model;
     }
-
-
 
     // COMMANDS
 

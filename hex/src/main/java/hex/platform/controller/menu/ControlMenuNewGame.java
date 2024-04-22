@@ -24,7 +24,6 @@ public class ControlMenuNewGame implements ActionListener {
         this.size = size;
     }
 
-
     // COMMANDS
 
     @Override

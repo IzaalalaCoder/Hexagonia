@@ -36,7 +36,7 @@ public class ControlLoadGame implements ActionListener {
         
     }
     
-    
+    // ENTERED POINT
 
     public static void main(final String[] args) {
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

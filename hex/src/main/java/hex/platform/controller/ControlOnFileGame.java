@@ -8,11 +8,17 @@ import java.io.IOException;
 
 public class ControlOnFileGame implements ActionListener {
 
+    // ATTRIBUTES
+
     private String path;
+
+    // CONSTRUCTORS
     
     public ControlOnFileGame(String path) {
         this.path = path;
     }
+    
+    // COMMANDS
     
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -12,7 +12,6 @@ public class Cell {
     private EnumMap<Direction, Cell> directions;
     private AbstractPlayer player;
     private boolean visit;
-
     private final int abscissa;
     private final int ordinate;
     private final int numberOfMemberships;
@@ -20,11 +19,11 @@ public class Cell {
     // CONSTRUCTOR
 
     public Cell(int players, int i, int j) {
+        this.initializeDirection();
         this.state = State.EMPTY;
         this.abscissa = i;
         this.ordinate = j;
         this.visit = false;
-        this.initializeDirection();
         this.player = null;
         this.numberOfMemberships = players;
     }

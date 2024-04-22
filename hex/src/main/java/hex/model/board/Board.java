@@ -30,7 +30,6 @@ public class Board {
     // REQUESTS
 
     public Cell[][] getGrid() {
-        //return this.copyGrid(this.grid);
         return this.grid;
     }
 

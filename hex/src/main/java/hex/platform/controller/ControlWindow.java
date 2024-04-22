@@ -17,6 +17,8 @@ public class ControlWindow implements ActionListener {
         this.parent = parent;
     }
 
+    // COMMANDS
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         parent.dispose();

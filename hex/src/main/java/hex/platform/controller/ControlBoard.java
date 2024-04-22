@@ -12,9 +12,13 @@ import hex.platform.view.shapes.Forms;
 
 public class ControlBoard {
 
+    // ATTRIBUTES
+
     private final Game model;
     private final DisplayBoard frame;
     private final Forms[][] buttons;
+
+    // CONSTRUCTORS
 
     public ControlBoard(Forms[][] buttons, Game model, DisplayBoard display) {
         this.model = model;
@@ -23,6 +27,7 @@ public class ControlBoard {
         this.createController();
     }
 
+    // COMMANDS
     private void createController() {
         this.model.addPropertyChangeListener(AbstractGame.PROP_TAKE_CELL_BY_COMPUTER, evt -> {
             Cell c = (Cell) evt.getNewValue();

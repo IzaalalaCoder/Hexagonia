@@ -4,7 +4,6 @@ import hex.model.board.Board;
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.Direction;
 import hex.model.board.cell.State;
-import hex.model.game.complementary.Help;
 import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.computer.Computer;
 import hex.model.game.player.Player;
@@ -80,11 +79,6 @@ public class Game implements AbstractGame {
     @Override
     public int getPositionCurrentPlayer() {
         return currentPlayer;
-    }
-
-    @Override
-    public Help getHelp() {
-        return null;
     }
 
     // COMMANDS

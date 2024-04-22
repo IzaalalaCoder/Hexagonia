@@ -1,7 +1,6 @@
 package hex.model.game;
 
 import hex.model.board.Board;
-import hex.model.game.complementary.Help;
 import hex.model.game.player.AbstractPlayer;
 
 import java.beans.PropertyChangeListener;
@@ -53,12 +52,6 @@ public interface AbstractGame {
      * @return Player
      */
     AbstractPlayer getCurrentPlayer();
-
-    /**
-     * Return help for Player
-     * @return Help
-     */
-    Help getHelp();
 
     /**
      * Current player act so consume his turn

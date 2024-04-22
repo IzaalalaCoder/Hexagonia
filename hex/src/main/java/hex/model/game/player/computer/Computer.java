@@ -8,11 +8,13 @@ import hex.model.game.player.PlayerType;
 
 public class Computer extends AbstractPlayer {
 
+    // ATTRIBUTES
+
     private Play play;
-
     private final Level level;
-
     private Game game;
+
+    // CONSTRUCTORS 
 
     public Computer(int position, Level level) {
         this.play = null;
@@ -21,6 +23,8 @@ public class Computer extends AbstractPlayer {
         this.position = position;
         this.game = null;
     }
+
+    // COMMANDS
 
     public void startPlay(Game game) {
         this.game = game;
