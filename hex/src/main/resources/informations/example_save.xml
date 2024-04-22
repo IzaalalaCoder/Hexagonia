@@ -1,38 +1,37 @@
-<save mode="">
-    <players>
-        <player mode="computer" />
-        <player mode="human" />
-    </players>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE save SYSTEM "save.dtd">
 
-    <current>
-        <player_current>RED</player_current>
-        <chronometer>3.2</chronometer>
-    </current>
-
-    <board shape="HEXAGONAL" size="3">
+<save>
+    <data>
+        <players>
+            <player mode="human" />
+            <player mode="computer" />
+        </players>
+        <current>1</current>
+    </data><board>
         <row>
-            <empty/>
-            <cell>BLUE</cell>
-            <cell>RED</cell>
-            <empty/>
+            <cell />
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell />
         </row>
         <row>
-            <cell>BLUE</cell>
-            <empty/>
-            <empty/>
-            <cell>RED</cell>
+            <cell>0</cell>
+            <cell />
+            <cell />
+            <cell>1</cell>
         </row>
         <row>
-            <cell>BLUE</cell>
-            <empty/>
-            <cell>RED</cell>
-            <cell>RED</cell>
+            <cell>0</cell>
+            <cell />
+            <cell>1</cell>
+            <cell>1</cell>
         </row>
         <row>
-            <cell>BLUE</cell>
-            <empty/>
-            <empty/>
-            <cell>BLUE</cell>
+            <cell>0</cell>
+            <cell />
+            <cell />
+            <cell>0</cell>
         </row>
     </board>
 </save>
