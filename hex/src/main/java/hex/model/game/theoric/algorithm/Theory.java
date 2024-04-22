@@ -5,7 +5,11 @@ import hex.model.game.theoric.structure.Node;
 
 public interface Theory {
 
+    // REQUESTS
+
     public Cell getChooseCell();
+
+    // COMMANDS
 
     public void analyze(Node root);
 }

@@ -42,7 +42,6 @@ public class Negamax implements Theory {
     private Double negamax(Node root) {
         Double val;
         if (root.getStatus() == Status.LEAF) {
-            // calculate heuristic value
             val = root.getHeuristicValue();
         } else {
             val = Double.MIN_VALUE;

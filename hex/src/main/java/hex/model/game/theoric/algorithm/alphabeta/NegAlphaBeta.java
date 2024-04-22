@@ -9,6 +9,7 @@ import hex.model.game.theoric.structure.Node;
 import hex.model.game.theoric.structure.util.Status;
 
 public class NegAlphaBeta implements Theory {
+    
     // ATTRIBUTES
 
     private Cell chooseCell;
