@@ -1,10 +1,12 @@
 package hex.model.util.xml;
 
-import java.io.File;
+import java.io.IOException;
 
 import hex.model.game.Game;
 
 public interface XMLParser {
+
+    public final String PATH = "hex/src/main/resources/informations/";
 
     // REQUETES
 
@@ -12,5 +14,5 @@ public interface XMLParser {
 
     // COMMANDES
 
-    public void readFileXML(File f);
+    public void readFileXML() throws IOException;
 }

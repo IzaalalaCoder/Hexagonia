@@ -2,6 +2,7 @@ package hex.platform.view.menu;
 
 import hex.platform.controller.ControlOnFileGame;
 import hex.platform.controller.ControlWindow;
+import hex.platform.controller.menu.ControlLoadGame;
 import hex.platform.view.DisplayWindow;
 
 import javax.swing.*;
@@ -69,6 +70,9 @@ public class MainMenu extends JMenuBar {
 
         JMenuItem itemQuit = this.subMenus.get(MenuItem.QUIT);
         itemQuit.addActionListener(new ControlWindow(parent));
+
+        JMenuItem itemLoad = this.subMenus.get(MenuItem.LOAD_GAME);
+        itemLoad.addActionListener(new ControlLoadGame(parent));
 
     }
 }

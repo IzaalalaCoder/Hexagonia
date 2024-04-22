@@ -3,16 +3,14 @@
 
 <save>
     <data>
-        <players>
-            <player mode="human" />
-            <player mode="computer" />
-        </players>
-        <current>1</current>
-    </data><board>
+        <computer level="EASY"></computer>
+        <current>0</current>
+    </data>
+    <board>
         <row>
             <cell />
             <cell>0</cell>
-            <cell>1</cell>
+            <cell></cell>
             <cell />
         </row>
         <row>

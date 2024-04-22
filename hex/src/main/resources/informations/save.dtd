@@ -1,10 +1,11 @@
 <!ELEMENT save (data, board) >
-<!ELEMENT data (players, current) >
-<!ELEMENT players (player+) >
-<!ELEMENT player EMPTY >
+<!ELEMENT data (computer?, current) >
+<!ELEMENT computer EMPTY>
 <!ELEMENT current (#PCDATA)>
 <!ELEMENT board (row+) >
 <!ELEMENT row (cell+) >
-<!ELEMENT cell ANY >
+<!ELEMENT cell (#PCDATA) >
+
 
 <!ATTLIST player mode (human | computer) #REQUIRED>
+<!ATTLIST computer level (EASY | MEDIUM | HARD) #REQUIRED>
