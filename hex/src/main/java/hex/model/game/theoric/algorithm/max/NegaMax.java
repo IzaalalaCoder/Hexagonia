@@ -6,7 +6,6 @@ import hex.model.game.player.computer.Level;
 import hex.model.game.theoric.algorithm.Theory;
 import hex.model.game.theoric.algorithm.tree.Arborescence;
 import hex.model.game.theoric.structure.Node;
-import hex.model.game.theoric.structure.util.LabelPlayer;
 import hex.model.game.theoric.structure.util.Status;
 
 public class Negamax implements Theory {
