@@ -44,7 +44,6 @@ public class DisplayBoard extends JPanel {
 
     private void createHexBoard(JPanel p) {
         p.setLayout(new GridBagLayout());
-        //p.setPreferredSize(new Dimension());
         Cell[][] grids = model.getBoard().getGrid();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.NONE;
@@ -92,6 +91,35 @@ public class DisplayBoard extends JPanel {
                 colorsForBorder.replace(Direction.BOTTOM_LEFT, Color.BLUE);
                 colorsForBorder.replace(Direction.TOP_LEFT, Color.RED);
                 colorsForBorder.replace(Direction.TOP_RIGHT, Color.RED);
+            } else if (j == this.model.getSize() - 1) {
+                colorsForBorder.replace(Direction.RIGHT, Color.BLUE);
+                colorsForBorder.replace(Direction.TOP_LEFT, Color.RED);
+                colorsForBorder.replace(Direction.TOP_RIGHT, Color.RED);
+            } else {
+                colorsForBorder.replace(Direction.TOP_LEFT, Color.RED);
+                colorsForBorder.replace(Direction.TOP_RIGHT, Color.RED);
+            }
+        } else if (i == this.model.getSize() - 1) {
+            if (j == 0) {
+                colorsForBorder.replace(Direction.LEFT, Color.BLUE);
+                colorsForBorder.replace(Direction.BOTTOM_LEFT, Color.RED);
+                colorsForBorder.replace(Direction.BOTTOM_RIGHT, Color.RED);
+            } else if (j == this.model.getSize() - 1) {
+                colorsForBorder.replace(Direction.RIGHT, Color.BLUE);
+                colorsForBorder.replace(Direction.TOP_RIGHT, Color.BLUE);
+                colorsForBorder.replace(Direction.BOTTOM_LEFT, Color.RED);
+                colorsForBorder.replace(Direction.BOTTOM_RIGHT, Color.RED);
+            } else {
+                colorsForBorder.replace(Direction.BOTTOM_LEFT, Color.RED);
+                colorsForBorder.replace(Direction.BOTTOM_RIGHT, Color.RED);
+            }
+        } else {
+            if (j == 0) {
+                colorsForBorder.replace(Direction.LEFT, Color.BLUE);
+                colorsForBorder.replace(Direction.BOTTOM_LEFT, Color.BLUE);
+            } else if (j == this.model.getSize() - 1) {
+                colorsForBorder.replace(Direction.RIGHT, Color.BLUE);
+                colorsForBorder.replace(Direction.TOP_RIGHT, Color.BLUE);
             }
         }
         

@@ -1,9 +1,6 @@
 package hex.platform.view.shapes;
 
-import hex.model.board.cell.Direction;
-
 import java.awt.*;
-import java.util.Map;
 
 public interface Forms {
 

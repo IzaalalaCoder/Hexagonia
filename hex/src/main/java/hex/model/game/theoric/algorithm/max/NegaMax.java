@@ -8,7 +8,7 @@ import hex.model.game.theoric.algorithm.tree.Arborescence;
 import hex.model.game.theoric.structure.Node;
 import hex.model.game.theoric.structure.util.Status;
 
-public class Negamax implements Theory {
+public class NegaMax implements Theory {
 
     // ATTRIBUTES
 
@@ -16,7 +16,7 @@ public class Negamax implements Theory {
 
     // CONSTRUCTOR
 
-    public Negamax(Board board, Level level) {
+    public NegaMax(Board board, Level level) {
         Arborescence a = new Arborescence(board);
         this.analyze(a.createArborescence(level));
         chooseCell = null;

@@ -5,17 +5,16 @@ import java.awt.*;
 public enum Direction {
 
     // VALUES
-
+    BOTTOM_LEFT() {
+        @Override
+        public Point getNewCoordinates(int x, int y) {
+            return new Point(x + 1, y - 1);
+        }
+    },
     LEFT() {
         @Override
         public Point getNewCoordinates(int x, int y) {
             return new Point(x, y - 1);
-        }
-    },
-    RIGHT() {
-        @Override
-        public Point getNewCoordinates(int x, int y) {
-            return new Point(x, y + 1);
         }
     },
     TOP_LEFT() {
@@ -30,11 +29,11 @@ public enum Direction {
             return new Point(x - 1, y + 1);
         }
     },
-    BOTTOM_LEFT() {
-        @Override
-        public Point getNewCoordinates(int x, int y) {
-            return new Point(x + 1, y - 1);
-        }
+    RIGHT() {
+            @Override
+            public Point getNewCoordinates(int x, int y) {
+                return new Point(x, y + 1);
+            }
     },
     BOTTOM_RIGHT() {
         @Override
