@@ -25,15 +25,10 @@ public class DisplayWindow extends JFrame {
     public DisplayWindow() {
         super();
         this.createMenu();
-        this.createController();
         this.setSize(this.DIMENSION);
         this.setLayout(new BorderLayout());
         this.updateWindow();
     }
-
-    // REQUESTS
-
-    // COMMANDS
 
     // UTILS
 
@@ -52,10 +47,6 @@ public class DisplayWindow extends JFrame {
                 this.setSize(size.getDimension());
             }
         }
-    }
-
-    private void createController() {
-
     }
 
     public void setModel(Game game) {

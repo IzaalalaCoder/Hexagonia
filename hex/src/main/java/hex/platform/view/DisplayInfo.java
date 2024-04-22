@@ -9,8 +9,12 @@ import java.awt.*;
 
 public class DisplayInfo extends JPanel {
 
+    // ATTRIBUTES
+
     private final Game model;
     private final JLabel playerInformation;
+
+    // CONSTRUCTORS
 
     public DisplayInfo(Game model) {
         super();
@@ -22,6 +26,8 @@ public class DisplayInfo extends JPanel {
         this.placeComponents();
         this.createController();
     }
+
+    // UTILS
 
     private void placeComponents() {
         this.add(this.playerInformation);

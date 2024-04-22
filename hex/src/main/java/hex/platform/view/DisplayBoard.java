@@ -33,6 +33,17 @@ public class DisplayBoard extends JPanel {
 
     // UTILS
 
+    public void removeAllController() {
+        final int size = this.buttons.length;
+        for (Forms[] button : this.buttons) {
+            for (int j = 0; j < size; j++) {
+                button[j].removeController();
+            }
+        }
+    }
+
+    // UTILS
+
     private void createController() {
         new ControlBoard(this.buttons, model, this);
     }
@@ -40,44 +51,6 @@ public class DisplayBoard extends JPanel {
     private void displayBoard() {
         JPanel p = new JPanel();
         this.createHexBoard(p);
-    }
-
-    private void createHexBoard(JPanel p) {
-        p.setLayout(new GridBagLayout());
-        Cell[][] grids = model.getBoard().getGrid();
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(-13, -28, 0, 0);
-
-        int i = 0;
-        for (Cell[] cells : grids) {
-            for (int j = 0; j < cells.length ; j++) {
-                Cell c = cells[j];
-
-
-                gbc.gridx = i + j * 2 + 1;
-                gbc.gridy = i * 2 + 1;
-                gbc.gridwidth =  1;
-
-                Map<Direction, Color> colorsForBorder = this.generateBorderColor(c, i, j, cells.length - 1);
-                HexagonButton button = new HexagonButton(model, colorsForBorder, i, j);
-
-                this.buttons[i][j] = button;
-
-                if (c.getState() != State.EMPTY) {
-                    this.buttons[i][j].changeColor(
-                            PlayerName.values()[c.getPlayer().getPosition()].getDefaultColorForPlayer());
-                    this.buttons[i][j].removeController();
-                } else {
-                    this.buttons[i][j].changeColor(Color.WHITE);
-                }
-
-                p.add(button, gbc);
-            }
-            i++;
-        }
-        this.add(p, BorderLayout.CENTER);
     }
 
     private Map<Direction, Color> generateBorderColor(Cell c, int i, int j, int size) {
@@ -127,13 +100,42 @@ public class DisplayBoard extends JPanel {
         return colorsForBorder;
     }
 
-    public void removeAllController() {
-        final int size = this.buttons.length;
-        for (Forms[] button : this.buttons) {
-            for (int j = 0; j < size; j++) {
-                button[j].removeController();
+    private void createHexBoard(JPanel p) {
+        p.setLayout(new GridBagLayout());
+        Cell[][] grids = model.getBoard().getGrid();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(-13, -28, 0, 0);
+
+        int i = 0;
+        for (Cell[] cells : grids) {
+            for (int j = 0; j < cells.length ; j++) {
+                Cell c = cells[j];
+
+
+                gbc.gridx = i + j * 2 + 1;
+                gbc.gridy = i * 2 + 1;
+                gbc.gridwidth =  1;
+
+                Map<Direction, Color> colorsForBorder = this.generateBorderColor(c, i, j, cells.length - 1);
+                HexagonButton button = new HexagonButton(model, colorsForBorder, i, j);
+
+                this.buttons[i][j] = button;
+
+                if (c.getState() != State.EMPTY) {
+                    this.buttons[i][j].changeColor(
+                            PlayerName.values()[c.getPlayer().getPosition()].getDefaultColorForPlayer());
+                    this.buttons[i][j].removeController();
+                } else {
+                    this.buttons[i][j].changeColor(Color.WHITE);
+                }
+
+                p.add(button, gbc);
             }
+            i++;
         }
+        this.add(p, BorderLayout.CENTER);
     }
 
 }

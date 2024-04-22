@@ -1,15 +1,11 @@
 package hex.platform.view.shapes.forms;
 
 import hex.model.board.cell.Direction;
-
 import java.awt.event.MouseAdapter;
-
 import hex.model.game.Game;
 import hex.platform.controller.shapes.forms.ControlForms;
 import hex.platform.view.shapes.Forms;
-
 import javax.swing.*;
-
 import java.awt.*;
 import java.util.Map;
 
@@ -68,17 +64,15 @@ public class HexagonButton extends JButton implements Forms {
     @Override
     protected void paintBorder(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(2)); // Épaisseur de la bordure
+        g2.setStroke(new BasicStroke(2));
         for (int i = 0; i < 6; i++) {
-            g.setColor(borderColors.get(Direction.values()[i])); // Récupère la couleur de la bordure pour chaque direction
+            g.setColor(borderColors.get(Direction.values()[i]));
             int x1 = x[i];
             int y1 = y[i];
             int x2 = x[(i + 1) % 6];
             int y2 = y[(i + 1) % 6];
-            g.drawLine(x1, y1, x2, y2); // Dessine chaque côté de la bordure
+            g.drawLine(x1, y1, x2, y2); 
         }
-        //g.setColor(getForeground());
-        //g.drawPolygon(x, y, 6);
     }
 
     @Override
@@ -109,7 +103,5 @@ public class HexagonButton extends JButton implements Forms {
         size.width = size.height = SIZE_DEFAULT;
         setPreferredSize(size);
     }
-
-    // IMBRICATED CLASSES
 
 }

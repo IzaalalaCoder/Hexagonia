@@ -6,7 +6,6 @@ import hex.platform.view.info.LevelMode;
 import hex.platform.view.info.PlayerMode;
 import hex.platform.view.info.SizeGame;
 import hex.platform.view.menu.util.InformationOnNewGame;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.util.ArrayList;
@@ -14,7 +13,11 @@ import java.util.List;
 
 public class MenuNewGame extends JMenu {
 
+    // ATTRIBUTES 
+    
     private final List<Pair<InformationOnNewGame, JMenuItem>> menus;
+
+    // CONSTRUCTORS
 
     public MenuNewGame() {
         super();
@@ -22,6 +25,8 @@ public class MenuNewGame extends JMenu {
         this.createGameMenu();
         this.setText("Nouvelle partie");
     }
+
+    // COMMANDS
 
     public void createController(DisplayWindow parent)  {
         for (Pair<InformationOnNewGame, JMenuItem> pair : this.menus) {
@@ -44,6 +49,8 @@ public class MenuNewGame extends JMenu {
             this.add(menuPlayer);
         }
     }
+
+    // UTILS
 
     private void addMenuByTypePlayer(PlayerMode playerMode, JMenu submenu) {
 
@@ -71,6 +78,8 @@ public class MenuNewGame extends JMenu {
         }
     }
 
+    // IMBRICATED CLASSES
+    
     private static class Pair<V, W> {
         private final V first;
         private final W second;

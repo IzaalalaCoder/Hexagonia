@@ -12,10 +12,13 @@ import java.util.Map;
 
 public class MainMenu extends JMenuBar {
 
+    // CONSTANTS
+
     private final String PATH_HISTORY = "hex/src/main/resources/doc/HISTORY.pdf";
     private final String PATH_RULES = "hex/src/main/resources/doc/RULES.pdf";
-
     public static final String PATH = "hex/src/main/resources/assets/";
+
+    // STATIC METHOD
 
     public static ImageIcon getIcon(ImageIcon imageIcon) {
         if (imageIcon == null) {
@@ -25,6 +28,8 @@ public class MainMenu extends JMenuBar {
         Image newimg = image.getScaledInstance(32, 32,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newimg);
     }
+
+    // ATTRIBUTES
 
     private Map<MenuItem, JMenuItem> subMenus;
 
@@ -56,11 +61,8 @@ public class MainMenu extends JMenuBar {
     }
 
     private void createController(DisplayWindow parent) {
-        // Add controller on new game menu
-
         MenuNewGame newGameMenu = (MenuNewGame) this.subMenus.get(MenuItem.NEW_GAME);
         newGameMenu.createController(parent);
-
 
         JMenuItem itemRule = this.subMenus.get(MenuItem.RULE_GAME);
         itemRule.addActionListener(new ControlOnFileGame(PATH_RULES));
@@ -73,6 +75,5 @@ public class MainMenu extends JMenuBar {
 
         JMenuItem itemLoad = this.subMenus.get(MenuItem.LOAD_GAME);
         itemLoad.addActionListener(new ControlLoadGame(parent));
-
     }
 }
