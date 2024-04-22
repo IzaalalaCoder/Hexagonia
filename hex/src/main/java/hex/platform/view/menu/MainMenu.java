@@ -1,7 +1,6 @@
 package hex.platform.view.menu;
 
-import hex.platform.controller.ControlHistory;
-import hex.platform.controller.ControlRules;
+import hex.platform.controller.ControlOnFileGame;
 import hex.platform.controller.ControlWindow;
 import hex.platform.view.DisplayWindow;
 
@@ -11,6 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainMenu extends JMenuBar {
+
+    private final String PATH_HISTORY = "hex/src/main/resources/doc/HISTORY.pdf";
+    private final String PATH_RULES = "hex/src/main/resources/doc/RULES.pdf";
 
     public static final String PATH = "hex/src/main/resources/assets/";
 
@@ -60,10 +62,10 @@ public class MainMenu extends JMenuBar {
 
 
         JMenuItem itemRule = this.subMenus.get(MenuItem.RULE_GAME);
-        itemRule.addActionListener(new ControlRules());
+        itemRule.addActionListener(new ControlOnFileGame(PATH_RULES));
 
         JMenuItem itemHistory = this.subMenus.get(MenuItem.HISTORY_GAME);
-        itemHistory.addActionListener(new ControlHistory());
+        itemHistory.addActionListener(new ControlOnFileGame(PATH_HISTORY));
 
         JMenuItem itemQuit = this.subMenus.get(MenuItem.QUIT);
         itemQuit.addActionListener(new ControlWindow(parent));
