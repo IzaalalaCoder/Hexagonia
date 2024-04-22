@@ -1,6 +1,5 @@
 package hex.model.util.xml;
 
-import hex.model.board.cell.Cell;
 import hex.model.game.Game;
 import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.computer.Level;
