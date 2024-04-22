@@ -68,6 +68,7 @@ public class DisplayBoard extends JPanel {
                 if (c.getState() != State.EMPTY) {
                     this.buttons[i][j].changeColor(
                             PlayerName.values()[c.getPlayer().getPosition()].getDefaultColorForPlayer());
+                    this.buttons[i][j].removeController();
                 } else {
                     this.buttons[i][j].changeColor(Color.WHITE);
                 }

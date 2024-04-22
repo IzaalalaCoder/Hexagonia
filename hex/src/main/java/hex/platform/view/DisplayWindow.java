@@ -67,7 +67,6 @@ public class DisplayWindow extends JFrame {
             this.information = new DisplayInfo(this.model);
         }
         this.board.setVisible(true);
-        //this.help = new DisplayHelp();
         this.placeComponent();
         this.updateWindow();
     }
@@ -77,7 +76,6 @@ public class DisplayWindow extends JFrame {
             this.board.removeAllController();
             this.board.setVisible(false);
             this.remove(this.board);
-            //this.remove(this.help);
             if (!model.getIsGameWithComputer()) {
                 this.information.setVisible(false);
                 this.remove(this.information);
@@ -88,7 +86,6 @@ public class DisplayWindow extends JFrame {
 
     private void placeComponent() {
         this.createBoard();
-        //this.createHelpBar();
 
         if (!model.getIsGameWithComputer()) {
             this.createInfoBar();

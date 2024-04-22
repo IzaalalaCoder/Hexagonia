@@ -120,6 +120,15 @@ public class Game implements AbstractGame {
         this.pcs.addPropertyChangeListener(pName, pcl);
     }
 
+    @Override
+    public void setCurrentPlayer(int current) {
+        if (current < 0 || current > 1) {
+            throw new AssertionError();
+        }
+
+        this.currentPlayer = current;
+    }
+
     // UTILS
 
     private Board createBoard() {

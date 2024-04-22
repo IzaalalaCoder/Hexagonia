@@ -47,6 +47,7 @@ public interface AbstractGame {
 
     void takeCell(int i, int j);
 
+    void setCurrentPlayer(int current);
     /**
      * Return current player
      * @return Player

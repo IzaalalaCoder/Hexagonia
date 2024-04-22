@@ -5,9 +5,11 @@ import java.awt.event.ActionListener;
 
 import hex.model.game.Game;
 
+@SuppressWarnings("unused")
 public class ControleSaveGame implements ActionListener {
     //private final String PATH_HISTORY = "hex/src/main/resources/informations/example_save.xml";
     // ATTRIBUTES 
+    
     
     private Game game;
     
