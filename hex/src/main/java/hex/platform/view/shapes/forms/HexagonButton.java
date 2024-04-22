@@ -9,8 +9,8 @@ import hex.platform.controller.shapes.forms.ControlForms;
 import hex.platform.view.shapes.Forms;
 
 import javax.swing.*;
+
 import java.awt.*;
-import java.util.HashMap;
 import java.util.Map;
 
 public class HexagonButton extends JButton implements Forms {
@@ -18,13 +18,12 @@ public class HexagonButton extends JButton implements Forms {
     // ATTRIBUTES
 
     private MouseAdapter listener;
-    private final Map<Direction, Color> borderColor;
     int[] x = new int[6];
     int[] y = new int[6];
     double angle = 2 * Math.PI / 6;
     private int ordinate;
     private int abscissa;
-
+    private Map<Direction, Color> borderColors;
 
     // CONSTRUCTOR
 
@@ -32,26 +31,11 @@ public class HexagonButton extends JButton implements Forms {
         manageCoordinate();
         this.abscissa = i;
         this.ordinate = j;
-        this.borderColor = border;
-        this.changeSize();
-        this.setContentAreaFilled(false);
+        this.borderColors = border;
         this.listener = new ControlForms(model);
-        this.addMouseListener(this.listener);
-    }
-
-    public HexagonButton() {
-        manageCoordinate();
-        this.borderColor = new HashMap<>();
         this.changeSize();
         this.setContentAreaFilled(false);
-        this.listener = new ControlForms(null);
         this.addMouseListener(this.listener);
-
-    }
-
-    @Override
-    public Map<Direction, Color> getColorsForBorder() {
-        return this.borderColor;
     }
 
     // REQUESTS
@@ -72,16 +56,6 @@ public class HexagonButton extends JButton implements Forms {
         return polygon.contains(p);
     }
 
-    private void manageCoordinate() {
-        for(int i = 0; i < 6; i++) {
-            double v = i * angle;
-            x[i] = Forms.SIZE_DEFAULT / 2 + (int) Math.round(((double) Forms.SIZE_DEFAULT / 2)
-                    * Math.cos(v + Math.PI / 2));
-            y[i] = Forms.SIZE_DEFAULT / 2 + (int) Math.round(((double) Forms.SIZE_DEFAULT / 2)
-                    * Math.sin(v + Math.PI / 2));
-        }
-    }
-
     // COMMANDS
 
     @Override
@@ -93,24 +67,23 @@ public class HexagonButton extends JButton implements Forms {
 
     @Override
     protected void paintBorder(Graphics g) {
-        g.setColor(getForeground());
-        g.drawPolygon(x, y, 6);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(2)); // Épaisseur de la bordure
+        for (int i = 0; i < 6; i++) {
+            g.setColor(borderColors.get(Direction.values()[i])); // Récupère la couleur de la bordure pour chaque direction
+            int x1 = x[i];
+            int y1 = y[i];
+            int x2 = x[(i + 1) % 6];
+            int y2 = y[(i + 1) % 6];
+            g.drawLine(x1, y1, x2, y2); // Dessine chaque côté de la bordure
+        }
+        //g.setColor(getForeground());
+        //g.drawPolygon(x, y, 6);
     }
 
     @Override
     public void changeColor(Color c) {
         this.setBackground(c);
-    }
-
-    @Override
-    public void setColorsForBorder(Map<Direction, Color> c) {
-        for (Direction d : this.borderColor.keySet()) {
-            Color color = this.borderColor.get(d);
-            if (!color.equals(c.get(d))) {
-                this.borderColor.replace(d, c.get(d));
-            }
-
-        }
     }
 
     @Override
@@ -121,10 +94,22 @@ public class HexagonButton extends JButton implements Forms {
 
     // UTILS
 
+    private void manageCoordinate() {
+        for(int i = 0; i < 6; i++) {
+            double v = i * angle;
+            x[i] = Forms.SIZE_DEFAULT / 2 + (int) Math.round(((double) Forms.SIZE_DEFAULT / 2)
+                    * Math.cos(v + Math.PI / 2));
+            y[i] = Forms.SIZE_DEFAULT / 2 + (int) Math.round(((double) Forms.SIZE_DEFAULT / 2)
+                    * Math.sin(v + Math.PI / 2));
+        }
+    }
+
     private void changeSize() {
         Dimension size = getPreferredSize();
         size.width = size.height = SIZE_DEFAULT;
         setPreferredSize(size);
     }
+
+    // IMBRICATED CLASSES
 
 }

@@ -82,35 +82,19 @@ public class DisplayBoard extends JPanel {
 
     private Map<Direction, Color> generateBorderColor(Cell c, int i, int j, int size) {
         Map<Direction, Color> colorsForBorder = new HashMap<>();
-        if (c.getNumberOfMemberships() == 1) {
-            if (i == 0) {
-                colorsForBorder.put(Direction.TOP_LEFT, PlayerName.SECOND.getDefaultColorForPlayer());
-                colorsForBorder.put(Direction.TOP_RIGHT, PlayerName.SECOND.getDefaultColorForPlayer());
-            } else if (i == size) {
-                colorsForBorder.put(Direction.BOTTOM_LEFT, PlayerName.SECOND.getDefaultColorForPlayer());
-                colorsForBorder.put(Direction.BOTTOM_RIGHT, PlayerName.SECOND.getDefaultColorForPlayer());
-            } else if (j == 0) {
-                colorsForBorder.put(Direction.LEFT, PlayerName.SECOND.getDefaultColorForPlayer());
-                colorsForBorder.put(Direction.BOTTOM_LEFT, PlayerName.SECOND.getDefaultColorForPlayer());
-            } else if (j == size) {
-                colorsForBorder.put(Direction.RIGHT, PlayerName.SECOND.getDefaultColorForPlayer());
-                colorsForBorder.put(Direction.TOP_RIGHT, PlayerName.SECOND.getDefaultColorForPlayer());
-            }
-        } else if (c.getNumberOfMemberships() == 2) {
-            if (i == 0) {
-                if (j == 0) {
+        for (Direction d : Direction.values()) {
+            colorsForBorder.put(d, Color.BLACK);
+        }
 
-                } else if (j == size) {
-
-                }
-            } else if (i == size) {
-                if (j == 0) {
-
-                } else if (j == size) {
-
-                }
+        if (i == 0) {
+            if (j == 0) {
+                colorsForBorder.replace(Direction.LEFT, Color.BLUE);
+                colorsForBorder.replace(Direction.BOTTOM_LEFT, Color.BLUE);
+                colorsForBorder.replace(Direction.TOP_LEFT, Color.RED);
+                colorsForBorder.replace(Direction.TOP_RIGHT, Color.RED);
             }
         }
+        
         return colorsForBorder;
     }
 

@@ -25,9 +25,5 @@ public interface Forms {
 
     void changeColor(Color c);
 
-    void setColorsForBorder(Map<Direction, Color> c);
-
-    Map<Direction, Color> getColorsForBorder();
-
     void removeController();
 }
