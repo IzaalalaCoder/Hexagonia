@@ -1,7 +1,8 @@
 <!ELEMENT save (data, board) >
-<!ELEMENT data (computer?, current) >
+<!ELEMENT data (computer?, current, end) >
 <!ELEMENT computer EMPTY>
 <!ELEMENT current (#PCDATA)>
+<!ELEMENT end (#PCDATA)>
 <!ELEMENT board (row+) >
 <!ELEMENT row (cell+) >
 <!ELEMENT cell (#PCDATA) >

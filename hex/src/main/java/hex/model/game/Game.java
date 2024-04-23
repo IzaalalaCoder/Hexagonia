@@ -33,6 +33,20 @@ public class Game implements AbstractGame {
         this.currentPlayer = 0;
         this.players = initializePlayers(computer, level);
         this.board = createBoard();
+        this.endOfGame = false;
+        if (computer) {
+            ((Computer) this.players[1]).startPlay(this);
+        }
+        this.pcs = new PropertyChangeSupport(this);
+    }
+
+    public Game(boolean endGame, boolean computer, int level, int size) {
+        this.gameWithComputer = computer;
+        this.size = size;
+        this.endOfGame = endGame;
+        this.currentPlayer = 0;
+        this.players = initializePlayers(computer, level);
+        this.board = createBoard();
         if (computer) {
             ((Computer) this.players[1]).startPlay(this);
         }

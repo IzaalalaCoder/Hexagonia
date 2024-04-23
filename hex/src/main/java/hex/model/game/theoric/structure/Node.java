@@ -101,7 +101,6 @@ public class Node {
     }
 
     private void calculateHeuristicValue() {
-        // TODO calculate
         this.status = Status.TERMINAL;
     }
 

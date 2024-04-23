@@ -17,6 +17,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 
 public class WritingXML implements XMLWriter {
@@ -50,6 +51,11 @@ public class WritingXML implements XMLWriter {
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.newDocument();
         
+        String qualifiedName = "save";
+        String systemId = "save.dtd";
+        DocumentType doctype = document.getImplementation().createDocumentType(qualifiedName, null, systemId);
+        document.appendChild(doctype);
+
         // Création de l'élément racine
         Element root = document.createElement("save");
         document.appendChild(root);
@@ -69,6 +75,12 @@ public class WritingXML implements XMLWriter {
             Integer.toString(this.model.getPositionCurrentPlayer()))
         );
         data.appendChild(current);
+
+        final Element end = document.createElement("end");
+        end.appendChild(document.createTextNode(
+            this.model.isEndOfGame() ? "1" : "0" 
+        ));
+        data.appendChild(end);
 
         root.appendChild(data);
         
@@ -99,9 +111,8 @@ public class WritingXML implements XMLWriter {
 
         transformer.setOutputProperty(OutputKeys.VERSION, "1.0");
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-        transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");          
-                
-        //formatage
+        transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");      
+        transformer.setOutputProperty("doctype-system", "save.dtd");
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 

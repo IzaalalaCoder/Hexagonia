@@ -111,9 +111,12 @@ public class ReadingXML implements XMLScheme, XMLParser {
         
         int current = Integer.parseInt(dataElement.getElementsByTagName("current")
             .item(0).getTextContent());
+        
+        int end = Integer.parseInt(dataElement.getElementsByTagName("end")
+            .item(0).getTextContent());
 
         NodeList rowList = this.document.getElementsByTagName("row");
-        this.model = new Game(computerList.getLength() != 0, level.ordinal(), rowList.getLength());
+        this.model = new Game(end == 1, computerList.getLength() != 0, level != null ? level.ordinal() : 0, rowList.getLength());
         this.model.setCurrentPlayer(current);
 
         this.browseBoard(rowList);
