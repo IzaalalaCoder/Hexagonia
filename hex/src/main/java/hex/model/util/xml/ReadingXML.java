@@ -32,7 +32,7 @@ public class ReadingXML implements XMLScheme, XMLParser {
     public ReadingXML(File f) throws IOException {
         this.model = null;
         this.document = null;
-        this.file = Files.copy(f.toPath(), Paths.get(PATH + "save.xml")).toFile();
+        this.file = Files.copy(f.toPath(), Paths.get(PATH_XML + "save.xml")).toFile();
         this.flag = true;
         try {
             this.openFile();
@@ -75,6 +75,7 @@ public class ReadingXML implements XMLScheme, XMLParser {
     private void openFile() throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating(true);
+        
         DocumentBuilder builder = factory.newDocumentBuilder();
         builder.setErrorHandler(new ErrorHandler() {
 

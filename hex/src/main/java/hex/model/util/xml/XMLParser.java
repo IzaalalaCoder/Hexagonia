@@ -8,7 +8,8 @@ public interface XMLParser {
 
     // CONSTANTS
 
-    public final String PATH = "hex/src/main/resources/informations/";
+    public String PATH_DTD = "hex/src/main/resources/informations/save.dtd";
+    public final String PATH_XML = "hex/src/main/resources/informations/";
 
     // REQUESTS
 

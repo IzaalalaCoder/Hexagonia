@@ -1,17 +1,16 @@
 package hex.model.util.xml;
 
+import hex.model.board.cell.Cell;
+import hex.model.board.cell.State;
 import hex.model.game.Game;
 import hex.model.game.player.computer.Computer;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -25,13 +24,13 @@ public class WritingXML implements XMLWriter {
     // ATTRIBUTES
 
     private final Game model;
-    private final File save;
+    private File save;
 
     // CONSTRUCTOR
 
-    public WritingXML(Game game) throws IOException {
+    public WritingXML(Game game) {
         this.model = game;
-        this.save = Files.createFile(Paths.get(PATH)).toFile();
+        this.save = null;
     }
 
     // REQUESTS
@@ -39,66 +38,76 @@ public class WritingXML implements XMLWriter {
     @Override
     public File getGeneratedFile() {
         return this.save;
+        //return Files.copy(this.save.toPath(), Paths.get(PATH + "finalSave.xml")).toFile();
     }
 
     // COMMANDS
 
     @Override
-    public void writeXMLFile() throws ParserConfigurationException {
-        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        final DocumentBuilder builder = factory.newDocumentBuilder();
-        final Document document = builder.newDocument();
+    public void writeXMLFile() throws ParserConfigurationException, TransformerException {
 
-        // start save
-        final Element root = document.createElement("save");
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document = builder.newDocument();
+        
+        // Création de l'élément racine
+        Element root = document.createElement("save");
         document.appendChild(root);
-
-        // append data
-        this.readDataOnGame(document, root);
-
-        // final 
-        try {
-            this.flush(document);
-        } catch (TransformerConfigurationException e) {
-            
-        } catch (TransformerException e) {
-        }
-    }
-
-    // UTILS
-
-    @SuppressWarnings("unused")
-    private void readBoard(Document doc, Element root) {
-    }
-
-    private void readDataOnGame(Document doc, Element root) {
-        final Element data = doc.createElement("data");
+        
+        final Element data = document.createElement("data");
 
         // add computer 
         if (this.model.getIsGameWithComputer()) {
-            final Element computer = doc.createElement("computer");
+            final Element computer = document.createElement("computer");
             Computer c = (Computer) this.model.getComputer();
             computer.setAttribute("level", c.getLevel().name());
             data.appendChild(computer);
         }
 
-        final Element current = doc.createElement("current");
-        current.appendChild(doc.createTextNode(
+        final Element current = document.createElement("current");
+        current.appendChild(document.createTextNode(
             Integer.toString(this.model.getPositionCurrentPlayer()))
         );
         data.appendChild(current);
 
         root.appendChild(data);
-    }
-
-    private void flush(Document document) throws TransformerException {
+        
+        // Ajout de l'élément "board" avec ses sous-éléments
+        Element boardElement = document.createElement("board");
+        root.appendChild(boardElement);
+        
+        // Ajout des lignes et des cellules de la grille
+        
+        for (Cell[] cells : this.model.getBoard().getGrid()) {
+            Element rowElement = document.createElement("row");
+            boardElement.appendChild(rowElement);
+            for (Cell c : cells) {
+                Element cellElement = document.createElement("cell");
+                
+                cellElement.appendChild(document.createTextNode(c.getState() != State.EMPTY ? Integer.toString(c.getPlayer().getPosition()) : ""));
+                rowElement.appendChild(cellElement);
+            }
+        }
+        
+        // Écriture du contenu dans un fichier XML
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(document);
-        StreamResult result = new StreamResult(new File(PATH));
+
+        this.save = new File(PATH_XML);
+        StreamResult result = new StreamResult(save);
+
+        transformer.setOutputProperty(OutputKeys.VERSION, "1.0");
+        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");          
+                
+        //formatage
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+
         transformer.transform(source, result);
-        
-        System.out.println("Sauvegarde XML créée avec succès !");
     }
+    
 }
 

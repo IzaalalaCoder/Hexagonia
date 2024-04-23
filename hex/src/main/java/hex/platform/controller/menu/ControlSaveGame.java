@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
 import hex.model.game.Game;
 import hex.model.util.xml.WritingXML;
 import hex.platform.view.DisplayWindow;
@@ -31,11 +34,11 @@ public class ControlSaveGame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        WritingXML writer = new WritingXML(parent.getModel());
         try {
-            WritingXML writer = new WritingXML(parent.getModel());
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+            writer.writeXMLFile();
+        } catch (ParserConfigurationException e1) {} 
+        catch (TransformerException e1) {}
     }
     
 }
