@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -100,7 +99,6 @@ public class ReadingXML implements XMLScheme, XMLParser {
 
 
     private void browseFile(File file) {
-        //final Element root = this.document.getDocumentElement();
         final Element dataElement = (Element) this.document
             .getElementsByTagName("data").item(0);
 
