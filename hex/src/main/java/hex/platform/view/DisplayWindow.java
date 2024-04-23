@@ -97,6 +97,15 @@ public class DisplayWindow extends JFrame {
         this.setJMenuBar(this.mainMenu);
     }
 
+    // REQUESTS 
+
+    public Game getModel() {
+        if (this.model == null) {
+            throw new AssertionError("peux pas");
+        }
+        return this.model;
+    }
+
     // POINT ENTERED
 
     public static void main(String[] args) {

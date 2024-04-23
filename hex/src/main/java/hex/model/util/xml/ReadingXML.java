@@ -32,7 +32,7 @@ public class ReadingXML implements XMLScheme, XMLParser {
     public ReadingXML(File f) throws IOException {
         this.model = null;
         this.document = null;
-        this.file = Files.copy(f.toPath(), Paths.get("hex/src/main/resources/informations/save.xml")).toFile();
+        this.file = Files.copy(f.toPath(), Paths.get(PATH + "save.xml")).toFile();
         this.flag = true;
         try {
             this.openFile();

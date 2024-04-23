@@ -24,6 +24,12 @@ public class Computer extends AbstractPlayer {
         this.game = null;
     }
 
+    // REQUESTS
+
+    public Level getLevel() {
+        return this.level;
+    }
+
     // COMMANDS
 
     public void startPlay(Game game) {

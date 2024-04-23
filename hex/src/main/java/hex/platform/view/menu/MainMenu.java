@@ -3,6 +3,7 @@ package hex.platform.view.menu;
 import hex.platform.controller.ControlOnFileGame;
 import hex.platform.controller.ControlWindow;
 import hex.platform.controller.menu.ControlLoadGame;
+import hex.platform.controller.menu.ControlSaveGame;
 import hex.platform.view.DisplayWindow;
 
 import javax.swing.*;
@@ -75,5 +76,8 @@ public class MainMenu extends JMenuBar {
 
         JMenuItem itemLoad = this.subMenus.get(MenuItem.LOAD_GAME);
         itemLoad.addActionListener(new ControlLoadGame(parent));
+
+        JMenuItem itemSave = this.subMenus.get(MenuItem.SAVE_GAME);
+        itemSave.addActionListener(new ControlSaveGame(parent));
     }
 }

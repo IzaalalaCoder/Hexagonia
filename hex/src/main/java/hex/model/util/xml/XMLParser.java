@@ -6,13 +6,15 @@ import hex.model.game.Game;
 
 public interface XMLParser {
 
+    // CONSTANTS
+
     public final String PATH = "hex/src/main/resources/informations/";
 
-    // REQUETES
+    // REQUESTS
 
     public Game getGameInFile();
 
-    // COMMANDES
+    // COMMANDS
 
     public void readFileXML() throws IOException;
 }

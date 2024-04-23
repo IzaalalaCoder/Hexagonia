@@ -47,6 +47,17 @@ public class Game implements AbstractGame {
     }
 
     @Override
+    public AbstractPlayer getComputer() {
+        for (AbstractPlayer p : this.players) {
+            if (p.getType() == PlayerType.COMPUTER) {
+                return p;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
     public int getSize() {
         return size;
     }

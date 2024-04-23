@@ -1,20 +1,20 @@
 package hex.model.util.xml;
 
-import hex.model.board.Board;
-
 import java.io.File;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 public interface XMLWriter {
 
-    public String PATH = "hex/src/main/resources/informations";
+    // CONSTANTS
 
-    // REQUETES
+    public String PATH = "hex/src/main/resources/informations/newSave.xml";
+
+    // REQUESTS
 
     public File getGeneratedFile();
 
-    // COMMANDES
+    // COMMANDS
 
-    public void readBoard(Board board);
-
-    public void writeXMLFile(Board board);
+    public void writeXMLFile() throws ParserConfigurationException, TransformerException ;
 }

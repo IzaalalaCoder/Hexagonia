@@ -25,6 +25,9 @@ public interface AbstractGame {
      */
     int getSize();
 
+
+    public AbstractPlayer getComputer();
+
     /**
      * Return board's game
      * @return Board
