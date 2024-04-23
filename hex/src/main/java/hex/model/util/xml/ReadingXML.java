@@ -5,6 +5,9 @@ import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.computer.Level;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,10 +30,10 @@ public class ReadingXML implements XMLScheme, XMLParser {
 
     // CONSTRUCTOR
 
-    public ReadingXML(File f) {
+    public ReadingXML(File f) throws IOException {
         this.model = null;
         this.document = null;
-        this.file = f;
+        this.file = Files.copy(f.toPath(), Paths.get("hex/src/main/resources/informations/save.xml")).toFile();
         this.flag = true;
         try {
             this.openFile();
@@ -64,6 +67,8 @@ public class ReadingXML implements XMLScheme, XMLParser {
         System.out.println("rentré");
         
         this.browseFile(file);
+
+        Files.delete(this.file.toPath());
     }
 
     // UTILS
