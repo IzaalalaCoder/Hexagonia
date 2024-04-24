@@ -31,7 +31,7 @@ public class DisplayBoard extends JPanel {
         this.createController();
     }
 
-    // UTILS
+    // COMMANDS
 
     public void removeAllController() {
         final int size = this.buttons.length;
