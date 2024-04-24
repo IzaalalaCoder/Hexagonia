@@ -62,11 +62,8 @@ public class ReadingXML implements XMLScheme, XMLParser {
         if (!this.flag) {
             throw new AssertionError("Can not open");
         }
-
-        System.out.println("rentré");
         
         this.browseFile(file);
-
         Files.delete(this.file.toPath());
     }
 
