@@ -43,7 +43,13 @@ public class ThreeSStar implements Theory {
     // UTILS
 
     private void insert(Triplet<Node, Type, Double> triplet) {
-        
+        for (Triplet<Node, Type, Double> t : this.G) {
+            if (triplet.getThirdValue() > t.getThirdValue()) {
+                this.G.add(this.G.indexOf(t), triplet);
+                return;
+            }
+        }
+        this.G.add(triplet);
     }
 
     private void removeTripletHaveNode(Node node) {
