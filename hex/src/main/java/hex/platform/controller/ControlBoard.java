@@ -54,6 +54,8 @@ public class ControlBoard {
                         "Félicitation ! Vous avez gagné";
                     EndGamePopUp.preventEndGame(message, isLost);
                 } else {
+                    message += PlayerName.values()[model.getPositionCurrentPlayer()].name() + " a gagné";
+                    EndGamePopUp.preventEndGame(message, false);
                 }
             }
             
