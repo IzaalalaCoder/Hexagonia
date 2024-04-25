@@ -30,6 +30,10 @@ public class Cell {
 
     // REQUESTS
 
+    @Override
+    public String toString() {
+        return abscissa + " " + ordinate + " " + visit;
+    }
 
     public int getAbscissa() {
         return abscissa;

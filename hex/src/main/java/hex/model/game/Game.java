@@ -182,31 +182,30 @@ public class Game implements AbstractGame {
     private boolean existLine() {
         boolean readOnOrdinate = this.currentPlayer == 0;
         Cell[][] grid = this.board.getGrid();
-
         boolean win = false;
         if (readOnOrdinate) {
             for (Cell[] cells : grid) {
                 Cell c = cells[0];
-                c.setVisit(true);
                 if (c.getState() != State.EMPTY
                         && c.getPlayer() == this.getCurrentPlayer()) {
+                    c.setVisit(true);
                     if (this.canPathFromCell(c)) {
                         win = true;
                     } else {
-                        this.board.refreshVisit();
+                        this.board.refreshVisit(c.getOrdinate());
                     }
                 }
             }
         } else {
-            Cell[] line = grid[0];
-            for (Cell c : line) {
+            for (int i = 0; i < this.getSize(); i++) {
+                Cell c = grid[0][i];
                 if (c.getState() != State.EMPTY
                     && c.getPlayer() == this.getCurrentPlayer()) {
                     c.setVisit(true);
                     if (this.canPathFromCell(c)) {
                         win = true;
                     } else {
-                        this.board.refreshVisit();
+                        this.board.refreshVisit(c.getOrdinate());
                     }
                 }
             }
@@ -242,6 +241,7 @@ public class Game implements AbstractGame {
                     && !newCell.getVisited())
                 {
                     newCell.setVisit(true);
+                    
                     if (this.canPathFromCell(newCell)) {
                         return true;
                     }

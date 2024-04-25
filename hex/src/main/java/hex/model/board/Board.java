@@ -65,10 +65,14 @@ public class Board {
         }
     }
 
-    public void refreshVisit() {
+    public void refreshVisit(int y) {
         for (Cell[] cells : this.grid) {
             for (Cell c : cells) {
-                c.setVisit(false);
+                if (c.getAbscissa() == 0 || c.getOrdinate() > y) {
+                    c.setVisit(false);
+                } else if (c.getAbscissa() != 0) {
+                    c.setVisit(false);
+                }
             }
         }
     }
