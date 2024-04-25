@@ -19,6 +19,7 @@ public class Game implements AbstractGame {
 
     private final Board board;
     private final AbstractPlayer[] players;
+    private AbstractPlayer winner;
     private final int size;
     private int currentPlayer;
     private final PropertyChangeSupport pcs;
@@ -34,6 +35,7 @@ public class Game implements AbstractGame {
         this.players = initializePlayers(computer, level);
         this.board = createBoard();
         this.endOfGame = false;
+        this.winner = null;
         if (computer) {
             ((Computer) this.players[1]).startPlay(this);
         }
@@ -45,6 +47,7 @@ public class Game implements AbstractGame {
         this.size = size;
         this.endOfGame = endGame;
         this.currentPlayer = 0;
+        this.winner = null;
         this.players = initializePlayers(computer, level);
         this.board = createBoard();
         if (computer) {
@@ -106,6 +109,11 @@ public class Game implements AbstractGame {
         return currentPlayer;
     }
 
+    @Override
+    public AbstractPlayer getWinner() {
+        return this.winner;
+    }
+    
     // COMMANDS
 
     @Override
@@ -174,6 +182,8 @@ public class Game implements AbstractGame {
     private boolean existLine() {
         boolean readOnOrdinate = this.currentPlayer == 0;
         Cell[][] grid = this.board.getGrid();
+
+        boolean win = false;
         if (readOnOrdinate) {
             for (Cell[] cells : grid) {
                 Cell c = cells[0];
@@ -181,7 +191,7 @@ public class Game implements AbstractGame {
                 if (c.getState() != State.EMPTY
                         && c.getPlayer() == this.getCurrentPlayer()) {
                     if (this.canPathFromCell(c)) {
-                        return true;
+                        win = true;
                     } else {
                         this.board.refreshVisit();
                     }
@@ -194,7 +204,7 @@ public class Game implements AbstractGame {
                     && c.getPlayer() == this.getCurrentPlayer()) {
                     c.setVisit(true);
                     if (this.canPathFromCell(c)) {
-                        return true;
+                        win = true;
                     } else {
                         this.board.refreshVisit();
                     }
@@ -202,6 +212,10 @@ public class Game implements AbstractGame {
             }
         }
 
+        if (win) {
+            this.winner = this.players[this.currentPlayer];
+            return true;
+        }
         return false;
     }
 

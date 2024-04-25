@@ -64,6 +64,8 @@ public interface AbstractGame {
      */
     void consumeTurn();
 
+    public AbstractPlayer getWinner();
+    
     /**
      * Game restart play
      */
