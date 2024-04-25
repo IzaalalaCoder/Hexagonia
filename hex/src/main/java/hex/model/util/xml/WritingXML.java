@@ -38,6 +38,9 @@ public class WritingXML implements XMLWriter {
 
     @Override
     public File getGeneratedFile() {
+        if (this.model == null) {
+            throw new AssertionError("Aucune partie n'est lancé");
+        }
         return this.save;
         //return Files.copy(this.save.toPath(), Paths.get(PATH + "finalSave.xml")).toFile();
     }
@@ -46,6 +49,9 @@ public class WritingXML implements XMLWriter {
 
     @Override
     public void writeXMLFile() throws ParserConfigurationException, TransformerException {
+        if (this.model == null) {
+            return;
+        }
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();

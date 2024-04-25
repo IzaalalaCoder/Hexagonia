@@ -15,6 +15,7 @@ import javax.xml.transform.TransformerException;
 import hex.model.game.Game;
 import hex.model.util.xml.WritingXML;
 import hex.platform.view.DisplayWindow;
+import hex.platform.view.popup.ErrorPopUp;
 
 @SuppressWarnings("unused")
 public class ControlSaveGame implements ActionListener {
@@ -39,6 +40,11 @@ public class ControlSaveGame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (parent.getModel() == null) {
+            ErrorPopUp.preventError();
+            return;
+        }
+
         WritingXML writer = new WritingXML(parent.getModel());
         try {
             writer.writeXMLFile();

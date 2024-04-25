@@ -2,9 +2,12 @@ package hex.platform.controller.menu;
 
 import hex.model.game.Game;
 import hex.platform.view.DisplayWindow;
+import hex.platform.view.popup.WarningPopUp;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
 
 public class ControlMenuNewGame implements ActionListener {
 
@@ -28,6 +31,11 @@ public class ControlMenuNewGame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (parent.getModel() != null) {
+            if (WarningPopUp.preventSaveAble() == JOptionPane.NO_OPTION) {
+                return;
+            }
+        } 
         parent.setModel(new Game(
                 isComputer,
                 level,

@@ -6,10 +6,12 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import hex.model.util.xml.ReadingXML;
 import hex.platform.view.DisplayWindow;
+import hex.platform.view.popup.WarningPopUp;
 
 public class ControlLoadGame implements ActionListener {
 
@@ -27,6 +29,12 @@ public class ControlLoadGame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (parent.getModel() != null) {
+            if (WarningPopUp.preventSaveAble() == JOptionPane.NO_OPTION) {
+                return;
+            }
+        } 
+
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         fileChooser.setDialogTitle("Sélectionner une sauvegarde");
         fileChooser.setAcceptAllFileFilterUsed(false);
@@ -47,6 +55,7 @@ public class ControlLoadGame implements ActionListener {
     // UTILS
 
     private void lauchGame(File file) throws IOException {
+       
         ReadingXML readerXML = new ReadingXML(file);
         readerXML.readFileXML();
         this.parent.setModel(readerXML.getGameInFile());

@@ -29,7 +29,7 @@ public class DisplayWindow extends JFrame {
         this.setLayout(new BorderLayout());
         this.updateWindow();
     }
-
+    
     // UTILS
 
     private void createContents() {
@@ -100,9 +100,6 @@ public class DisplayWindow extends JFrame {
     // REQUESTS 
 
     public Game getModel() {
-        if (this.model == null) {
-            throw new AssertionError("peux pas");
-        }
         return this.model;
     }
 
