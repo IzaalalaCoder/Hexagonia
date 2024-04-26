@@ -11,6 +11,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import hex.model.util.xml.ReadingXML;
 import hex.platform.view.DisplayWindow;
+import hex.platform.view.popup.ErrorPopUp;
 import hex.platform.view.popup.WarningPopUp;
 
 public class ControlLoadGame implements ActionListener {
@@ -30,7 +31,7 @@ public class ControlLoadGame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (parent.getModel() != null) {
-            if (WarningPopUp.preventSaveAble() == JOptionPane.NO_OPTION) {
+            if (WarningPopUp.preventSaveAble() != JOptionPane.YES_OPTION) {
                 return;
             }
         } 
@@ -47,7 +48,7 @@ public class ControlLoadGame implements ActionListener {
             try {
                 lauchGame(f);
             } catch (IOException e1) {
-               
+               ErrorPopUp.preventOpenOrParseFileError();
             }
         }
     }
@@ -55,7 +56,6 @@ public class ControlLoadGame implements ActionListener {
     // UTILS
 
     private void lauchGame(File file) throws IOException {
-       
         ReadingXML readerXML = new ReadingXML(file);
         readerXML.readFileXML();
         this.parent.setModel(readerXML.getGameInFile());

@@ -41,7 +41,7 @@ public class ControlSaveGame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (parent.getModel() == null) {
-            ErrorPopUp.preventError();
+            ErrorPopUp.preventStartGameError();
             return;
         }
 
