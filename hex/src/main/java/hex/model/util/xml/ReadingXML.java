@@ -1,5 +1,7 @@
 package hex.model.util.xml;
 
+import hex.model.board.cell.Cell;
+import hex.model.game.Action;
 import hex.model.game.Game;
 import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.computer.Level;
@@ -7,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -113,10 +117,12 @@ public class ReadingXML implements XMLScheme, XMLParser {
             .item(0).getTextContent());
 
         NodeList rowList = this.document.getElementsByTagName("row");
-        this.model = new Game(end == 1, computerList.getLength() != 0, level != null ? level.ordinal() : 0, rowList.getLength());
+        this.model = new Game(end == 1, computerList.getLength() != 0, 
+            level != null ? level.ordinal() : 0, rowList.getLength());
         this.model.setCurrentPlayer(current);
 
         this.browseBoard(rowList);
+        this.model.setHistoricActions(getHistory());
     }
 
     private void browseBoard(NodeList rowList) {
@@ -145,5 +151,30 @@ public class ReadingXML implements XMLScheme, XMLParser {
             }
         }
         return l;
+    }
+
+    private List<Action> getHistory() {
+        List<Action> actions = new ArrayList<>();
+
+        NodeList history = this.document.getElementsByTagName("act");
+        for (int i = 0; i < history.getLength(); i++) {
+            Element actElement = (Element) history.item(i);
+
+            // recuperate case
+            Element coordinateElement = (Element) actElement.getElementsByTagName("coordinate").item(0);
+            Element abscissaElement = (Element) coordinateElement.getElementsByTagName("abscissa").item(0);
+            Element ordinateElement = (Element) coordinateElement.getElementsByTagName("ordinate").item(0);
+
+            Cell[][] grid = this.model.getBoard().getGrid();
+            Cell c = grid[Integer.parseInt(abscissaElement.getTextContent())][Integer.parseInt(ordinateElement.getTextContent())];
+
+            // recuperate player 
+            Element pElement = (Element) actElement.getElementsByTagName("p").item(0);
+            AbstractPlayer player = this.model.getPlayers()[Integer.parseInt(pElement.getTextContent())];
+
+            actions.add(new Action(c, player));
+        }
+
+        return actions;
     }
 }
