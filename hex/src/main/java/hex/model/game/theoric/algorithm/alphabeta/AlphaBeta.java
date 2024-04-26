@@ -1,13 +1,13 @@
 package hex.model.game.theoric.algorithm.alphabeta;
 
-import hex.model.board.Board;
 import hex.model.board.cell.Cell;
+import hex.model.game.Game;
 import hex.model.game.player.computer.Level;
 import hex.model.game.theoric.algorithm.Theory;
-import hex.model.game.theoric.algorithm.tree.Arborescence;
-import hex.model.game.theoric.structure.Node;
-import hex.model.game.theoric.structure.util.LabelPlayer;
-import hex.model.game.theoric.structure.util.Status;
+import hex.model.game.theoric.structure.node.Node;
+import hex.model.game.theoric.structure.node.util.LabelPlayer;
+import hex.model.game.theoric.structure.node.util.Status;
+import hex.model.game.theoric.structure.tree.Arborescence;
 
 public class AlphaBeta implements Theory {
 
@@ -17,8 +17,8 @@ public class AlphaBeta implements Theory {
 
     // CONSTRUCTOR
 
-    public AlphaBeta(Board board, Level level) {
-        Arborescence a = new Arborescence(board);
+    public AlphaBeta(Game game, Level level) {
+        Arborescence a = new Arborescence(game);
         this.analyze(a.createArborescence(level));
         chooseCell = null;
     }   

@@ -2,14 +2,14 @@ package hex.model.game.theoric.algorithm.sss;
 
 import java.util.ArrayList;
 import java.util.List;
-import hex.model.board.Board;
 import hex.model.board.cell.Cell;
+import hex.model.game.Game;
 import hex.model.game.player.computer.Level;
 import hex.model.game.theoric.algorithm.Theory;
-import hex.model.game.theoric.algorithm.tree.Arborescence;
-import hex.model.game.theoric.structure.Node;
-import hex.model.game.theoric.structure.util.LabelPlayer;
-import hex.model.game.theoric.structure.util.Status;
+import hex.model.game.theoric.structure.node.Node;
+import hex.model.game.theoric.structure.node.util.LabelPlayer;
+import hex.model.game.theoric.structure.node.util.Status;
+import hex.model.game.theoric.structure.tree.Arborescence;
 
 public class ThreeSStar implements Theory {
 
@@ -19,10 +19,10 @@ public class ThreeSStar implements Theory {
 
     // CONSTRUCTORS
 
-    public ThreeSStar(Board board, Level level) {
-        this.G = new ArrayList<>();
-        Arborescence a = new Arborescence(board);
+    public ThreeSStar(Game game, Level level) {
+        Arborescence a = new Arborescence(game);
         Node root = a.createArborescence(level);
+        this.G = new ArrayList<>();
         this.analyze(root);
     }
 
