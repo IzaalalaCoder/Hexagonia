@@ -4,6 +4,7 @@ import hex.model.board.Board;
 import hex.model.game.player.AbstractPlayer;
 
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 public interface AbstractGame {
 
@@ -25,7 +26,7 @@ public interface AbstractGame {
      */
     int getSize();
 
-
+    public void setHistoricActions(List<Action> history);
     public AbstractPlayer getComputer();
 
     /**
@@ -63,6 +64,8 @@ public interface AbstractGame {
      *      currentPlayer != this.currentPlayer
      */
     void consumeTurn();
+
+    public List<Action> getHistoricActions();
 
     public AbstractPlayer getWinner();
     

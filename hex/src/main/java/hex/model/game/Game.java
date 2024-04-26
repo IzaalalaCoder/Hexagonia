@@ -12,6 +12,8 @@ import hex.model.game.player.computer.Level;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game implements AbstractGame {
 
@@ -25,10 +27,12 @@ public class Game implements AbstractGame {
     private final PropertyChangeSupport pcs;
     private boolean endOfGame;
     private boolean gameWithComputer;
+    private List<Action> historyAction;
 
     // CONSTRUCTORS
 
     public Game(boolean computer, int level, int size) {
+        this.historyAction = new ArrayList<>();
         this.gameWithComputer = computer;
         this.size = size;
         this.currentPlayer = 0;
@@ -43,6 +47,7 @@ public class Game implements AbstractGame {
     }
 
     public Game(boolean endGame, boolean computer, int level, int size) {
+        this.historyAction = new ArrayList<>();
         this.gameWithComputer = computer;
         this.size = size;
         this.endOfGame = endGame;
@@ -57,6 +62,17 @@ public class Game implements AbstractGame {
     }
 
     // REQUESTS
+
+    @Override
+    public void setHistoricActions(List<Action> history) {
+        this.historyAction = history;
+    }
+
+
+    @Override
+    public List<Action> getHistoricActions() {
+        return this.historyAction;
+    }
 
     @Override
     public boolean getIsGameWithComputer() {
@@ -120,6 +136,7 @@ public class Game implements AbstractGame {
     public void takeCell(int i, int j) {
         Cell c = this.board.getGrid()[i][j];
         c.setPlayer(this.getCurrentPlayer());
+        this.historyAction.add(new Action(c, this.getCurrentPlayer()));
         if (c.getPlayer().getType() == PlayerType.COMPUTER) {
             this.pcs.firePropertyChange(PROP_TAKE_CELL_BY_COMPUTER, null, c);
         }
