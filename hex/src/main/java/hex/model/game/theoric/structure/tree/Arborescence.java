@@ -1,12 +1,13 @@
-package hex.model.game.theoric.algorithm.tree;
+package hex.model.game.theoric.structure.tree;
 
 import hex.model.board.Board;
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.State;
+import hex.model.game.Game;
 import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.computer.Level;
-import hex.model.game.theoric.structure.Node;
-import hex.model.game.theoric.structure.util.LabelPlayer;
+import hex.model.game.theoric.structure.node.Node;
+import hex.model.game.theoric.structure.node.util.LabelPlayer;
 
 public class Arborescence {
 
@@ -14,12 +15,12 @@ public class Arborescence {
 
     private Node root;
     private int currentPlayer;
-
+    private Game game;
 
     // CONSTRUCTORS
     
-    public Arborescence(Board board) {
-        this.root = new Node(LabelPlayer.MAX, board);
+    public Arborescence(Game game) {
+        this.root = new Node(LabelPlayer.MAX, game.getBoard());
         this.currentPlayer = 1;
     }
 
@@ -28,6 +29,8 @@ public class Arborescence {
     public Node createArborescence(Level level) {
         int sizeTail = level.getSizeTail();
         this.buildTree(root, sizeTail);
+
+        this.calculateMinimaxValue();
         return root;
     }
 
@@ -53,5 +56,9 @@ public class Arborescence {
                 }
             }
         }
+    }
+
+    private void calculateMinimaxValue() {
+        // TODO calculate all minimax value
     }
 }
