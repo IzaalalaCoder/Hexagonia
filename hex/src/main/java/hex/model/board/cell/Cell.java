@@ -32,7 +32,7 @@ public class Cell {
 
     @Override
     public String toString() {
-        return abscissa + " " + ordinate + " " + visit;
+        return abscissa + " " + ordinate + " " + visit + " " + (state == State.PLAYER ? player.getPosition() : "vide");
     }
 
     public int getAbscissa() {

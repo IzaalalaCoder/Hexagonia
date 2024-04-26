@@ -4,7 +4,11 @@ import hex.model.board.Board;
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.State;
 import hex.model.game.Action;
+import hex.model.game.Game;
 import hex.model.game.theoric.algorithm.RandomAction;
+import hex.model.game.theoric.algorithm.Theory;
+import hex.model.game.theoric.algorithm.max.Minimax;
+import hex.model.game.theoric.algorithm.sss.ThreeSStar;
 
 public class Play {
 
@@ -12,13 +16,13 @@ public class Play {
 
     Level level;
     RandomAction randomize;
-    Board board;
+    Game game;
     Action action;
 
     // CONSTRUCTOR
 
-    public Play(Level level, Board b, Computer computer) {
-        this.board = b;
+    public Play(Level level, Game game, Computer computer) {
+        this.game = game;
         this.level = level;
         this.action = null;
         this.randomize = new RandomAction(computer);
@@ -40,9 +44,12 @@ public class Play {
     public void play() {
         int percent = this.getPercentEmptyCase();
         if (percent > this.level.getPercent()) {
-            this.randomize.chooseCell(this.board);
+            this.randomize.chooseCell(this.game.getBoard());
             this.action = this.randomize.getChooseCell();
         } else {
+            
+            Theory theoric = new ThreeSStar(game, level);
+            this.action  = new Action(theoric.getCell(), game.getComputer());
         }
 
     }
@@ -52,7 +59,7 @@ public class Play {
     private int getPercentEmptyCase() {
         int count = 0;
 
-        for (Cell[] cells : this.board.getGrid()) {
+        for (Cell[] cells : this.game.getBoard().getGrid()) {
             for (Cell c : cells) {
                 if (c.getState() == State.EMPTY) {
                     count++;
@@ -61,8 +68,8 @@ public class Play {
         }
 
 
-        int size = this.board.getGrid().length
-            * this.board.getGrid().length;
+        int size = this.game.getBoard().getGrid().length
+            * this.game.getBoard().getGrid().length;
 
         return ((count * 100) / size);
     }

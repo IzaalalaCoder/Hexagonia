@@ -1,4 +1,4 @@
-package hex.model.game.theoric.algorithm.sss;
+package hex.model.game.theoric.algorithm.sss.element;
 
 public enum Type {
     // VALUES

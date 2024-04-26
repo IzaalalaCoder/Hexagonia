@@ -1,43 +1,40 @@
 package hex.model.game.theoric.algorithm.max;
 
-import hex.model.board.cell.Cell;
 import hex.model.game.Game;
 import hex.model.game.player.computer.Level;
-import hex.model.game.theoric.algorithm.Theory;
+import hex.model.game.theoric.algorithm.AbstractTheory;
 import hex.model.game.theoric.structure.node.Node;
 import hex.model.game.theoric.structure.node.util.Status;
 import hex.model.game.theoric.structure.tree.Arborescence;
 
-public class NegaMax implements Theory {
-
-    // ATTRIBUTES
-
-    private Cell chooseCell;
+public class NegaMax extends AbstractTheory {
 
     // CONSTRUCTOR
 
     public NegaMax(Game game, Level level) {
+        super(game, level);
         Arborescence a = new Arborescence(game);
         this.analyze(a.createArborescence(level));
-        chooseCell = null;
     }   
 
-    // REQUESTS
-
-    @Override
-    public Cell getChooseCell() {
-        return chooseCell;
-        
-    }
-
-    // COMMANDS
-
-    @Override
-    public void analyze(Node root) {
-        this.negamax(root);
-    }
-
     // UTILS
+    
+    private void analyze(Node root) {
+        this.negamax(root);
+        this.chooseBoard(root);
+    }
+
+    private void chooseBoard(Node root) {
+        Node nodeWithMaxHeuristicValue = root.getSuccessor().get(0);
+
+        for (Node node : root.getSuccessor()) {
+            if (node.getHeuristicValue() > nodeWithMaxHeuristicValue.getHeuristicValue()) {
+                nodeWithMaxHeuristicValue = node;
+            }
+        }
+
+        chooseBoard = nodeWithMaxHeuristicValue.getActualBoard();
+    }
     
     private Double negamax(Node root) {
         Double val;
@@ -49,6 +46,8 @@ public class NegaMax implements Theory {
                 val = Math.max(val, -this.negamax(n));
             }
         }
+
+        //chooseBoard = root.getActualBoard();
         return val;
     }
 }

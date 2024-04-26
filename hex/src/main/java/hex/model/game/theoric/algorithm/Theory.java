@@ -1,15 +1,11 @@
 package hex.model.game.theoric.algorithm;
 
 import hex.model.board.cell.Cell;
-import hex.model.game.theoric.structure.node.Node;
 
 public interface Theory {
 
     // REQUESTS
 
-    public Cell getChooseCell();
+    public Cell getCell();
 
-    // COMMANDS
-
-    public void analyze(Node root);
 }

@@ -1,43 +1,28 @@
 package hex.model.game.theoric.algorithm.alphabeta;
 
-import hex.model.board.cell.Cell;
 import hex.model.game.Game;
 import hex.model.game.player.computer.Level;
-import hex.model.game.theoric.algorithm.Theory;
+import hex.model.game.theoric.algorithm.AbstractTheory;
 import hex.model.game.theoric.structure.node.Node;
 import hex.model.game.theoric.structure.node.util.LabelPlayer;
 import hex.model.game.theoric.structure.node.util.Status;
 import hex.model.game.theoric.structure.tree.Arborescence;
 
-public class AlphaBeta implements Theory {
-
-    // ATTRIBUTES
-
-    private Cell chooseCell;
+public class AlphaBeta extends AbstractTheory {
 
     // CONSTRUCTOR
 
     public AlphaBeta(Game game, Level level) {
+        super(game, level);
         Arborescence a = new Arborescence(game);
         this.analyze(a.createArborescence(level));
-        chooseCell = null;
-    }   
-
-    // REQUESTS
-
-    @Override
-    public Cell getChooseCell() {
-       return chooseCell;
-    }
-
-    // COMMANDS
-
-    @Override
-    public void analyze(Node root) {
-        this.alphaBeta(root, Double.MIN_VALUE, Double.MAX_VALUE);
     }
 
     // UTILS
+
+    private void analyze(Node root) {
+        this.alphaBeta(root, Double.MIN_VALUE, Double.MAX_VALUE);
+    }
 
     private Double alphaBeta(Node root, Double alpha, Double beta) {
         if (root.getStatus() != Status.LEAF) {
@@ -57,6 +42,8 @@ public class AlphaBeta implements Theory {
                 return beta;
             }
         }
+
+        this.chooseBoard = root.getActualBoard();
         return root.getHeuristicValue();
     }
     

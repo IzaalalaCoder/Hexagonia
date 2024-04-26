@@ -19,7 +19,7 @@ public class Game implements AbstractGame {
 
     // ATTRIBUTES
 
-    private final Board board;
+    private Board board;
     private final AbstractPlayer[] players;
     private AbstractPlayer winner;
     private final int size;
@@ -111,7 +111,7 @@ public class Game implements AbstractGame {
     }
 
     private void isEndOfGameAboutCurrentPlayer() {
-        this.endOfGame = this.existLine();
+        this.endOfGame = this.existLine(this.currentPlayer);
         this.pcs.firePropertyChange(PROP_END_GAME, false, endOfGame);
     }
 
@@ -196,18 +196,25 @@ public class Game implements AbstractGame {
         return players;
     }
 
-    private boolean existLine() {
-        boolean readOnOrdinate = this.currentPlayer == 0;
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+
+    @Override
+    public boolean existLine(int current) {
+        boolean readOnOrdinate = current == 0;
         Cell[][] grid = this.board.getGrid();
         boolean win = false;
         if (readOnOrdinate) {
             for (Cell[] cells : grid) {
                 Cell c = cells[0];
                 if (c.getState() != State.EMPTY
-                        && c.getPlayer() == this.getCurrentPlayer()) {
+                        && c.getPlayer() == this.players[current]) {
                     c.setVisit(true);
-                    if (this.canPathFromCell(c)) {
+                    if (this.canPathFromCell(c, current)) {
                         win = true;
+                        break;
                     } else {
                         this.board.refreshVisit(c.getOrdinate());
                     }
@@ -217,10 +224,11 @@ public class Game implements AbstractGame {
             for (int i = 0; i < this.getSize(); i++) {
                 Cell c = grid[0][i];
                 if (c.getState() != State.EMPTY
-                    && c.getPlayer() == this.getCurrentPlayer()) {
+                    && c.getPlayer() == this.players[current]) {
                     c.setVisit(true);
-                    if (this.canPathFromCell(c)) {
+                    if (this.canPathFromCell(c, current)) {
                         win = true;
+                        break;
                     } else {
                         this.board.refreshVisit(c.getOrdinate());
                     }
@@ -229,14 +237,14 @@ public class Game implements AbstractGame {
         }
 
         if (win) {
-            this.winner = this.players[this.currentPlayer];
+            this.winner = this.players[current];
             return true;
         }
         return false;
     }
 
-    private boolean canPathFromCell(Cell c) {
-        boolean readOnOrdinate = this.currentPlayer == 0;
+    private boolean canPathFromCell(Cell c, int current) {
+        boolean readOnOrdinate = current == 0;
 
         if (readOnOrdinate) {
             if (c.getOrdinate() == this.board.getGrid().length - 1) {
@@ -254,12 +262,12 @@ public class Game implements AbstractGame {
 
             if (newCell != null) {
                 if (newCell.getState() == State.PLAYER
-                    && newCell.getPlayer() == this.getCurrentPlayer()
+                    && newCell.getPlayer() == this.players[current]
                     && !newCell.getVisited())
                 {
                     newCell.setVisit(true);
                     
-                    if (this.canPathFromCell(newCell)) {
+                    if (this.canPathFromCell(newCell, current)) {
                         return true;
                     }
                 }

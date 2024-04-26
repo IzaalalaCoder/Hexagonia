@@ -1,46 +1,42 @@
 package hex.model.game.theoric.algorithm.max;
 
-import hex.model.board.cell.Cell;
 import hex.model.game.Game;
 import hex.model.game.player.computer.Level;
-import hex.model.game.theoric.algorithm.Theory;
+import hex.model.game.theoric.algorithm.AbstractTheory;
 import hex.model.game.theoric.structure.node.Node;
 import hex.model.game.theoric.structure.node.util.LabelPlayer;
 import hex.model.game.theoric.structure.node.util.Status;
 import hex.model.game.theoric.structure.tree.Arborescence;
 
 
-public class Minimax implements Theory {
-
-    // ATTRIBUTES
-
-    private Cell chooseCell;
+public class Minimax extends AbstractTheory {
 
     // CONSTRUCTOR
 
     public Minimax(Game game, Level level) {
+        super(game, level);
         Arborescence a = new Arborescence(game);
         this.analyze(a.createArborescence(level));
-        chooseCell = null;
-    }   
-
-    // REQUESTS
-
-    @Override
-    public Cell getChooseCell() {
-        return chooseCell;
-        
-    }
-
-    // COMMANDS
-
-    @Override
-    public void analyze(Node root) {
-        this.minimax(root);
-    }
+    } 
 
     // UTILS
 
+    public void analyze(Node root) {
+        this.minimax(root);this.chooseBoard(root);
+    }
+
+    private void chooseBoard(Node root) {
+        Node nodeWithMaxHeuristicValue = root.getSuccessor().get(0);
+
+        for (Node node : root.getSuccessor()) {
+            if (node.getHeuristicValue() > nodeWithMaxHeuristicValue.getHeuristicValue()) {
+                nodeWithMaxHeuristicValue = node;
+            }
+        }
+
+        chooseBoard = nodeWithMaxHeuristicValue.getActualBoard();
+    }
+    
     private Double minimax(Node root) {
         Double val;
         if (root.getStatus() == Status.LEAF) {

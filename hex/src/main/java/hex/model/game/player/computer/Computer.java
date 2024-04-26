@@ -34,7 +34,7 @@ public class Computer extends AbstractPlayer {
 
     public void startPlay(Game game) {
         this.game = game;
-        this.play = new Play(level, game.getBoard(), this);
+        this.play = new Play(level, game, this);
     }
 
     public void play() {

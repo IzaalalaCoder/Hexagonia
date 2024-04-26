@@ -2,16 +2,17 @@ package hex.model.game.theoric.algorithm.sss;
 
 import java.util.ArrayList;
 import java.util.List;
-import hex.model.board.cell.Cell;
 import hex.model.game.Game;
 import hex.model.game.player.computer.Level;
-import hex.model.game.theoric.algorithm.Theory;
+import hex.model.game.theoric.algorithm.AbstractTheory;
+import hex.model.game.theoric.algorithm.sss.element.Triplet;
+import hex.model.game.theoric.algorithm.sss.element.Type;
 import hex.model.game.theoric.structure.node.Node;
 import hex.model.game.theoric.structure.node.util.LabelPlayer;
 import hex.model.game.theoric.structure.node.util.Status;
 import hex.model.game.theoric.structure.tree.Arborescence;
 
-public class ThreeSStar implements Theory {
+public class ThreeSStar extends AbstractTheory {
 
     // ATTRIBUTES
 
@@ -20,27 +21,17 @@ public class ThreeSStar implements Theory {
     // CONSTRUCTORS
 
     public ThreeSStar(Game game, Level level) {
-        Arborescence a = new Arborescence(game);
-        Node root = a.createArborescence(level);
+        super(game, level);
         this.G = new ArrayList<>();
-        this.analyze(root);
+        Arborescence a = new Arborescence(game);
+        this.analyze(a.createArborescence(level));
     }
 
-    // REQUESTS
+    // UTILS
 
-    @Override
-    public Cell getChooseCell() {
-        return null;
-    }
-
-    // COMMANDS
-
-    @Override
-    public void analyze(Node root) {
+    private void analyze(Node root) {
         this.sssStar(root);
     }
-   
-    // UTILS
 
     private void insert(Triplet<Node, Type, Double> triplet) {
         for (Triplet<Node, Type, Double> t : this.G) {
@@ -112,6 +103,7 @@ public class ThreeSStar implements Theory {
             }
         } 
 
+        chooseBoard = root.getActualBoard();
         return val;
     }
 

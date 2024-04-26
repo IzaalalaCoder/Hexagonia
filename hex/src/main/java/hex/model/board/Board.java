@@ -29,6 +29,18 @@ public class Board {
 
     // REQUESTS
 
+    @Override
+    public String toString() {
+        String message = "";
+        for (Cell[] cells : this.grid) {
+            for (Cell c : cells) {
+                message += c.toString() + " -- ";
+            }
+            message += "\n";
+        }
+        return message;
+    }
+
     public Cell[][] getGrid() {
         return this.grid;
     }

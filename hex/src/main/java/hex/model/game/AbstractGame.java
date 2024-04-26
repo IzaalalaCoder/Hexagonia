@@ -34,6 +34,9 @@ public interface AbstractGame {
      * @return Board
      */
     Board getBoard();
+    void setBoard(Board board);
+
+    public boolean existLine(int current);
 
     /**
      * Returns all players

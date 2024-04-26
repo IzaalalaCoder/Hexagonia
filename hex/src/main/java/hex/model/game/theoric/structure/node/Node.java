@@ -62,7 +62,6 @@ public class Node {
     }
     
     public Status getStatus() {
-        this.calculateHeuristicValue();
         return this.status;
     }
     
@@ -100,7 +99,8 @@ public class Node {
         this.predecessor = predecessor;
     }
 
-    private void calculateHeuristicValue() {
+    public void setHeuristicValue(Double value) {
+        this.heuristicValue = value;
         this.status = Status.TERMINAL;
     }
 
