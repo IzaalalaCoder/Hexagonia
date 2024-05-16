@@ -1,4 +1,4 @@
-package hex.model.util.xml;
+package hex.model.util.xml.writer;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ public interface XMLWriter {
 
     // CONSTANTS
 
-    public String PATH_XML = "hex/src/main/resources/informations/newSave.xml";
+    public String PATH_XML = "src/main/resources/informations/newSave.xml";
 
     // REQUESTS
 

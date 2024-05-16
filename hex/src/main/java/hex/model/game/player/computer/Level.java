@@ -18,8 +18,8 @@ public enum Level {
 
     // ATTRIBUTES 
 
-    private int percent;
-    private int sizeTail;
+    private final int percent;
+    private final int sizeTail;
 
     // REQUESTS
     

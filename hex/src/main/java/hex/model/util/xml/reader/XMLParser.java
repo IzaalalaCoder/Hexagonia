@@ -1,4 +1,4 @@
-package hex.model.util.xml;
+package hex.model.util.xml.reader;
 
 import java.io.IOException;
 
@@ -8,8 +8,7 @@ public interface XMLParser {
 
     // CONSTANTS
 
-    public String PATH_DTD = "hex/src/main/resources/informations/save.dtd";
-    public final String PATH_XML = "hex/src/main/resources/informations/";
+    public final String PATH_XML = "src/main/resources/informations/";
 
     // REQUESTS
 

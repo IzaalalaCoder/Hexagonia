@@ -32,11 +32,9 @@ public class MenuNewGame extends JMenu {
         for (Pair<InformationOnNewGame, JMenuItem> pair : this.menus) {
             InformationOnNewGame information = pair.getFirst();
             JMenuItem it = pair.getSecond();
-
             boolean isComputer = information.isComputer();
             int level = information.getLevel();
             int size = Integer.parseInt(it.getText());
-
             it.addActionListener(new ControlMenuNewGame(parent, isComputer, level, size));
         }
     }
@@ -53,7 +51,6 @@ public class MenuNewGame extends JMenu {
     // UTILS
 
     private void addMenuByTypePlayer(PlayerMode playerMode, JMenu submenu) {
-
         if (playerMode == PlayerMode.PLAYER) {
             InformationOnNewGame info = new InformationOnNewGame(true);
             info.setComputer(false);
@@ -78,7 +75,7 @@ public class MenuNewGame extends JMenu {
         }
     }
 
-    // IMBRICATED CLASSES
+    // IMBRICATION CLASSES
     
     private static class Pair<V, W> {
         private final V first;

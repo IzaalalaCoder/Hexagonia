@@ -2,7 +2,6 @@ package hex.model.game.theoric.structure.node;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import hex.model.board.Board;
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.State;
@@ -16,8 +15,8 @@ public class Node {
 
     private final LabelPlayer labelPlayer;
     private final Board board;
+    private final List<Node> successors;
     private Status status;
-    private List<Node> successors;
     private Node predecessor;
     private Double heuristicValue;
 
@@ -26,7 +25,7 @@ public class Node {
     public Node(LabelPlayer labelPlayer, Board board) {
         this.labelPlayer = labelPlayer;
         this.status = Status.LEAF;
-        this.successors = new ArrayList<Node>();
+        this.successors = new ArrayList<>();
         this.predecessor = null;
         this.heuristicValue = 0.0;
         this.board = board;
@@ -36,21 +35,18 @@ public class Node {
 
     @Override
     public String toString() {
-        String result = "";
-
+        StringBuilder result = new StringBuilder();
         for (Cell[] cells : this.board.getGrid()) {
             for (Cell c : cells) {
                 if (c.getState() == State.EMPTY) {
-                    result += " _ ";
+                    result.append(" _ ");
                 } else {
-                    result += c.getPlayer().getType() 
-                        == PlayerType.COMPUTER ? " X " : " O ";
+                    result.append(c.getPlayer().getType() == PlayerType.COMPUTER ? " X " : " O ");
                 }
             }
-            result += "\n";
+            result.append("\n");
         }
-
-        return result;
+        return result.toString();
     }
 
     public Board getActualBoard() {
@@ -79,18 +75,15 @@ public class Node {
 
     // COMMANDS
     
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-    
     public void addSuccessor(Node successor) {
         this.successors.add(successor);
         this.status = Status.NODE;
     }
-    
+
+    @SuppressWarnings("unused")
     public void removeSuccessor(Node successor) {
         this.successors.remove(successor);
-        if (this.successors.size() == 0) {
+        if (this.successors.isEmpty()) {
             this.status = Status.LEAF;
         }
     }
@@ -103,5 +96,4 @@ public class Node {
         this.heuristicValue = value;
         this.status = Status.TERMINAL;
     }
-
 }

@@ -5,7 +5,6 @@ import hex.platform.controller.ControlWindow;
 import hex.platform.controller.menu.ControlLoadGame;
 import hex.platform.controller.menu.ControlSaveGame;
 import hex.platform.view.DisplayWindow;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
@@ -15,9 +14,9 @@ public class MainMenu extends JMenuBar {
 
     // CONSTANTS
 
-    private final String PATH_HISTORY = "hex/src/main/resources/doc/HISTORY.pdf";
-    private final String PATH_RULES = "hex/src/main/resources/doc/RULES.pdf";
-    public static final String PATH = "hex/src/main/resources/assets/";
+    private final String PATH_HISTORY = "src/main/resources/doc/HISTORY.pdf";
+    private final String PATH_RULES = "src/main/resources/doc/RULES.pdf";
+    public static final String PATH = "src/main/resources/assets/";
 
     // STATIC METHOD
 
@@ -25,14 +24,13 @@ public class MainMenu extends JMenuBar {
         if (imageIcon == null) {
             return null;
         }
-        Image image = imageIcon.getImage();
-        Image newimg = image.getScaledInstance(32, 32,  java.awt.Image.SCALE_SMOOTH);
-        return new ImageIcon(newimg);
+        Image image = imageIcon.getImage().getScaledInstance(32, 32,  java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(image);
     }
 
     // ATTRIBUTES
 
-    private Map<MenuItem, JMenuItem> subMenus;
+    private final Map<MenuItem, JMenuItem> subMenus;
 
     // CONSTRUCTOR
 

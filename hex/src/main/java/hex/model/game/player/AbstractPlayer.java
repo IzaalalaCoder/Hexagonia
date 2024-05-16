@@ -16,5 +16,4 @@ public abstract class AbstractPlayer {
     public int getPosition() {
         return position;
     }
-
 }

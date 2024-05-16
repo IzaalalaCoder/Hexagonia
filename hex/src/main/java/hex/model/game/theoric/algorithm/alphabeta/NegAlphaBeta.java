@@ -5,7 +5,6 @@ import hex.model.game.player.computer.Level;
 import hex.model.game.theoric.algorithm.AbstractTheory;
 import hex.model.game.theoric.structure.node.Node;
 import hex.model.game.theoric.structure.node.util.Status;
-import hex.model.game.theoric.structure.tree.Arborescence;
 
 public class NegAlphaBeta extends AbstractTheory {
 
@@ -13,29 +12,28 @@ public class NegAlphaBeta extends AbstractTheory {
 
     public NegAlphaBeta(Game game, Level level) {
         super(game, level);
-        Arborescence a = new Arborescence(game);
-        this.analyze(a.createArborescence(level));
+        this.analyze(tree.getRoot());
     }
 
     // UTILS
 
     private void analyze(Node root) {
-        this.negAlphaBeta(root, Double.MIN_VALUE, Double.MAX_VALUE);
+        this.negAlphaBeta(root, -700.0, +700.0);
+        this.chooseBoard(root);
     }
 
     private Double negAlphaBeta(Node root, Double alpha, Double beta) {
         if (root.getStatus() != Status.LEAF) {
             int k = 1;
-            Double val = Double.MIN_VALUE;
+            double val = -700.0;
             while (alpha < beta && k <= root.getSuccessor().size()) {
                 val = Math.max(val, -negAlphaBeta(root.getSuccessor().get(k - 1), -beta, -alpha));
                 alpha = Math.max(alpha, val);
                 k++;
             }
+            root.setHeuristicValue(val);
             return val;
         }
-
-        chooseBoard = root.getActualBoard();
         return root.getHeuristicValue();
     }
 }

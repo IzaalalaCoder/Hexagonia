@@ -3,8 +3,7 @@ package hex.model.board;
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.Direction;
 import hex.model.game.player.AbstractPlayer;
-
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,18 +30,26 @@ public class Board {
 
     @Override
     public String toString() {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         for (Cell[] cells : this.grid) {
             for (Cell c : cells) {
-                message += c.toString() + " -- ";
+                message.append(c.toString());
             }
-            message += "\n";
+            message.append("\n");
         }
-        return message;
+        return message.toString();
     }
 
     public Cell[][] getGrid() {
         return this.grid;
+    }
+
+    public void refreshAllVisit() {
+        for (Cell[] cells : this.grid) {
+            for (Cell c : cells) {
+                c.setVisit(false);
+            }
+        }
     }
 
     public boolean coordinateIsValid(int i, int j) {
@@ -63,19 +70,11 @@ public class Board {
                 newBoard.getGrid()[i][j] = c.copyCell();
             }
         }
-
+        newBoard.refreshAllVisit();
         return newBoard;
     }
 
     // COMMANDS
-
-    public void clearGrid() {
-        for (int i = 0; i < this.size; i++) {
-            for (int j = 0; j < this.size; j++) {
-                this.grid[i][j].clearCell();
-            }
-        }
-    }
 
     public void refreshVisit(int y) {
         for (Cell[] cells : this.grid) {
@@ -91,33 +90,20 @@ public class Board {
 
     // UTILS
 
-    /*private Cell[][] copyGrid(Cell[][] grid) {
-        Cell[][] cells = new Cell[this.grid.length][];
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                cells[i][j] = Cell.copyCell(grid[i][j]);
-            }
-        }
-        return cells;
-    }*/
-
     private Cell[][] createGrid() {
         Cell[][] cells = new Cell[size][size];
-
         List<AbstractPlayer> playersCell = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (j == 0 || j == size - 1) {
                     playersCell.add(this.players.get(0));
                 }
-
                 if (i == 0 || i == size - 1) {
                     playersCell.add(this.players.get(1));
                 }
                 cells[i][j] = new Cell(playersCell.size(), i, j);
                 playersCell.clear();
             }
-
         }
 
         // Initialization of all direction's cells
@@ -133,7 +119,6 @@ public class Board {
                 }
             }
         }
-
         return cells;
     }
 }

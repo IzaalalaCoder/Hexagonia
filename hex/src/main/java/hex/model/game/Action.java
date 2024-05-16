@@ -8,7 +8,6 @@ public class Action {
     // ATTRIBUTES
 
     private final Cell c;
-
     private final AbstractPlayer player;
 
     // CONSTRUCTORS
@@ -19,7 +18,6 @@ public class Action {
     }
 
     // REQUESTS
-
 
     public Cell getCell() {
         return c;

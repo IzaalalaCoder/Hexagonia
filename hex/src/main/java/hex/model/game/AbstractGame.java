@@ -2,23 +2,19 @@ package hex.model.game;
 
 import hex.model.board.Board;
 import hex.model.game.player.AbstractPlayer;
-
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public interface AbstractGame {
 
-    public final int NUMBER_SIDES = 6;
+    String PROP_CURR_PLAYER_ID = "currentPlayer";
+    String PROP_TAKE_CELL_BY_COMPUTER = "takeCell";
+    String PROP_END_GAME = "EndOfGame";
+    int FIRST_PLAYER = 0;
+    int SECOND_PLAYER = 1;
+    int MAX_NUMBER_OF_PLAYER = 2;
 
-    public final String PROP_CURR_PLAYER_ID = "currentPlayer";
-    public final String PROP_TAKE_CELL_BY_COMPUTER = "takeCell";
-    public final String PROP_END_GAME = "EndOfGame";
-
-    boolean getIsGameWithComputer();
-    public final int FIRST_PLAYER = 0;
-    public final int SECOND_PLAYER = 1;
-
-    public final int MAX_NUMBER_OF_PLAYER = 2;
+    // REQUESTS
 
     /**
      * Return size's board
@@ -26,25 +22,11 @@ public interface AbstractGame {
      */
     int getSize();
 
-    public void setHistoricActions(List<Action> history);
-    public AbstractPlayer getComputer();
-
-    /**
-     * Return board's game
-     * @return Board
-     */
-    Board getBoard();
-    void setBoard(Board board);
-
-    public boolean existLine(int current);
-
-    /**
-     * Returns all players
-     * @return Player[]
-     */
-    AbstractPlayer[] getPlayers();
-
     int getPositionCurrentPlayer();
+
+    boolean getIsGameWithComputer();
+
+    boolean existLine(int current);
 
     /**
      * Check if ended game
@@ -52,9 +34,12 @@ public interface AbstractGame {
      */
     boolean isEndOfGame();
 
-    void takeCell(int i, int j);
+    List<Action> getHistoricActions();
 
-    void setCurrentPlayer(int current);
+    AbstractPlayer getWinner();
+
+    AbstractPlayer getComputer();
+
     /**
      * Return current player
      * @return Player
@@ -62,22 +47,35 @@ public interface AbstractGame {
     AbstractPlayer getCurrentPlayer();
 
     /**
+     * Returns all players
+     * @return Player[]
+     */
+    AbstractPlayer[] getPlayers();
+
+    /**
+     * Return board's game
+     * @return Board
+     */
+    Board getBoard();
+
+    PropertyChangeListener[] getPropertyChangeListeners(String pName);
+
+    // COMMANDS
+
+    void setHistoricActions(List<Action> history);
+
+    void setBoard(Board board);
+
+    void takeCell(int i, int j);
+
+    void setCurrentPlayer(int current);
+
+    /**
      * Current player act so consume his turn
      * @post
      *      currentPlayer != this.currentPlayer
      */
     void consumeTurn();
-
-    public List<Action> getHistoricActions();
-
-    public AbstractPlayer getWinner();
-    
-    /**
-     * Game restart play
-     */
-    void replay();
-
-    PropertyChangeListener[] getPropertyChangeListeners(String pName);
 
     void addPropertyChangeListener(String pName, PropertyChangeListener pcl);
 }

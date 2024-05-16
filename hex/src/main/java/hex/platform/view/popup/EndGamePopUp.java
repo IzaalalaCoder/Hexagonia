@@ -8,9 +8,7 @@ public class EndGamePopUp {
     
     public static void preventEndGame(String message, boolean isLost) {
         ImageIcon icon = new ImageIcon(MainMenu.PATH + (isLost ? "lost.png" : "win.png"));
-
         JOptionPane.showMessageDialog(null, message, "Fin de la partie"
             , JOptionPane.INFORMATION_MESSAGE, icon);
     }
-
 }

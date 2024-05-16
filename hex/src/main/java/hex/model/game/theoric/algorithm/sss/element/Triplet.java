@@ -4,9 +4,9 @@ public class Triplet<A, B, C> {
 
     // ATTRIBUTES
 
-    private A firstValue;
-    private B secondValue;
-    private C thirdValue;
+    private final A firstValue;
+    private final B secondValue;
+    private final C thirdValue;
 
     // CONSTRUCTOR
 
@@ -28,19 +28,5 @@ public class Triplet<A, B, C> {
 
     public C getThirdValue() {
         return this.thirdValue;
-    }
-
-    // COMMANDS
-
-    public void setFirstValue(A firstValue) {
-        this.firstValue = firstValue;
-    }
-
-    public void setSecondValue(B secondValue) {
-        this.secondValue = secondValue;
-    }
-
-    public void setThirdValue(C thirdValue) {
-        this.thirdValue = thirdValue;
     }
 } 

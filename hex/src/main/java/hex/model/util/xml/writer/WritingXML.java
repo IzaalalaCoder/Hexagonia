@@ -1,4 +1,4 @@
-package hex.model.util.xml;
+package hex.model.util.xml.writer;
 
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.State;

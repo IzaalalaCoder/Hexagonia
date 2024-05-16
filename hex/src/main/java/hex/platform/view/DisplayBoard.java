@@ -8,9 +8,12 @@ import hex.platform.controller.ControlBoard;
 import hex.platform.view.info.PlayerName;
 import hex.platform.view.shapes.Forms;
 import hex.platform.view.shapes.forms.HexagonButton;
-
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +49,9 @@ public class DisplayBoard extends JPanel {
 
     private void createController() {
         new ControlBoard(this.buttons, model, this);
+        if (model.isEndOfGame()) {
+            this.removeAllController();
+        }
     }
 
     private void displayBoard() {
@@ -53,7 +59,7 @@ public class DisplayBoard extends JPanel {
         this.createHexBoard(p);
     }
 
-    private Map<Direction, Color> generateBorderColor(Cell c, int i, int j, int size) {
+    private Map<Direction, Color> generateBorderColor(int i, int j) {
         Map<Direction, Color> colorsForBorder = new HashMap<>();
         for (Direction d : Direction.values()) {
             colorsForBorder.put(d, Color.BLACK);
@@ -118,7 +124,7 @@ public class DisplayBoard extends JPanel {
                 gbc.gridy = i * 2 + 1;
                 gbc.gridwidth =  1;
 
-                Map<Direction, Color> colorsForBorder = this.generateBorderColor(c, i, j, cells.length - 1);
+                Map<Direction, Color> colorsForBorder = this.generateBorderColor(i, j);
                 HexagonButton button = new HexagonButton(model, colorsForBorder, i, j);
 
                 this.buttons[i][j] = button;

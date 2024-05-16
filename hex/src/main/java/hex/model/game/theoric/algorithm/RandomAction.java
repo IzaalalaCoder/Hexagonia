@@ -13,9 +13,9 @@ public class RandomAction {
 
     // ATTRIBUTES
 
-    private List<Cell> emptyCells;
+    private final List<Cell> emptyCells;
+    private final Computer player;
     private Cell chooseCell;
-    private Computer player;
 
     // CONSTRUCTORS
 
@@ -28,8 +28,7 @@ public class RandomAction {
     // REQUESTS
 
     public Action getChooseCell() {
-        Action a = new Action(chooseCell, player);
-        return a;
+        return new Action(chooseCell, player);
     }
 
     // COMMANDS

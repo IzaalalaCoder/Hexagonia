@@ -4,6 +4,6 @@ public enum PlayerType {
 
     // VALUES 
     
-    HUMAN,
-    COMPUTER;
+    HUMAN, // player
+    COMPUTER; // ia
 }

@@ -11,8 +11,8 @@ public class Computer extends AbstractPlayer {
     // ATTRIBUTES
 
     private Play play;
-    private final Level level;
     private Game game;
+    private final Level level;
 
     // CONSTRUCTORS 
 
@@ -38,14 +38,10 @@ public class Computer extends AbstractPlayer {
     }
 
     public void play() {
-        this.play.play();
-
-       Action act = this.play.getAction();
-
-        if (act != null) { 
+        Action act = this.play.play();
+        if (act != null) {
             Cell c = act.getCell();
             this.game.takeCell(c.getAbscissa(), c.getOrdinate());
-        } 
-        
+        }
     }
 }

@@ -1,8 +1,5 @@
 package hex.platform.controller;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 import hex.model.board.cell.Cell;
 import hex.model.game.AbstractGame;
 import hex.model.game.Game;
@@ -32,33 +29,28 @@ public class ControlBoard {
     }
 
     // COMMANDS
+
     private void createController() {
         this.model.addPropertyChangeListener(AbstractGame.PROP_TAKE_CELL_BY_COMPUTER, evt -> {
             Cell c = (Cell) evt.getNewValue();
             PlayerName playerName = PlayerName.values()[model.getPositionCurrentPlayer()];
             buttons[c.getAbscissa()][c.getOrdinate()].changeColor(playerName.getDefaultColorForPlayer());
             buttons[c.getAbscissa()][c.getOrdinate()].removeController();
-
             model.consumeTurn();
         });
 
-        this.model.addPropertyChangeListener(AbstractGame.PROP_END_GAME, new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                frame.removeAllController();
-                String message = "";
-                if (model.getIsGameWithComputer()) {
-                    boolean isLost = model.getWinner().getType() == PlayerType.COMPUTER;
-                    message += isLost ? "Dommage ! L'ordinateur a gagné" : 
-                        "Félicitation ! Vous avez gagné";
-                    EndGamePopUp.preventEndGame(message, isLost);
-                } else {
-                    message += PlayerName.values()[model.getPositionCurrentPlayer()].name() + " a gagné";
-                    EndGamePopUp.preventEndGame(message, false);
-                }
+        this.model.addPropertyChangeListener(AbstractGame.PROP_END_GAME, evt -> {
+            frame.removeAllController();
+            String message = "";
+            if (model.getIsGameWithComputer()) {
+                boolean isLost = model.getWinner().getType() == PlayerType.COMPUTER;
+                message += isLost ? "Dommage ! L'ordinateur a gagné" :
+                    "Félicitation ! Vous avez gagné";
+                EndGamePopUp.preventEndGame(message, isLost);
+            } else {
+                message += PlayerName.values()[model.getPositionCurrentPlayer()].name() + " a gagné";
+                EndGamePopUp.preventEndGame(message, false);
             }
-            
         });
 
         this.model.addPropertyChangeListener(AbstractGame.PROP_CURR_PLAYER_ID, evt -> {

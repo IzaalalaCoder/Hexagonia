@@ -3,15 +3,12 @@ package hex.platform.view;
 import hex.model.game.Game;
 import hex.platform.view.info.SizeGame;
 import hex.platform.view.menu.MainMenu;
-
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 public class DisplayWindow extends JFrame {
-
-    // CONSTANTS
-
-    private final Dimension DIMENSION = new Dimension(600, 600);
 
     // ATTRIBUTES
 
@@ -25,7 +22,8 @@ public class DisplayWindow extends JFrame {
     public DisplayWindow() {
         super();
         this.createMenu();
-        this.setSize(this.DIMENSION);
+        Dimension DIMENSION = new Dimension(600, 600);
+        this.setSize(DIMENSION);
         this.setLayout(new BorderLayout());
         this.updateWindow();
     }
@@ -71,17 +69,14 @@ public class DisplayWindow extends JFrame {
                 this.information.setVisible(false);
                 this.remove(this.information);
             }
-
         }
     }
 
     private void placeComponent() {
         this.createBoard();
-
         if (!model.getIsGameWithComputer()) {
             this.createInfoBar();
         }
-
     }
 
     private void createInfoBar() {
@@ -103,7 +98,7 @@ public class DisplayWindow extends JFrame {
         return this.model;
     }
 
-    // POINT ENTERED
+    // ENTERED POINT
 
     public static void main(String[] args) {
         JFrame frame = new DisplayWindow();

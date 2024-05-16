@@ -6,8 +6,6 @@ import hex.model.game.theoric.algorithm.AbstractTheory;
 import hex.model.game.theoric.structure.node.Node;
 import hex.model.game.theoric.structure.node.util.LabelPlayer;
 import hex.model.game.theoric.structure.node.util.Status;
-import hex.model.game.theoric.structure.tree.Arborescence;
-
 
 public class Minimax extends AbstractTheory {
 
@@ -15,26 +13,14 @@ public class Minimax extends AbstractTheory {
 
     public Minimax(Game game, Level level) {
         super(game, level);
-        Arborescence a = new Arborescence(game);
-        this.analyze(a.createArborescence(level));
+        this.analyze(tree.getRoot());
     } 
 
     // UTILS
 
     public void analyze(Node root) {
-        this.minimax(root);this.chooseBoard(root);
-    }
-
-    private void chooseBoard(Node root) {
-        Node nodeWithMaxHeuristicValue = root.getSuccessor().get(0);
-
-        for (Node node : root.getSuccessor()) {
-            if (node.getHeuristicValue() > nodeWithMaxHeuristicValue.getHeuristicValue()) {
-                nodeWithMaxHeuristicValue = node;
-            }
-        }
-
-        chooseBoard = nodeWithMaxHeuristicValue.getActualBoard();
+        this.minimax(root);
+        this.chooseBoard(root);
     }
     
     private Double minimax(Node root) {
@@ -43,18 +29,18 @@ public class Minimax extends AbstractTheory {
             val = root.getHeuristicValue();
         } else {
             if (root.getLabelPlayer() == LabelPlayer.MAX) {
-                val = Double.MIN_VALUE;
+                val = -700.0;
                 for (Node n : root.getSuccessor()) {
                     val = Math.max(val, this.minimax(n));
                 }
             } else {
-                val = Double.MAX_VALUE;
+                val = 700.0;
                 for (Node n : root.getSuccessor()) {
                     val = Math.min(val, this.minimax(n));
                 }
             }
         }
+        root.setHeuristicValue(val);
         return val;
     }
-    
 }

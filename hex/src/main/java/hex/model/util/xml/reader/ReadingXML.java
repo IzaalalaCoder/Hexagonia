@@ -1,4 +1,4 @@
-package hex.model.util.xml;
+package hex.model.util.xml.reader;
 
 import hex.model.board.cell.Cell;
 import hex.model.game.Action;
@@ -14,6 +14,8 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
+import hex.model.util.xml.XMLScheme;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

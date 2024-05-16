@@ -25,9 +25,10 @@ public class ControlWindow implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (parent.getModel() != null) {
-            if (WarningPopUp.preventSaveAble() == JOptionPane.YES_OPTION) {
-                parent.dispose();
+            if (WarningPopUp.preventSaveAble() != JOptionPane.YES_OPTION) {
+                return;
             }
-        } 
+        }
+        parent.dispose();
     }
 }

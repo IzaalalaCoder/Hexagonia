@@ -4,6 +4,6 @@ public enum State {
     
     // VALUES
 
-    EMPTY,
-    PLAYER;
+    EMPTY, // empty cell
+    PLAYER; // cell take by player
 }

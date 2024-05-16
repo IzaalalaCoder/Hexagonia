@@ -1,6 +1,7 @@
 package hex.model.board.cell;
 
 import hex.model.game.player.AbstractPlayer;
+import hex.model.game.player.PlayerType;
 
 import java.util.EnumMap;
 
@@ -32,7 +33,9 @@ public class Cell {
 
     @Override
     public String toString() {
-        return abscissa + " " + ordinate + " " + visit + " " + (state == State.PLAYER ? player.getPosition() : "vide");
+        //return state == State.PLAYER ? (player.getType() == PlayerType.COMPUTER ? "X " : "0 ") : "_ ";
+        return state == State.PLAYER ? Integer.toString(player.getPosition()) : "_ ";
+
     }
 
     public int getAbscissa() {
@@ -43,7 +46,7 @@ public class Cell {
         return ordinate;
     }
 
-    public boolean getVisited() {
+    public boolean isVisited() {
         return visit;
     }
 
@@ -53,15 +56,6 @@ public class Cell {
 
     public EnumMap<Direction, Cell> getDirections() {
         return this.directions;
-    }
-
-    public Cell copyCell() {
-        Cell newCell = new Cell(this.numberOfMemberships, this.abscissa, this.ordinate);
-        newCell.state = state;
-        newCell.player = player;
-        newCell.setVisit(this.getVisited());
-        manageDirections(newCell, this);
-        return newCell;
     }
 
     public Cell getCellOnDir(Direction d) {
@@ -76,10 +70,6 @@ public class Cell {
 
     public AbstractPlayer getPlayer() {
         return player;
-    }
-
-    public int getNumberOfMemberships() {
-        return numberOfMemberships;
     }
 
     // COMMANDS
@@ -117,9 +107,13 @@ public class Cell {
         this.directions.replace(d, c);
     }
 
-    public void clearCell() {
-        this.state = State.EMPTY;
-        this.player = null;
+    public Cell copyCell() {
+        Cell newCell = new Cell(this.numberOfMemberships, this.abscissa, this.ordinate);
+        newCell.state = state;
+        newCell.player = player;
+        newCell.setVisit(this.isVisited());
+        manageDirections(newCell, this);
+        return newCell;
     }
 
     // UTILS
@@ -133,7 +127,6 @@ public class Cell {
 
     private void initializeDirection() {
         this.directions = new EnumMap<>(Direction.class);
-
         for (Direction d : Direction.values()) {
             this.directions.put(d, null);
         }
