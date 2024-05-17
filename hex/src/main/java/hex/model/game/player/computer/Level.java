@@ -4,28 +4,22 @@ public enum Level {
 
     // VALUES 
 
-    EASY(90, 1),
-    MEDIUM(90, 2),
-    HARD(90, 3); // 12 a 9 thread ?
+    EASY(1),
+    MEDIUM(2),
+    HARD(3); // 12 a 9 thread ?
     //EXTREME(10, 4);
 
     // CONSTRUCTOR
 
-    private Level(int percent, int sizeTail) {
-        this.percent = percent;
+    private Level(int sizeTail) {
         this.sizeTail = sizeTail;
     }
 
     // ATTRIBUTES 
 
-    private final int percent;
     private final int sizeTail;
 
     // REQUESTS
-    
-    public int getPercent() {
-        return percent;
-    }
 
     public int getSizeTail() {
         return sizeTail;

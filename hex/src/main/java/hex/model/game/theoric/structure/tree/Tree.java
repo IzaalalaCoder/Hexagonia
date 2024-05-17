@@ -52,7 +52,9 @@ public class Tree {
                     c.setPlayer(p);
                     Node newNode = new Node(this.currentPlayer == 1 ? LabelPlayer.MAX : LabelPlayer.MIN, board.getCopy());
                     if (tail == level.getSizeTail() - 1) {
+                        System.out.println(board);
                         newNode.setHeuristicValue(Evaluator.evaluate(board));
+                        System.out.println(newNode.getHeuristicValue());
                     }
                     this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
                     this.buildTree(newNode, tail + 1);

@@ -44,7 +44,7 @@ public abstract class AbstractTheory implements Theory {
         for (Node node : root.getSuccessor()) {
             System.out.print(node.getHeuristicValue() + " ");
 
-            nodeWithMinHeuristicValue = node.getHeuristicValue() <= nodeWithMinHeuristicValue.getHeuristicValue()
+            nodeWithMinHeuristicValue = node.getHeuristicValue() < nodeWithMinHeuristicValue.getHeuristicValue()
                 ? node : nodeWithMinHeuristicValue;
         }
 

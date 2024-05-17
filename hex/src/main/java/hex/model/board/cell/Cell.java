@@ -1,8 +1,6 @@
 package hex.model.board.cell;
 
 import hex.model.game.player.AbstractPlayer;
-import hex.model.game.player.PlayerType;
-
 import java.util.EnumMap;
 
 public class Cell {
@@ -34,7 +32,7 @@ public class Cell {
     @Override
     public String toString() {
         //return state == State.PLAYER ? (player.getType() == PlayerType.COMPUTER ? "X " : "0 ") : "_ ";
-        return state == State.PLAYER ? Integer.toString(player.getPosition()) : "_ ";
+        return state == State.PLAYER ? Integer.toString(player.getPosition()) : "_";
 
     }
 

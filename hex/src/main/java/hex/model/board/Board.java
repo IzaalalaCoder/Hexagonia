@@ -53,8 +53,7 @@ public class Board {
     }
 
     public boolean coordinateIsValid(int i, int j) {
-        return !(i < 0 || i >= size||
-                j < 0 || j >= size);
+        return !(i < 0 || i >= size || j < 0 || j >= size);
     }
 
     public AbstractPlayer[] getAbstractPlayers() {

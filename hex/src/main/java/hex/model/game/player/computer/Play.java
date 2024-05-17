@@ -44,7 +44,7 @@ public class Play {
 
     private boolean shouldUseAdvancedAlgorithm() {
         int percentEmptyCells = getPercentEmptyCase();
-        return percentEmptyCells <= level.getPercent();
+        return percentEmptyCells <= 95;
     }
 
     private Action chooseRandomAction() {
