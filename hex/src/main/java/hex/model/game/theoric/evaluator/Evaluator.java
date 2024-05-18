@@ -26,8 +26,8 @@ public class Evaluator {
         double weightMinDistance = -2.0;
         double weightControlCenter = -10.0;
         double weightLongestChain = 10.0;
-        double weightVerticalLines = -20.0; // Augmenter le poids pour rechercher et éviter les lignes verticales ennemies
-        double weightBlockHorizontalLines = -100.0;
+        double weightVerticalLines = -100.0; // Augmenter le poids pour rechercher et éviter les lignes verticales ennemies
+        double weightBlockHorizontalLines = -50.0;
 
         // Prevent division by zero
         double playerMinDistance = calculateMinimumDistance(board, player);
