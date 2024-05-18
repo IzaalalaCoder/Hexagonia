@@ -2,250 +2,225 @@ package hex.model.game.theoric.evaluator;
 
 import hex.model.board.Board;
 import hex.model.board.cell.Cell;
-import hex.model.board.cell.Direction;
 import hex.model.board.cell.State;
 import hex.model.game.Game;
 
-import java.util.PriorityQueue;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Evaluator {
 
-    public static Double evaluate(Board board) {
-        if (board == null) {
-            throw new NullPointerException("Null game");
-        }
-
-        Game game = new Game(board);
-        boolean adversaryWin = game.existLine(0);
-        boolean computerWin = game.existLine(1);
-
-        if (adversaryWin) {
-            return 800.0;
-        } else if (computerWin) {
-            return -800.0;
-        }
+    public static double evaluate(Board board, int player) {
+        int opponent = (player == 1) ? 0 : 1;
 
         board.refreshAllVisit();
-        int numberPathAbleForAdversary = getTokenConnected(board, 0);
-        int numberPathAbleForComputer = getTokenConnected(board, 1);
-
-        System.out.println("Number of paths for adversary: " + numberPathAbleForAdversary);
-        System.out.println("Number of paths for computer: " + numberPathAbleForComputer);
-
-        int centralControl = getCentralControl(board, 1) - getCentralControl(board, 0);
-        System.out.println("Central control differential: " + centralControl);
-
-        double shortestPathDiff = getShortestPathDiff(board);
-        System.out.println("Shortest path differential: " + shortestPathDiff);
-
-        int borderControl = getBorderControl(board, 1) - getBorderControl(board, 0);
-        System.out.println("Border control differential: " + borderControl);
-
-        int blockingPotential = getBlockingPotential(board, 1) - getBlockingPotential(board, 0);
-        System.out.println("Blocking potential differential: " + blockingPotential);
-
-        int freedomOfMovement = getFreedomOfMovement(board, 1) - getFreedomOfMovement(board, 0);
-        System.out.println("Freedom of movement differential: " + freedomOfMovement);
-
-        return (double) (numberPathAbleForComputer - numberPathAbleForAdversary) + centralControl + shortestPathDiff + borderControl + blockingPotential + freedomOfMovement;
-    }
-
-    public static int getTokenConnected(Board board, int player) {
-        int tokenConnected = 0;
-        for (int i = 0; i < board.getGrid().length; i++) {
-            for (int j = 0; j < board.getGrid()[i].length; j++) {
-                Cell cell = board.getGrid()[i][j];
-                if (cell.getState() == State.PLAYER && cell.getPlayer().getPosition() == player && !cell.isVisited()) {
-                    int connectedFromThisCell = browseFromCell(cell);
-                    tokenConnected += connectedFromThisCell;
-                    System.out.println("Connected tokens from cell (" + i + ", " + j + "): " + connectedFromThisCell);
-                    board.refreshAllVisit();
-                }
-            }
+        Game g = new Game(board);
+        if (g.existLine(player)) {
+            return -2000000.0;
         }
-        return tokenConnected;
-    }
 
-    public static int browseFromCell(Cell cell) {
-        int connected = 1;
-        cell.setVisit(true);
-        for (Direction direction : cell.getDirections().keySet()) {
-            Cell cellInDirection = cell.getDirections().get(direction);
-            if (cellInDirection != null && !cellInDirection.isVisited() && cellInDirection.getState() == State.PLAYER && cellInDirection.getPlayer() == cell.getPlayer()) {
-                connected += browseFromCell(cellInDirection);
-            }
+        double playerScore = 0;
+        double opponentScore = 0;
+
+        // Define weights for each criterion
+        double weightMinDistance = -2.0;
+        double weightControlCenter = -10.0;
+        double weightLongestChain = 10.0;
+        double weightVerticalLines = -20.0; // Augmenter le poids pour rechercher et éviter les lignes verticales ennemies
+        double weightBlockHorizontalLines = -100.0;
+
+        // Prevent division by zero
+        double playerMinDistance = calculateMinimumDistance(board, player);
+        double opponentMinDistance = calculateMinimumDistance(board, opponent);
+        if (playerMinDistance != 0) {
+            playerScore += weightMinDistance * (double) 1000 / playerMinDistance;
         }
-        return connected;
-    }
-
-    public static int getCentralControl(Board board, int player) {
-        int centralControl = 0;
-        int mid = board.getGrid().length / 2;
-
-        for (int i = 0; i < board.getGrid().length; i++) {
-            for (int j = 0; j < board.getGrid()[i].length; j++) {
-                Cell cell = board.getGrid()[i][j];
-                if (cell.getState() == State.PLAYER && cell.getPlayer().getPosition() == player) {
-                    int distanceToCenter = Math.abs(mid - i) + Math.abs(mid - j);
-                    centralControl += (mid - distanceToCenter);
-                }
-            }
+        if (opponentMinDistance != 0) {
+            opponentScore += weightMinDistance * (double) 1000 / opponentMinDistance;
         }
-        return centralControl;
+
+        playerScore += weightControlCenter * controlCenter(board, player);
+        opponentScore += weightControlCenter * controlCenter(board, opponent);
+
+        playerScore += weightLongestChain * longestChain(board, player);
+        opponentScore += weightLongestChain * longestChain(board, opponent);
+
+        playerScore += weightVerticalLines * evaluateVerticalLines(board, player);
+        opponentScore += weightVerticalLines * evaluateVerticalLines(board, opponent);
+
+        playerScore += weightBlockHorizontalLines * blockHorizontalLines(board, opponent);
+        opponentScore += weightBlockHorizontalLines * blockHorizontalLines(board, player);
+
+        return playerScore - opponentScore;
     }
 
-    public static double getShortestPathDiff(Board board) {
-        int shortestPathForAdversary = getShortestPath(board, 0);
-        int shortestPathForComputer = getShortestPath(board, 1);
+    private static int calculateMinimumDistance(Board board, int player) {
+        int size = board.getGrid().length;
+        int[][] distance = new int[size][size];
+        boolean[][] visited = new boolean[size][size];
 
-        return shortestPathForAdversary - shortestPathForComputer;
-    }
-
-    public static int getShortestPath(Board board, int player) {
-        class Node {
-            final Cell cell;
-            final int cost;
-            final int heuristic;
-
-            Node(Cell cell, int cost, int heuristic) {
-                this.cell = cell;
-                this.cost = cost;
-                this.heuristic = heuristic;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                distance[i][j] = 10000;
+                visited[i][j] = false;
             }
         }
 
-        Comparator<Node> comparator = Comparator.comparingInt(a -> a.cost + a.heuristic);
-        PriorityQueue<Node> openSet = new PriorityQueue<>(comparator);
-        Set<Cell> closedSet = new HashSet<>();
-
-        int gridSize = board.getGrid().length;
-        Cell startCell = null;
-        Cell endCell = null;
-
-        if (player == 0) {
-            for (int i = 0; i < gridSize; i++) {
-                if (board.getGrid()[i][0].getPlayer() != null && board.getGrid()[i][0].getPlayer().getPosition() == player) {
-                    startCell = board.getGrid()[i][0];
-                    break;
-                }
-            }
-            for (int i = 0; i < gridSize; i++) {
-                if (board.getGrid()[i][gridSize - 1].getPlayer() != null && board.getGrid()[i][gridSize - 1].getPlayer().getPosition() == player) {
-                    endCell = board.getGrid()[i][gridSize - 1];
-                    break;
+        Queue<int[]> queue = new LinkedList<>();
+        if (player == 1) {
+            for (int i = 0; i < size; i++) {
+                Cell c = board.getGrid()[i][0];
+                if (c.getState() == State.PLAYER && c.getPlayer().getPosition() == player) {
+                    queue.add(new int[]{i, 0});
+                    distance[i][0] = 0;
                 }
             }
         } else {
-            for (int j = 0; j < gridSize; j++) {
-                if (board.getGrid()[0][j].getPlayer() != null && board.getGrid()[0][j].getPlayer().getPosition() == player) {
-                    startCell = board.getGrid()[0][j];
-                    break;
-                }
-            }
-            for (int j = 0; j < gridSize; j++) {
-                if (board.getGrid()[gridSize - 1][j].getPlayer() != null && board.getGrid()[gridSize - 1][j].getPlayer().getPosition() == player) {
-                    endCell = board.getGrid()[gridSize - 1][j];
-                    break;
+            for (int j = 0; j < size; j++) {
+                Cell c = board.getGrid()[0][j];
+                if (c.getState() == State.PLAYER && c.getPlayer().getPosition() == player) {
+                    queue.add(new int[]{0, j});
+                    distance[0][j] = 0;
                 }
             }
         }
 
-        if (startCell == null || endCell == null) {
-            return Integer.MAX_VALUE;
-        }
+        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, 1}, {1, -1}};
 
-        openSet.add(new Node(startCell, 0, heuristic(startCell, endCell)));
+        while (!queue.isEmpty()) {
+            int[] cell = queue.poll();
+            int x = cell[0], y = cell[1];
+            visited[x][y] = true;
 
-        while (!openSet.isEmpty()) {
-            Node currentNode = openSet.poll();
-            Cell currentCell = currentNode.cell;
-
-            if (currentCell.equals(endCell)) {
-                return currentNode.cost;
-            }
-
-            closedSet.add(currentCell);
-
-            for (Direction direction : currentCell.getDirections().keySet()) {
-                Cell neighbor = currentCell.getDirections().get(direction);
-                if (neighbor != null && !closedSet.contains(neighbor) && neighbor.getPlayer() != null && neighbor.getPlayer().getPosition() == player) {
-                    int newCost = currentNode.cost + 1;
-                    int heuristic = heuristic(neighbor, endCell);
-                    openSet.add(new Node(neighbor, newCost, heuristic));
-                }
-            }
-        }
-
-        return Integer.MAX_VALUE;
-    }
-
-    private static int heuristic(Cell a, Cell b) {
-        return Math.abs(a.getAbscissa() - b.getAbscissa()) + Math.abs(a.getOrdinate() - b.getOrdinate());
-    }
-
-    public static int getBorderControl(Board board, int player) {
-        int borderControl = 0;
-        int gridSize = board.getGrid().length;
-
-        for (int i = 0; i < gridSize; i++) {
-            if (player == 0) {
-                if (board.getGrid()[i][0].getPlayer() != null && board.getGrid()[i][0].getPlayer().getPosition() == player) {
-                    borderControl++;
-                }
-                if (board.getGrid()[i][gridSize - 1].getPlayer() != null && board.getGrid()[i][gridSize - 1].getPlayer().getPosition() == player) {
-                    borderControl++;
-                }
-            } else {
-                if (board.getGrid()[0][i].getPlayer() != null && board.getGrid()[0][i].getPlayer().getPosition() == player) {
-                    borderControl++;
-                }
-                if (board.getGrid()[gridSize - 1][i].getPlayer() != null && board.getGrid()[gridSize - 1][i].getPlayer().getPosition() == player) {
-                    borderControl++;
-                }
-            }
-        }
-        return borderControl;
-    }
-
-    public static int getBlockingPotential(Board board, int player) {
-        int blockingPotential = 0;
-        int opponent = 1 - player;
-        for (int i = 0; i < board.getGrid().length; i++) {
-            for (int j = 0; j < board.getGrid()[i].length; j++) {
-                Cell cell = board.getGrid()[i][j];
-                if (cell.getState() == State.EMPTY) {
-                    int opponentConnections = 0;
-                    for (Direction direction : cell.getDirections().keySet()) {
-                        Cell neighbor = cell.getDirections().get(direction);
-                        if (neighbor != null && neighbor.getPlayer() != null && neighbor.getPlayer().getPosition() == opponent) {
-                            opponentConnections++;
-                        }
+            for (int[] d : directions) {
+                int nx = x + d[0], ny = y + d[1];
+                if (nx >= 0 && ny >= 0 && nx < size && ny < size && !visited[nx][ny]) {
+                    int newDist = distance[x][y] + 1;
+                    Cell c = board.getGrid()[nx][ny];
+                    if (c.getState() == State.PLAYER && c.getPlayer().getPosition() == player) {
+                        newDist = distance[x][y];
                     }
-                    blockingPotential += opponentConnections;
+                    if (newDist < distance[nx][ny]) {
+                        distance[nx][ny] = newDist;
+                        queue.add(new int[]{nx, ny});
+                    }
                 }
             }
         }
-        return blockingPotential;
+
+        int minDistance = 10000;
+        if (player == 1) {
+            for (int i = 0; i < size; i++) {
+                if (distance[i][size - 1] < minDistance) {
+                    minDistance = distance[i][size - 1];
+                }
+            }
+        } else {
+            for (int j = 0; j < size; j++) {
+                if (distance[size - 1][j] < minDistance) {
+                    minDistance = distance[size - 1][j];
+                }
+            }
+        }
+
+        return minDistance == 10000 ? size * size : minDistance;
     }
 
-    public static int getFreedomOfMovement(Board board, int player) {
-        int freedomOfMovement = 0;
-        for (int i = 0; i < board.getGrid().length; i++) {
-            for (int j = 0; j < board.getGrid()[i].length; j++) {
-                Cell cell = board.getGrid()[i][j];
+    private static int controlCenter(Board board, int player) {
+        int size = board.getGrid().length;
+        int centerValue = 0;
+        int centerStart = size / 3;
+        int centerEnd = size - centerStart;
+
+        for (int i = centerStart; i < centerEnd; i++) {
+            for (int j = centerStart; j < centerEnd; j++) {
+                Cell c = board.getGrid()[i][j];
+                if (c.getState() == State.PLAYER && c.getPlayer().getPosition() == player) {
+                    centerValue += 1;
+                }
+            }
+        }
+        return centerValue;
+    }
+
+    private static int longestChain(Board board, int player) {
+        int size = board.getGrid().length;
+        boolean[][] visited = new boolean[size][size];
+        int maxChainLength = 0;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                Cell c = board.getGrid()[i][j];
+                if (c.getState() == State.PLAYER && c.getPlayer().getPosition() == player && !visited[i][j]) {
+                    int chainLength = dfs(board, player, visited, i, j);
+                    if (chainLength > maxChainLength) {
+                        maxChainLength = chainLength;
+                    }
+                }
+            }
+        }
+
+        return maxChainLength;
+    }
+
+    private static int dfs(Board board, int player, boolean[][] visited, int x, int y) {
+        int size = board.getGrid().length;
+        int length = 1;
+        visited[x][y] = true;
+
+        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, 1}, {1, -1}};
+        for (int[] d : directions) {
+            int nx = x + d[0], ny = y + d[1];
+            if (nx >= 0 && ny >= 0 && nx < size && ny < size) {
+                Cell c = board.getGrid()[nx][ny];
+                if (c.getState() == State.PLAYER && c.getPlayer().getPosition() == player && !visited[nx][ny]) {
+                    length += dfs(board, player, visited, nx, ny);
+                }
+            }
+        }
+
+        return length;
+    }
+
+    private static int evaluateVerticalLines(Board board, int player) {
+        int size = board.getGrid().length;
+        int verticalScore = 0;
+
+        for (int col = 0; col < size; col++) {
+            int consecutiveCount = 0;
+            for (int row = 0; row < size; row++) {
+                Cell cell = board.getGrid()[row][col];
                 if (cell.getState() == State.PLAYER && cell.getPlayer().getPosition() == player) {
-                    for (Direction direction : cell.getDirections().keySet()) {
-                        Cell neighbor = cell.getDirections().get(direction);
-                        if (neighbor != null && neighbor.getState() == State.EMPTY) {
-                            freedomOfMovement++;
-                        }
-                    }
+                    consecutiveCount++;
+                } else {
+                    verticalScore += (int) Math.pow(consecutiveCount, 2);  // Plus de points pour des chaînes plus longues
+                    consecutiveCount = 0;
                 }
             }
+            verticalScore += (int) Math.pow(consecutiveCount, 2);  // Dernière colonne évaluée
         }
-        return freedomOfMovement;
+
+        return verticalScore;
+    }
+
+    private static int blockHorizontalLines(Board board, int opponent) {
+        int size = board.getGrid().length;
+        int blockScore = 0;
+
+        for (int row = 0; row < size; row++) {
+            int consecutiveCount = 0;
+            for (int col = 0; col < size; col++) {
+                Cell cell = board.getGrid()[row][col];
+                if (cell.getState() == State.PLAYER && cell.getPlayer().getPosition() == opponent) {
+                    consecutiveCount++;
+                } else {
+                    blockScore += (int) Math.pow(consecutiveCount, 2);  // Plus de points pour des chaînes plus longues
+                    consecutiveCount = 0;
+                }
+            }
+            blockScore += (int) Math.pow(consecutiveCount, 2);  // Dernière ligne évaluée
+        }
+
+        return blockScore;
     }
 }

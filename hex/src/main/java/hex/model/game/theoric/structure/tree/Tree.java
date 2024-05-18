@@ -53,7 +53,7 @@ public class Tree {
                     Node newNode = new Node(this.currentPlayer == 1 ? LabelPlayer.MAX : LabelPlayer.MIN, board.getCopy());
                     if (tail == level.getSizeTail() - 1) {
                         System.out.println(board);
-                        newNode.setHeuristicValue(Evaluator.evaluate(board));
+                        newNode.setHeuristicValue(Evaluator.evaluate(board, 1));
                         System.out.println(newNode.getHeuristicValue());
                     }
                     this.currentPlayer = this.currentPlayer == 0 ? 1 : 0;
