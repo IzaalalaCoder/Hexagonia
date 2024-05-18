@@ -4,7 +4,6 @@ import hex.model.board.Board;
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.State;
 import hex.model.game.Game;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -26,7 +25,7 @@ public class Evaluator {
         double weightMinDistance = -2.0;
         double weightControlCenter = -10.0;
         double weightLongestChain = 10.0;
-        double weightVerticalLines = -100.0; // Augmenter le poids pour rechercher et éviter les lignes verticales ennemies
+        double weightVerticalLines = -100.0;
         double weightBlockHorizontalLines = -50.0;
 
         // Prevent division by zero
@@ -185,7 +184,6 @@ public class Evaluator {
     private static int evaluateVerticalLines(Board board, int player) {
         int size = board.getGrid().length;
         int verticalScore = 0;
-
         for (int col = 0; col < size; col++) {
             int consecutiveCount = 0;
             for (int row = 0; row < size; row++) {
@@ -193,20 +191,24 @@ public class Evaluator {
                 if (cell.getState() == State.PLAYER && cell.getPlayer().getPosition() == player) {
                     consecutiveCount++;
                 } else {
-                    verticalScore += (int) Math.pow(consecutiveCount, 2);  // Plus de points pour des chaînes plus longues
+                    verticalScore += (int) Math.pow(consecutiveCount, 2);
                     consecutiveCount = 0;
                 }
             }
-            verticalScore += (int) Math.pow(consecutiveCount, 2);  // Dernière colonne évaluée
+            verticalScore += (int) Math.pow(consecutiveCount, 2);
         }
-
         return verticalScore;
     }
 
+    /**
+     * Return number can block horizontal line
+     * @param board represent board game
+     * @param opponent represent player opponent
+     * @return int
+     */
     private static int blockHorizontalLines(Board board, int opponent) {
         int size = board.getGrid().length;
         int blockScore = 0;
-
         for (int row = 0; row < size; row++) {
             int consecutiveCount = 0;
             for (int col = 0; col < size; col++) {
@@ -214,13 +216,12 @@ public class Evaluator {
                 if (cell.getState() == State.PLAYER && cell.getPlayer().getPosition() == opponent) {
                     consecutiveCount++;
                 } else {
-                    blockScore += (int) Math.pow(consecutiveCount, 2);  // Plus de points pour des chaînes plus longues
+                    blockScore += (int) Math.pow(consecutiveCount, 2);
                     consecutiveCount = 0;
                 }
             }
-            blockScore += (int) Math.pow(consecutiveCount, 2);  // Dernière ligne évaluée
+            blockScore += (int) Math.pow(consecutiveCount, 2);
         }
-
         return blockScore;
     }
 }
