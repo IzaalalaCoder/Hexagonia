@@ -8,8 +8,8 @@ import hex.model.game.theoric.algorithm.AbstractTheory;
 import hex.model.game.theoric.algorithm.sss.element.Triplet;
 import hex.model.game.theoric.algorithm.sss.element.Type;
 import hex.model.game.theoric.structure.node.Node;
-import hex.model.game.theoric.structure.node.util.LabelPlayer;
-import hex.model.game.theoric.structure.node.util.Status;
+import hex.model.game.theoric.structure.node.LabelPlayer;
+import hex.model.game.theoric.structure.node.Status;
 
 public class ThreeSStar extends AbstractTheory {
 

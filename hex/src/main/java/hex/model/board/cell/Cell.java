@@ -13,27 +13,23 @@ public class Cell {
     private boolean visit;
     private final int abscissa;
     private final int ordinate;
-    private final int numberOfMemberships;
 
     // CONSTRUCTOR
 
-    public Cell(int players, int i, int j) {
+    public Cell(int i, int j) {
         this.initializeDirection();
         this.state = State.EMPTY;
         this.abscissa = i;
         this.ordinate = j;
         this.visit = false;
         this.player = null;
-        this.numberOfMemberships = players;
     }
 
     // REQUESTS
 
     @Override
     public String toString() {
-        //return state == State.PLAYER ? (player.getType() == PlayerType.COMPUTER ? "X " : "0 ") : "_ ";
         return state == State.PLAYER ? Integer.toString(player.getPosition()) : "_";
-
     }
 
     public int getAbscissa() {
@@ -70,6 +66,15 @@ public class Cell {
         return player;
     }
 
+    public Cell copyCell() {
+        Cell newCell = new Cell(this.abscissa, this.ordinate);
+        newCell.state = state;
+        newCell.player = player;
+        newCell.setVisit(this.isVisited());
+        manageDirections(newCell, this);
+        return newCell;
+    }
+
     // COMMANDS
 
     public void setVisit(boolean visit) {
@@ -103,15 +108,6 @@ public class Cell {
             throw new IllegalArgumentException("Don't cell correct");
         }
         this.directions.replace(d, c);
-    }
-
-    public Cell copyCell() {
-        Cell newCell = new Cell(this.numberOfMemberships, this.abscissa, this.ordinate);
-        newCell.state = state;
-        newCell.player = player;
-        newCell.setVisit(this.isVisited());
-        manageDirections(newCell, this);
-        return newCell;
     }
 
     // UTILS

@@ -1,4 +1,4 @@
-package hex.model.util.xml.writer;
+package hex.model.xml.writer;
 
 import java.io.File;
 import java.io.IOException;

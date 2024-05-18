@@ -9,7 +9,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
-import hex.model.util.xml.reader.ReadingXML;
+import hex.model.xml.reader.ReadingXML;
 import hex.platform.view.DisplayWindow;
 import hex.platform.view.popup.ErrorPopUp;
 import hex.platform.view.popup.WarningPopUp;

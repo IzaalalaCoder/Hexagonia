@@ -6,10 +6,6 @@ import hex.model.game.Action;
 import hex.model.game.Game;
 import hex.model.game.theoric.algorithm.RandomAction;
 import hex.model.game.theoric.algorithm.Theory;
-import hex.model.game.theoric.algorithm.alphabeta.AlphaBeta;
-import hex.model.game.theoric.algorithm.alphabeta.NegAlphaBeta;
-import hex.model.game.theoric.algorithm.max.Minimax;
-import hex.model.game.theoric.algorithm.max.NegaMax;
 import hex.model.game.theoric.algorithm.sss.ThreeSStar;
 
 public class Play {

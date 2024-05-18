@@ -6,8 +6,6 @@ import hex.model.board.Board;
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.State;
 import hex.model.game.player.PlayerType;
-import hex.model.game.theoric.structure.node.util.LabelPlayer;
-import hex.model.game.theoric.structure.node.util.Status;
 
 public class Node {
 

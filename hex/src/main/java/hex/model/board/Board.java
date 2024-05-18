@@ -5,7 +5,6 @@ import hex.model.board.cell.Direction;
 import hex.model.game.player.AbstractPlayer;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Board {
@@ -14,15 +13,13 @@ public class Board {
 
     private final int size;
     private final Cell[][] grid;
-    private final List<AbstractPlayer> players;
-    private final AbstractPlayer[] abstractPlayer;
+    private final AbstractPlayer[] players;
 
     // CONSTRUCTORS
 
     public Board(int size, AbstractPlayer[] players) {
         this.size = size;
-        this.abstractPlayer = players;
-        this.players = Arrays.asList(players);
+        this.players = players;
         this.grid = createGrid();
     }
 
@@ -44,20 +41,12 @@ public class Board {
         return this.grid;
     }
 
-    public void refreshAllVisit() {
-        for (Cell[] cells : this.grid) {
-            for (Cell c : cells) {
-                c.setVisit(false);
-            }
-        }
-    }
-
     public boolean coordinateIsValid(int i, int j) {
         return !(i < 0 || i >= size || j < 0 || j >= size);
     }
 
     public AbstractPlayer[] getAbstractPlayers() {
-        return this.abstractPlayer;
+        return this.players;
     }
 
     public Board getCopy() {
@@ -75,6 +64,14 @@ public class Board {
 
     // COMMANDS
 
+    public void refreshAllVisit() {
+        for (Cell[] cells : this.grid) {
+            for (Cell c : cells) {
+                c.setVisit(false);
+            }
+        }
+    }
+
     public void refreshVisit(int y) {
         for (Cell[] cells : this.grid) {
             for (Cell c : cells) {
@@ -91,17 +88,9 @@ public class Board {
 
     private Cell[][] createGrid() {
         Cell[][] cells = new Cell[size][size];
-        List<AbstractPlayer> playersCell = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (j == 0 || j == size - 1) {
-                    playersCell.add(this.players.get(0));
-                }
-                if (i == 0 || i == size - 1) {
-                    playersCell.add(this.players.get(1));
-                }
-                cells[i][j] = new Cell(playersCell.size(), i, j);
-                playersCell.clear();
+                cells[i][j] = new Cell(i, j);
             }
         }
 

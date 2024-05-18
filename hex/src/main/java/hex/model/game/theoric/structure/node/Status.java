@@ -1,4 +1,4 @@
-package hex.model.game.theoric.structure.node.util;
+package hex.model.game.theoric.structure.node;
 
 public enum Status {
     LEAF, // not children

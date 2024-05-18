@@ -1,8 +1,7 @@
-package hex.model.util.xml.writer;
+package hex.model.xml.writer;
 
 import hex.model.board.cell.Cell;
 import hex.model.board.cell.State;
-import hex.model.game.Action;
 import hex.model.game.Game;
 import hex.model.game.player.computer.Computer;
 import java.io.File;
@@ -41,7 +40,6 @@ public class WritingXML implements XMLWriter {
             throw new AssertionError("Aucune partie n'est lancé");
         }
         return this.save;
-        //return Files.copy(this.save.toPath(), Paths.get(PATH + "finalSave.xml")).toFile();
     }
 
     // COMMANDS
@@ -72,9 +70,6 @@ public class WritingXML implements XMLWriter {
         // Add board 
         root.appendChild(this.addElementBoard(document));
 
-        // Add history
-        root.appendChild(this.addElementHistory(document));
-
         // Écriture du contenu dans un fichier XML
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
@@ -93,7 +88,8 @@ public class WritingXML implements XMLWriter {
 
         transformer.transform(source, result);
     }
-    
+
+    // UTILS
 
     private Element addElementData(Document document) {
         final Element data = document.createElement("data");
@@ -141,38 +137,4 @@ public class WritingXML implements XMLWriter {
 
         return boardElement;
     }
-
-    private Element addElementHistory(Document document) {
-        Element historyElement = document.createElement("history");
-
-        for (Action a : this.model.getHistoricActions()) {
-            final Element actElement = document.createElement("act");
-
-            // Add coordinate
-            final Element coordinateElement = document.createElement("coordinate");
-            
-            final Element abscissaElement = document.createElement("abscissa");
-            abscissaElement.appendChild(document.createTextNode(Integer.toString(a.getCell().getAbscissa())));
-            coordinateElement.appendChild(abscissaElement);
-
-            final Element ordinateElement = document.createElement("ordinate");
-            ordinateElement.appendChild(document.createTextNode(Integer.toString(a.getCell().getOrdinate())));
-            coordinateElement.appendChild(ordinateElement);
-
-            actElement.appendChild(coordinateElement);
-
-            // Add 
-
-            final Element pElement = document.createElement("p");
-            pElement.appendChild(document.createTextNode(Integer.toString(a.getPlayer().getPosition())));
-            actElement.appendChild(pElement);
-
-            // Add this act in history 
-
-            historyElement.appendChild(actElement);
-        }
-
-        return historyElement;
-    }
 }
-

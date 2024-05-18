@@ -12,7 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import hex.model.game.Game;
-import hex.model.util.xml.writer.WritingXML;
+import hex.model.xml.writer.WritingXML;
 import hex.platform.view.DisplayWindow;
 import hex.platform.view.popup.ErrorPopUp;
 

@@ -1,6 +1,6 @@
 package hex.model.board.cell;
 
-import java.awt.*;
+import java.awt.Point;
 
 public enum Direction {
 
@@ -45,5 +45,4 @@ public enum Direction {
     // REQUESTS
 
     public abstract Point getNewCoordinates(int x, int y);
-
 }

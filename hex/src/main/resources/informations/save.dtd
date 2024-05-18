@@ -1,4 +1,4 @@
-<!ELEMENT save (data, board, history) >
+<!ELEMENT save (data, board) >
 <!ELEMENT data (computer?, current, end) >
 <!ELEMENT computer EMPTY>
 <!ELEMENT current (#PCDATA)>
@@ -8,9 +8,5 @@
 <!ELEMENT cell (#PCDATA) >
 <!ATTLIST player mode (human | computer) #REQUIRED>
 <!ATTLIST computer level (EASY | MEDIUM | HARD) #REQUIRED>
-<!ELEMENT history (act*) >
-<!ELEMENT act (coordinate, p) >
-<!ELEMENT coordinate (abscissa, ordinate) >
-<!ELEMENT p (#PCDATA) >
 <!ELEMENT abscissa (#PCDATA) >
 <!ELEMENT ordinate (#PCDATA) >

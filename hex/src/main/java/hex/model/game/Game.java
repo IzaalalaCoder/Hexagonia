@@ -5,15 +5,12 @@ import hex.model.board.cell.Cell;
 import hex.model.board.cell.Direction;
 import hex.model.board.cell.State;
 import hex.model.game.player.AbstractPlayer;
+import hex.model.game.player.Human;
 import hex.model.game.player.computer.Computer;
-import hex.model.game.player.Player;
 import hex.model.game.player.PlayerType;
 import hex.model.game.player.computer.Level;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Game implements AbstractGame {
 
@@ -27,12 +24,10 @@ public class Game implements AbstractGame {
     private AbstractPlayer winner;
     private int currentPlayer;
     private boolean endOfGame;
-    private List<Action> historyAction;
 
     // CONSTRUCTORS
 
     public Game(boolean computer, int level, int size) {
-        this.historyAction = new ArrayList<>();
         this.gameWithComputer = computer;
         this.size = size;
         this.currentPlayer = 0;
@@ -47,7 +42,6 @@ public class Game implements AbstractGame {
     }
 
     public Game(boolean endGame, boolean computer, int level, int size) {
-        this.historyAction = new ArrayList<>();
         this.gameWithComputer = computer;
         this.size = size;
         this.endOfGame = endGame;
@@ -62,7 +56,6 @@ public class Game implements AbstractGame {
     }
 
     public Game(Board board) {
-        this.historyAction = new ArrayList<>();
         this.gameWithComputer = true;
         this.size = board.getGrid().length;
         this.endOfGame = false;
@@ -74,16 +67,6 @@ public class Game implements AbstractGame {
     }
 
     // REQUESTS
-
-    @Override
-    public void setHistoricActions(List<Action> history) {
-        this.historyAction = history;
-    }
-
-    @Override
-    public List<Action> getHistoricActions() {
-        return this.historyAction;
-    }
 
     @Override
     public boolean getIsGameWithComputer() {
@@ -120,11 +103,6 @@ public class Game implements AbstractGame {
         return endOfGame;
     }
 
-    private void isEndOfGameAboutCurrentPlayer() {
-        this.endOfGame = this.existLine(this.currentPlayer);
-        this.pcs.firePropertyChange(PROP_END_GAME, false, endOfGame);
-    }
-
     @Override
     public AbstractPlayer getCurrentPlayer() {
         return this.players[currentPlayer];
@@ -146,7 +124,6 @@ public class Game implements AbstractGame {
     public void takeCell(int i, int j) {
         Cell c = this.board.getGrid()[i][j];
         c.setPlayer(this.getCurrentPlayer());
-        this.historyAction.add(new Action(c, this.getCurrentPlayer()));
         if (c.getPlayer().getType() == PlayerType.COMPUTER) {
             this.pcs.firePropertyChange(PROP_TAKE_CELL_BY_COMPUTER, null, c);
         }
@@ -183,23 +160,7 @@ public class Game implements AbstractGame {
         this.currentPlayer = current;
     }
 
-    // UTILS
-
-    private Board createBoard() {
-        return new Board(this.size, this.players);
-    }
-
-    private AbstractPlayer[] initializePlayers(boolean computerPlay, int level) {
-        AbstractPlayer[] players = new AbstractPlayer[MAX_NUMBER_OF_PLAYER];
-        players[0] = new Player(PlayerType.HUMAN, FIRST_PLAYER);
-        if (computerPlay) {
-            players[1] = new Computer(SECOND_PLAYER, Level.values()[level]);
-        } else {
-            players[1] = new Player(PlayerType.HUMAN, SECOND_PLAYER);
-        }
-        return players;
-    }
-
+    @Override
     public void setBoard(Board board) {
         this.board = board;
     }
@@ -232,6 +193,23 @@ public class Game implements AbstractGame {
             return true;
         }
         return false;
+    }
+
+    // UTILS
+
+    private Board createBoard() {
+        return new Board(this.size, this.players);
+    }
+
+    private AbstractPlayer[] initializePlayers(boolean computerPlay, int level) {
+        AbstractPlayer[] players = new AbstractPlayer[MAX_NUMBER_OF_PLAYER];
+        players[0] = new Human(PlayerType.HUMAN, FIRST_PLAYER);
+        if (computerPlay) {
+            players[1] = new Computer(SECOND_PLAYER, Level.values()[level]);
+        } else {
+            players[1] = new Human(PlayerType.HUMAN, SECOND_PLAYER);
+        }
+        return players;
     }
 
     private boolean browseCell(Cell c, int current) {
@@ -272,5 +250,10 @@ public class Game implements AbstractGame {
             }
         }
         return false;
+    }
+
+    private void isEndOfGameAboutCurrentPlayer() {
+        this.endOfGame = this.existLine(this.currentPlayer);
+        this.pcs.firePropertyChange(PROP_END_GAME, false, endOfGame);
     }
 }

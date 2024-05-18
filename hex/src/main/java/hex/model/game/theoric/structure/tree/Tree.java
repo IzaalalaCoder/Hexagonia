@@ -8,7 +8,7 @@ import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.computer.Level;
 import hex.model.game.theoric.evaluator.Evaluator;
 import hex.model.game.theoric.structure.node.Node;
-import hex.model.game.theoric.structure.node.util.LabelPlayer;
+import hex.model.game.theoric.structure.node.LabelPlayer;
 
 public class Tree {
 

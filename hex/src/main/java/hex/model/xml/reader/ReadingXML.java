@@ -1,7 +1,5 @@
-package hex.model.util.xml.reader;
+package hex.model.xml.reader;
 
-import hex.model.board.cell.Cell;
-import hex.model.game.Action;
 import hex.model.game.Game;
 import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.computer.Level;
@@ -9,13 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
-import hex.model.util.xml.XMLScheme;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -24,14 +18,14 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-public class ReadingXML implements XMLScheme, XMLParser {
+public class ReadingXML implements XMLParser {
 
     // ATTRIBUTES
 
     private Document document;
     private Game model;
-    private File file;
-    private boolean flag = true;
+    private final File file;
+    private boolean flag;
 
     // CONSTRUCTOR
 
@@ -49,16 +43,12 @@ public class ReadingXML implements XMLScheme, XMLParser {
 
     // REQUESTS
 
+    @Override
     public Game getGameInFile() {
         if (!this.flag) {
             throw new AssertionError("Can not create game");
         }
         return this.model;
-    }
-
-    @Override
-    public boolean checkXMLFile() {
-        return this.flag;
     }
 
     // COMMANDS
@@ -68,8 +58,7 @@ public class ReadingXML implements XMLScheme, XMLParser {
         if (!this.flag) {
             throw new AssertionError("Can not open");
         }
-        
-        this.browseFile(file);
+        this.browseFile();
         Files.delete(this.file.toPath());
     }
 
@@ -101,8 +90,7 @@ public class ReadingXML implements XMLScheme, XMLParser {
         this.document = builder.parse(file);
     }
 
-
-    private void browseFile(File file) {
+    private void browseFile() {
         final Element dataElement = (Element) this.document
             .getElementsByTagName("data").item(0);
 
@@ -124,7 +112,6 @@ public class ReadingXML implements XMLScheme, XMLParser {
         this.model.setCurrentPlayer(current);
 
         this.browseBoard(rowList);
-        this.model.setHistoricActions(getHistory());
     }
 
     private void browseBoard(NodeList rowList) {
@@ -153,30 +140,5 @@ public class ReadingXML implements XMLScheme, XMLParser {
             }
         }
         return l;
-    }
-
-    private List<Action> getHistory() {
-        List<Action> actions = new ArrayList<>();
-
-        NodeList history = this.document.getElementsByTagName("act");
-        for (int i = 0; i < history.getLength(); i++) {
-            Element actElement = (Element) history.item(i);
-
-            // recuperate case
-            Element coordinateElement = (Element) actElement.getElementsByTagName("coordinate").item(0);
-            Element abscissaElement = (Element) coordinateElement.getElementsByTagName("abscissa").item(0);
-            Element ordinateElement = (Element) coordinateElement.getElementsByTagName("ordinate").item(0);
-
-            Cell[][] grid = this.model.getBoard().getGrid();
-            Cell c = grid[Integer.parseInt(abscissaElement.getTextContent())][Integer.parseInt(ordinateElement.getTextContent())];
-
-            // recuperate player 
-            Element pElement = (Element) actElement.getElementsByTagName("p").item(0);
-            AbstractPlayer player = this.model.getPlayers()[Integer.parseInt(pElement.getTextContent())];
-
-            actions.add(new Action(c, player));
-        }
-
-        return actions;
     }
 }

@@ -4,7 +4,7 @@ import hex.model.game.Game;
 import hex.model.game.player.computer.Level;
 import hex.model.game.theoric.algorithm.AbstractTheory;
 import hex.model.game.theoric.structure.node.Node;
-import hex.model.game.theoric.structure.node.util.Status;
+import hex.model.game.theoric.structure.node.Status;
 
 public class NegaMax extends AbstractTheory {
 

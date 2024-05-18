@@ -3,7 +3,6 @@ package hex.model.game;
 import hex.model.board.Board;
 import hex.model.game.player.AbstractPlayer;
 import java.beans.PropertyChangeListener;
-import java.util.List;
 
 public interface AbstractGame {
 
@@ -34,8 +33,6 @@ public interface AbstractGame {
      */
     boolean isEndOfGame();
 
-    List<Action> getHistoricActions();
-
     AbstractPlayer getWinner();
 
     AbstractPlayer getComputer();
@@ -61,8 +58,6 @@ public interface AbstractGame {
     PropertyChangeListener[] getPropertyChangeListeners(String pName);
 
     // COMMANDS
-
-    void setHistoricActions(List<Action> history);
 
     void setBoard(Board board);
 
