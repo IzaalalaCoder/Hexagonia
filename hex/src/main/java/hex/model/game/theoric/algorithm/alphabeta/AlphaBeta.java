@@ -19,7 +19,7 @@ public class AlphaBeta extends AbstractTheory {
     // UTILS
 
     private void analyze(Node root) {
-        this.alphaBeta(root, -700.0, +700.0);
+        this.alphaBeta(root, MIN_HEURISTIC_VALUE, MAX_HEURISTIC_VALUE);
         this.chooseBoard(root);
     }
 

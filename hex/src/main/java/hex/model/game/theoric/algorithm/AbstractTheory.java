@@ -32,11 +32,6 @@ public abstract class AbstractTheory implements Theory {
         return this.getChooseCell();
     }
 
-    @Override
-    public Tree getTree() {
-        return tree;
-    }
-
     // COMMANDS
 
     protected void chooseBoard(Node root) {

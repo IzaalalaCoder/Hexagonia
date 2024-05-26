@@ -4,8 +4,6 @@ import hex.model.board.cell.Cell;
 import hex.model.board.cell.Direction;
 import hex.model.game.player.AbstractPlayer;
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Board {
 
@@ -94,7 +92,6 @@ public class Board {
             }
         }
 
-        // Initialization of all direction's cells
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 Cell c = cells[i][j];

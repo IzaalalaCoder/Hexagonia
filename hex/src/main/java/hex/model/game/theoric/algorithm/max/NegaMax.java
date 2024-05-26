@@ -27,7 +27,7 @@ public class NegaMax extends AbstractTheory {
         if (root.getStatus() == Status.LEAF) {
             val = root.getHeuristicValue();
         } else {
-            val = -700.0;
+            val = MIN_HEURISTIC_VALUE;
             for (Node n : root.getSuccessor()) {
                 val = Math.max(val, -1.0 * this.negamax(n));
             }

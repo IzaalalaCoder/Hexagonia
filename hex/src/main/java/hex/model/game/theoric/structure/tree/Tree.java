@@ -7,6 +7,7 @@ import hex.model.game.Game;
 import hex.model.game.player.AbstractPlayer;
 import hex.model.game.player.computer.Level;
 import hex.model.game.theoric.evaluator.Evaluator;
+import hex.model.game.theoric.evaluator.Heuristic;
 import hex.model.game.theoric.structure.node.Node;
 import hex.model.game.theoric.structure.node.LabelPlayer;
 
@@ -53,6 +54,7 @@ public class Tree {
                     Node newNode = new Node(this.currentPlayer == 1 ? LabelPlayer.MAX : LabelPlayer.MIN, board.getCopy());
                     if (tail == level.getSizeTail() - 1) {
                         System.out.println(board);
+                        Heuristic h = new Heuristic();
                         newNode.setHeuristicValue(Evaluator.evaluate(board, 1));
                         System.out.println(newNode.getHeuristicValue());
                     }

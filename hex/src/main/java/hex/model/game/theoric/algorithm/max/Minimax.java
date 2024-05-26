@@ -29,12 +29,12 @@ public class Minimax extends AbstractTheory {
             val = root.getHeuristicValue();
         } else {
             if (root.getLabelPlayer() == LabelPlayer.MAX) {
-                val = -700.0;
+                val = MIN_HEURISTIC_VALUE;
                 for (Node n : root.getSuccessor()) {
                     val = Math.max(val, this.minimax(n));
                 }
             } else {
-                val = 700.0;
+                val = MAX_HEURISTIC_VALUE;
                 for (Node n : root.getSuccessor()) {
                     val = Math.min(val, this.minimax(n));
                 }

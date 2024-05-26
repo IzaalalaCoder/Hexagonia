@@ -7,7 +7,6 @@ public enum Level {
     EASY(1),
     MEDIUM(2),
     HARD(3); // 12 a 9 thread ?
-    //EXTREME(10, 4);
 
     // CONSTRUCTOR
 

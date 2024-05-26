@@ -81,7 +81,7 @@ public class ThreeSStar extends AbstractTheory {
     }
 
     private void sssStar(Node root) {
-        this.G.add(new Triplet<>(root, Type.ALIVE, 900.0));
+        this.G.add(new Triplet<>(root, Type.ALIVE, MAX_HEURISTIC_VALUE));
         
         while (!this.G.isEmpty()) {
             Triplet<Node, Type, Double> extract = this.extractFirst();

@@ -18,7 +18,7 @@ public class NegAlphaBeta extends AbstractTheory {
     // UTILS
 
     private void analyze(Node root) {
-        this.negAlphaBeta(root, -700.0, +700.0);
+        this.negAlphaBeta(root, MIN_HEURISTIC_VALUE, MAX_HEURISTIC_VALUE);
         this.chooseBoard(root);
     }
 
