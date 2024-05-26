@@ -37,14 +37,10 @@ public abstract class AbstractTheory implements Theory {
     protected void chooseBoard(Node root) {
         Node nodeWithMinHeuristicValue = root.getSuccessor().get(0);
         for (Node node : root.getSuccessor()) {
-            System.out.print(node.getHeuristicValue() + " ");
-
             nodeWithMinHeuristicValue = node.getHeuristicValue() < nodeWithMinHeuristicValue.getHeuristicValue()
                 ? node : nodeWithMinHeuristicValue;
         }
 
-        System.out.println("");
-        System.out.println(nodeWithMinHeuristicValue.getHeuristicValue());
         chooseBoard = nodeWithMinHeuristicValue.getActualBoard();
     }
 

@@ -27,7 +27,7 @@ public enum MenuItem {
     SEPARATOR(null, null),
 
     QUIT(
-        new JMenuItem("QUIT"),
+        new JMenuItem("Quitter"),
         new ImageIcon(MainMenu.PATH + "quit.png")
     );
 

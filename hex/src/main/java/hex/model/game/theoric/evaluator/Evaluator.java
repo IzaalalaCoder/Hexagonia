@@ -21,7 +21,7 @@ public class Evaluator {
         int opponent = (player == 1) ? 0 : 1;
 
         board.refreshAllVisit();
-        Game g = new Game(board);
+        Game g = new Game(board.getCopy());
         if (g.existLine(player)) {
             return -2000000.0;
         }
@@ -175,7 +175,7 @@ public class Evaluator {
         for (int k = 0; k < size; k++) {
             int count = 0;
             for (int l = 0; l < size; l++) {
-                Cell cell = displayRows ? board.getGrid()[k][l] : board.getGrid()[l][k];
+                Cell cell = !displayRows ? board.getGrid()[k][l] : board.getGrid()[l][k];
                 if (cell.getState() == State.PLAYER && cell.getPlayer().getPosition() == player) {
                     count++;
                 } else {
