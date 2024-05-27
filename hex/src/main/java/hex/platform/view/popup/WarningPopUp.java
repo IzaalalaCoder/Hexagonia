@@ -9,5 +9,4 @@ public class WarningPopUp {
         return JOptionPane.showConfirmDialog(null, message, "Attention !"
             , JOptionPane.YES_NO_OPTION);
     }
-
 }

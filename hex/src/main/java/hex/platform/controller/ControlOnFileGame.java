@@ -10,7 +10,7 @@ public class ControlOnFileGame implements ActionListener {
 
     // ATTRIBUTES
 
-    private String path;
+    private final String path;
 
     // CONSTRUCTORS
     
@@ -26,8 +26,6 @@ public class ControlOnFileGame implements ActionListener {
         Desktop desktop = Desktop.getDesktop();
         try {
             desktop.open(output);
-        } catch (IOException e1) {
-        }
+        } catch (IOException ignored) {}
     }
-    
 }

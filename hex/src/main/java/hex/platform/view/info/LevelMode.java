@@ -5,6 +5,5 @@ public enum LevelMode {
     EASY,
     MEDIUM,
     HARD;
-    //EXTREME;
 
 }

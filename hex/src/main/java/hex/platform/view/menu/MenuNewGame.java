@@ -52,12 +52,12 @@ public class MenuNewGame extends JMenu {
 
     private void addMenuByTypePlayer(PlayerMode playerMode, JMenu submenu) {
         if (playerMode == PlayerMode.PLAYER) {
-            InformationOnNewGame info = new InformationOnNewGame(true);
+            InformationOnNewGame info = new InformationOnNewGame();
             info.setComputer(false);
             this.createSizeMenu(info, submenu);
         } else {
             for (LevelMode levelMode : LevelMode.values()) {
-                InformationOnNewGame info = new InformationOnNewGame(true);
+                InformationOnNewGame info = new InformationOnNewGame();
                 info.setComputer(true);
                 JMenu levelMenu = new JMenu(levelMode.name());
                 info.setLevel(levelMode.ordinal());

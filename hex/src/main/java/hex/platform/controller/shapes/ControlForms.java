@@ -1,9 +1,8 @@
-package hex.platform.controller.shapes.forms;
+package hex.platform.controller.shapes;
 
 import hex.model.game.Game;
 import hex.platform.view.info.PlayerName;
 import hex.platform.view.shapes.Forms;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,10 +23,6 @@ public class ControlForms extends MouseAdapter {
     // COMMANDS
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
     public void mousePressed(MouseEvent e) {
         Forms f = (Forms) e.getSource();
         Point p = e.getPoint();
@@ -40,11 +35,6 @@ public class ControlForms extends MouseAdapter {
             }
             f.removeController();
         }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override
@@ -62,5 +52,4 @@ public class ControlForms extends MouseAdapter {
         Forms f = (Forms) e.getSource();
         f.changeColor(Color.WHITE);
     }
-
 }

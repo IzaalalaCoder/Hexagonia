@@ -7,7 +7,7 @@ import hex.model.game.Game;
 import hex.platform.controller.ControlBoard;
 import hex.platform.view.info.PlayerName;
 import hex.platform.view.shapes.Forms;
-import hex.platform.view.shapes.forms.HexagonButton;
+import hex.platform.view.shapes.HexagonButton;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -143,5 +143,4 @@ public class DisplayBoard extends JPanel {
         }
         this.add(p, BorderLayout.CENTER);
     }
-
 }

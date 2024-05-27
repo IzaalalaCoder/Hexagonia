@@ -4,6 +4,8 @@ import java.awt.*;
 
 public enum SizeGame {
 
+    // VALUES
+
     TWELVE(
         12,
         new Dimension(850, 700)
@@ -54,14 +56,20 @@ public enum SizeGame {
         new Dimension(250, 350)
     );
 
+    // ATTRIBUTES
+
     private final int size;
 
     private final Dimension dimension;
+
+    // CONSTRUCTORS
 
     SizeGame(int s, Dimension dimension) {
         this.size = s;
         this.dimension = dimension;
     }
+
+    // REQUESTS
 
     public Dimension getDimension() {
         return dimension;

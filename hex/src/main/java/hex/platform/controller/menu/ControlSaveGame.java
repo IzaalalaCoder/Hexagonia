@@ -6,32 +6,22 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import javax.swing.JFileChooser;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-
-import hex.model.game.Game;
 import hex.model.xml.writer.WritingXML;
 import hex.platform.view.DisplayWindow;
 import hex.platform.view.popup.ErrorPopUp;
 
-@SuppressWarnings("unused")
 public class ControlSaveGame implements ActionListener {
-    
-    // CONSTANTS
 
-    private final String PATH_HISTORY = "hex/src/main/resources/informations/newSave.xml";
-    
-    // ATTRIBUTES 
-    
-    private Game game;
-    private DisplayWindow parent;
+    // ATTRIBUTES
+
+    private final DisplayWindow parent;
     
     // CONSTRUCTORS
 
     public ControlSaveGame(DisplayWindow parent) {
-        this.game = null;
         this.parent = parent;
     }
 
@@ -47,8 +37,7 @@ public class ControlSaveGame implements ActionListener {
         WritingXML writer = new WritingXML(parent.getModel());
         try {
             writer.writeXMLFile();
-        } catch (ParserConfigurationException e1) {} 
-        catch (TransformerException e1) {}
+        } catch (ParserConfigurationException | TransformerException ignored) {}
 
         File f = writer.getGeneratedFile();
 
@@ -62,8 +51,7 @@ public class ControlSaveGame implements ActionListener {
         if (result == JFileChooser.APPROVE_OPTION) { 
             try {
                 Files.move(f.toPath(), Paths.get(chooserDirectory.getSelectedFile() + "/" + f.getName()));
-            } catch (IOException e1) {}
+            } catch (IOException ignored) {}
         }
     }
-    
 }

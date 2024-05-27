@@ -6,7 +6,7 @@ public interface Forms {
 
     // CONSTANTS
 
-    public final int SIZE_DEFAULT = 50;
+    int SIZE_DEFAULT = 50;
 
     // REQUESTS
 

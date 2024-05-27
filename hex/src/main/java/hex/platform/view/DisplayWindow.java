@@ -4,7 +4,6 @@ import hex.model.game.Game;
 import hex.platform.view.info.SizeGame;
 import hex.platform.view.menu.MainMenu;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -14,7 +13,7 @@ public class DisplayWindow extends JFrame {
 
     private Game model;
     private DisplayBoard board;
-    private JPanel information;
+    private DisplayInfo information;
     private MainMenu mainMenu;
 
     // CONSTRUCTORS

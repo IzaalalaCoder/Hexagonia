@@ -7,14 +7,12 @@ public class InformationOnNewGame {
     // ATTRIBUTES
 
     private Boolean isComputer;
-    private final Boolean isOffline;
     private int level;
 
     // CONSTRUCTOR
 
-    public InformationOnNewGame(boolean offline) {
+    public InformationOnNewGame() {
         this.isComputer = null;
-        this.isOffline = offline;
         this.level = -1;
     }
 
@@ -24,17 +22,13 @@ public class InformationOnNewGame {
         return isComputer;
     }
 
-    public boolean isOffline() {
-        return isOffline;
-    }
-
     public int getLevel() {
         return level;
     }
     
     @Override
     public String toString() {
-        return "Offline : " + isOffline + " Computer : " + isComputer
+        return  " Computer : " + isComputer
                 + " Level : " + (level != -1 ? Level.values()[level].name() : 0);
     }
 

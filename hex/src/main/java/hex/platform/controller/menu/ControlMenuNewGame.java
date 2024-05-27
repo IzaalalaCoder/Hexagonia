@@ -3,17 +3,15 @@ package hex.platform.controller.menu;
 import hex.model.game.Game;
 import hex.platform.view.DisplayWindow;
 import hex.platform.view.popup.WarningPopUp;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JOptionPane;
 
 public class ControlMenuNewGame implements ActionListener {
 
     // ATTRIBUTES
 
-    private DisplayWindow parent;
+    private final DisplayWindow parent;
     private final boolean isComputer;
     private final int level;
     private final int size;

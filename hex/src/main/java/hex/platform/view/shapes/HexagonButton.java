@@ -1,25 +1,27 @@
-package hex.platform.view.shapes.forms;
+package hex.platform.view.shapes;
 
 import hex.model.board.cell.Direction;
 import java.awt.event.MouseAdapter;
 import hex.model.game.Game;
-import hex.platform.controller.shapes.forms.ControlForms;
-import hex.platform.view.shapes.Forms;
+import hex.platform.controller.shapes.ControlForms;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 
 public class HexagonButton extends JButton implements Forms {
 
-    // ATTRIBUTES
+    // CONSTANTS
 
-    private MouseAdapter listener;
     int[] x = new int[6];
     int[] y = new int[6];
     double angle = 2 * Math.PI / 6;
-    private int ordinate;
-    private int abscissa;
-    private Map<Direction, Color> borderColors;
+
+    // ATTRIBUTES
+
+    private MouseAdapter listener;
+    private final int ordinate;
+    private final int abscissa;
+    private final Map<Direction, Color> borderColors;
 
     // CONSTRUCTOR
 

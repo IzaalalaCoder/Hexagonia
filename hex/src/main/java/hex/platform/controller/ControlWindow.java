@@ -2,9 +2,7 @@ package hex.platform.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JOptionPane;
-
 import hex.platform.view.DisplayWindow;
 import hex.platform.view.popup.WarningPopUp;
 
@@ -12,7 +10,7 @@ public class ControlWindow implements ActionListener {
 
     // ATTRIBUTES
 
-    private DisplayWindow parent;
+    private final DisplayWindow parent;
 
     // CONSTRUCTOR 
 

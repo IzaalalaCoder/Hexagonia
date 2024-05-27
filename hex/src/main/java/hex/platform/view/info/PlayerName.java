@@ -6,19 +6,17 @@ public enum PlayerName {
 
     // VALUES
 
-    FIRST(Color.BLUE, 0),
-    SECOND(Color.RED, 1);
+    FIRST(Color.BLUE),
+    SECOND(Color.RED);
 
     // ATTRIBUTES
 
     private final Color color;
-    private final int position;
 
     // CONSTRUCTOR
 
-    private PlayerName(Color c, int pos) {
+    PlayerName(Color c) {
         this.color = c;
-        this.position = pos;
     }
 
     // REQUESTS
@@ -27,7 +25,4 @@ public enum PlayerName {
         return this.color;
     }
 
-    public int getPosition() {
-        return position;
-    }
 }
